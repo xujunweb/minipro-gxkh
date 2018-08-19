@@ -5,7 +5,7 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
+    wx.envConfig = this.globalData.env[this.globalData.env.mode];
     // 登录
     wx.login({
       success: res => {
@@ -34,6 +34,22 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: {
+      'id': 206,
+      'userName': '13113864577',
+      'password': 'fanjunlin123',
+      'token': 'abcdefghijklmn123456'
+    },
+    code: '',
+    openid: '',
+    env: {
+      mode: 'dev',
+      dev: {
+        host: 'http://47.107.54.207:8080',
+      },
+      production: {
+        host: 'https://app.1sju.com/yishuju-app',
+      }
+    }
   }
 })

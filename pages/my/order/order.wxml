@@ -1,0 +1,21 @@
+<!--my.wxml-->
+<wxs module="dateFr" src="../../../filter/dateFr.wxs"></wxs>
+<view class="container order">
+  <view class='top'>
+    <view class="item {{select=='0'?'hover':''}}" bindtap='orderSwitch'>租借中</view>
+    <view class="item {{select=='1'?'hover':''}}" bindtap='orderSwitch'>已经完成</view>
+  </view>
+  <view class='fixedDIV'></view>
+  <!-- <view class='loading' wx:if="{{isloading}}">加载中...</view> -->
+  <view class='noorder' wx:if="{{orderlist.length === 0}}">
+    <image src="http://pics.sc.chinaz.com/Files/pic/icons128/7060/g1.png" mode="aspectFit"></image>
+    <view>你还没有一个订单哦</view>
+  </view>
+  <view class='orderlist'>
+    <view class='item' wx:for="{{orderlist}}" wx:key="index">
+      <view class='orderno'>订单编号:{{item.order_no}}</view>
+      <view class='time'>{{dateFr.getDate(item.time)}}</view>
+      <view class='place'>{{item.place}}</view>
+    </view>
+  </view>
+</view>

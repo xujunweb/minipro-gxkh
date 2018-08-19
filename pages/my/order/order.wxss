@@ -1,0 +1,69 @@
+.order{
+  height: 100%;
+  background: #eee;
+}
+.fixedDIV{
+  height: 90rpx;
+}
+.top {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90rpx;
+}
+.top .item{
+  width: 50%;
+  text-align: center;
+  font-size: 28rpx;
+  color: #ca2c89;
+  position: relative;
+  line-height: 90rpx;
+}
+.top .hover::after{
+  display: inline-block;
+  content: '';
+  position: absolute;
+  width: 30%;
+  height: 6rpx;
+  background: #ca2c89;
+  bottom: 0;
+  left: 35%;
+  border-radius: 10rpx;
+}
+.noorder{
+  margin-top: 60rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+.noorder image{
+  width: 200rpx;
+  margin-bottom: 40rpx;
+}
+
+.orderlist{
+  
+}
+.orderlist .item{
+  background: #fff;
+  border-radius: 10rpx;
+  border: 2rpx solid #ccc;
+  box-shadow: 0rpx 0 8rpx #ccc;
+  width: 680rpx;
+  margin: 0 auto;
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  padding: 16rpx;
+  line-height: 48rpx;
+}
+.orderlist .item .orderno{
+  color: #999;
+}
+
+
+
+
+

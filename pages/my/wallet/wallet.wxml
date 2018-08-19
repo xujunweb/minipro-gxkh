@@ -1,0 +1,7 @@
+<!--my.wxml-->
+<view class="container wallet">
+  <view class='top'>
+    <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  </view>
+</view>

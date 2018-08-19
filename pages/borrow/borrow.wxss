@@ -1,0 +1,24 @@
+.log-list{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.log-list image{
+  width: 400rpx;
+}
+.text_line{
+  font-size: 28rpx;
+  text-align: center;
+}
+.other-button-hover {
+  background-color: blue;
+}
+.image{
+  text-align: center;
+}
+.button{
+  color: #fff;
+  margin-top: 40rpx;
+  width: 85%;
+  background:#ca2c89;
+}
