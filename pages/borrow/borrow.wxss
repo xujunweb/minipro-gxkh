@@ -5,6 +5,8 @@
 }
 .log-list image{
   width: 400rpx;
+  height: 300rpx;
+  margin-bottom: 20rpx;
 }
 .text_line{
   font-size: 28rpx;

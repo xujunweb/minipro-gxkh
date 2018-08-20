@@ -18,8 +18,8 @@ Page({
   scan:function(){
     wx.scanCode({
       onlyFromCamera:false,   //可以从相册选择照片
-      success:function(){
-        
+      success:function(e){
+        console.log(e)
       },
       fail:function(){
         

@@ -31,12 +31,42 @@
 }
 .weixinplay{
   background: #fff;
-  padding: 10rpx 30rpx;
-  padding-bottom: 0;
+  padding: 20rpx 50rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.weixinplay .image{
+  font-size: 28rpx;
+  display: flex;
+  align-content: center;
+  line-height: 50rpx;
+}
+.weixinplay .image text{
+  margin-left: 20rpx;
 }
 .weixinplay image{
-  width: 270rpx;
-  height: 60rpx;
+  width: 50rpx;
+  height: 50rpx;
+}
+.weixinplay .icon{
+  margin-top: 6rpx;
+}
+.button{
+  position: fixed;
+  bottom: 40rpx;
+  width: 680rpx;
+  left: 35rpx;
+}
+.button button{
+  width: 80%;
+  color: #fff;
+  background: #2da747;
+  margin: 0 auto;
+  border-radius: 50rpx;
+  font-size: 32rpx;
+}
+.button button::after{
+  border: 0
 }
 
 

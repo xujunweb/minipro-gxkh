@@ -9,7 +9,13 @@
     </view>
   </view>
   <view class='weixinplay'>
-    <image src='../../../images/weixinplay.png' mode='aspectFit'></image>
+    <view class='image'>
+      <image src='../../../images/weixinplay.png' mode='aspectFit'></image>
+      <text>微信支付</text>
+    </view>
+    <icon type='success' size='17' class='icon'></icon>
   </view>
-  <button class='button'>确认支付</button>
+  <view class='button'>
+    <button disabled="{{disabled}}">确认支付</button>
+  </view>
 </view>
