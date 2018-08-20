@@ -1,16 +1,18 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/logs/logs",
     "pages/borrow/borrow",
     "pages/my/my",
     "pages/my/order/order",
-    "pages/my/wallet/wallet"
+    "pages/my/wallet/wallet",
+    "pages/my/recharge/recharge",
+    "pages/my/deposit/deposit"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#ca2c89",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle": "white"
   }
 }

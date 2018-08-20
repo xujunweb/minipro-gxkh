@@ -1,12 +1,80 @@
 .wallet{
   height: 100%;
-  background: #eee;
+  background: #fff;
 }
 
-.top {
+.wallet .block{
+  width: 600rpx;
+  padding: 60rpx 40rpx;
+  border: 2rpx solid #eee;
+  box-shadow: 0rpx 0 20rpx #eee;
+  margin: 0 auto;
+  font-size: 32rpx;
+  border-radius: 16rpx;
+  margin-top: 40rpx;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #fff;
-  padding-bottom: 40rpx;
+  justify-content: space-between;
 }
+.wallet .block .title{
+  margin-bottom: 10rpx;
+}
+.wallet .balance .conter{
+  color: #999;
+  font-size: 28rpx;
+}
+.wallet .deposit .conter{
+  font-size: 28rpx;
+  color: #2da747;
+}
+.wallet .block .block-button{
+  margin-left: 0;
+  margin-right: 0;
+  font-size: 32rpx;
+  width: 200rpx;
+  border-radius: 40rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #fff;
+  background: #ca2c89;
+  background: linear-gradient(to right, #ec53ca , #ca2c89);
+  box-shadow: 0 0 14rpx #eca0dc;
+}
+
+.wallet .block .button-hover{
+  background: #ca2c89;
+}
+.wallet .block .block-button::after{
+  border: 0;
+}
+.weui-cell_link{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30rpx;
+  padding:0 40rpx;
+}
+.weui-cell_active{
+ background: #fff; 
+}
+.weui-cell__bd{
+  font-size: 28rpx;
+}
+
+.button{
+  position: fixed;
+  bottom: 40rpx;
+  width: 680rpx;
+  left: 35rpx;
+}
+.button button{
+  width: 80%;
+  color: #fff;
+  background: #2da747;
+  margin: 0 auto;
+  border-radius: 50rpx;
+  font-size: 32rpx;
+}
+.button button::after{
+  border: 0
+}
+
+

@@ -12,8 +12,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.2.3",
-	"appid": "wxb3764475cf22db68",
-	"projectname": "%E5%85%B1%E4%BA%AB%E5%BA%B7%E6%8A%A4",
+	"appid": "wxb3bfac02eb55371e",
+	"projectname": "%E6%A2%A6%E5%AE%9D%E5%BA%B7%E6%8A%A4",
 	"isGameTourist": false,
 	"condition": {
 		"search": {
@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -50,7 +50,19 @@
 				{
 					"id": -1,
 					"name": "订单列表",
-					"pathName": "pages/my/order/order"
+					"pathName": "pages/my/order/order",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的钱包",
+					"pathName": "pages/my/wallet/wallet",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "押金充值",
+					"pathName": "pages/my/deposit/deposit"
 				}
 			]
 		}

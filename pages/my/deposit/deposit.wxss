@@ -1,0 +1,54 @@
+/* pages/my/deposit/deposit.wxss */
+.deposit{
+  height: 100%;
+  background: #f3f2f2;
+}
+.conter{
+  padding: 50rpx 40rpx;
+}
+.title{
+  font-size: 46rpx;
+}
+.tip{
+  font-size: 24rpx;
+  color: #999;
+}
+.deposit-conter{
+  padding: 40rpx 30rpx;
+  margin-top: 40rpx;
+  border-radius: 18rpx;
+  background: #fff;
+  border: 2rpx solid #e0dfdf;
+  box-shadow: 0 0 30rpx #e0dfdf;
+}
+.deposit-conter .price{
+  color: #38d63d;
+  font-size: 60rpx;
+}
+.deposit-conter .text{
+  font-size: 28rpx;
+  padding-left: 15rpx;
+}
+.weixinplay{
+  background: #fff;
+  padding: 10rpx 30rpx;
+  padding-bottom: 0;
+}
+.weixinplay image{
+  width: 270rpx;
+  height: 60rpx;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

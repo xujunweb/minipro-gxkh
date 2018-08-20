@@ -1,0 +1,15 @@
+<!--pages/my/deposit/deposit.wxml-->
+<view class='deposit'>
+  <view class='conter'>
+    <view class='title'>租借前需充值押金</view>
+    <view class='tip'>归还后，可在“个人中心-我的钱包”中提现</view>
+    <view class='deposit-conter'>
+      <view class='price'>￥99</view>
+      <view class='text'>押金</view>
+    </view>
+  </view>
+  <view class='weixinplay'>
+    <image src='../../../images/weixinplay.png' mode='aspectFit'></image>
+  </view>
+  <button class='button'>确认支付</button>
+</view>
