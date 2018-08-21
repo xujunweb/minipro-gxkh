@@ -8,7 +8,8 @@
     "pages/my/wallet/wallet",
     "pages/my/recharge/recharge",
     "pages/my/deposit/deposit",
-    "pages/reduction/reduction"
+    "pages/reduction/reduction",
+    "pages/my/detailed/detailed"
   ],
   "window": {
     "backgroundTextStyle": "light",

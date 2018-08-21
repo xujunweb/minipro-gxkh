@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 6,
 			"list": [
 				{
 					"id": -1,
@@ -62,7 +62,19 @@
 				{
 					"id": -1,
 					"name": "押金充值",
-					"pathName": "pages/my/deposit/deposit"
+					"pathName": "pages/my/deposit/deposit",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "余额充值",
+					"pathName": "pages/my/recharge/recharge",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "交易明细",
+					"pathName": "pages/my/detailed/detailed"
 				}
 			]
 		}
