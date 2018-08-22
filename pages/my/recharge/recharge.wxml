@@ -1,2 +1,10 @@
 <!--pages/my/recharge/recharge.wxml-->
-<text>pages/my/recharge/recharge.wxml</text>
+<view class='recharge'>
+  <view class='title-h2'>请选择充值金额</view>
+  <view class='money'>
+    <view class="money-list {{item.select?'select':''}}" wx:for="{{moneyList}}" wx:key="{{index}}" bindtap='select' data-item="{{item.money}}" data-index="{{index}}">{{item.money}}元</view>
+  </view>
+  <view class='button'>
+    <button disabled="{{disabled}}">微信支付</button>
+  </view>
+</view>

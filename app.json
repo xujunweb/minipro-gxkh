@@ -10,6 +10,7 @@
     "pages/my/deposit/deposit",
     "pages/reduction/reduction",
     "pages/payment/payment",
+    "pages/my/detailed/detailed",
     "pages/progress/progress"
   ],
   "window": {

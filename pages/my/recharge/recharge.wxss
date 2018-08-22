@@ -1,1 +1,47 @@
 /* pages/my/recharge/recharge.wxss */
+.recharge{
+  height: 100%;
+  background: #fff;
+}
+.title-h2{
+  margin-top: 30rpx;
+  font-size: 28rpx;
+  color: #999;
+  text-align: center;
+}
+.money{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 50rpx;
+}
+.money .money-list{
+  font-size: 28rpx;
+  margin-top: 30rpx;
+  border: 2rpx solid #e4e4e4;
+  border-radius: 6rpx;
+  width: 210rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  text-align: center;
+}
+.money .select{
+  border: 2rpx solid #e68014;
+  background: #fcffe4;
+}
+.button{
+  bottom: 40rpx;
+  width: 680rpx;
+  margin: 0 auto;
+}
+.button button{
+  width: 80%;
+  color: #fff;
+  background: #2da747;
+  margin: 0 auto;
+  border-radius: 50rpx;
+  font-size: 32rpx;
+}
+.button button::after{
+  border: 0
+}
