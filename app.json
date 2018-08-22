@@ -11,7 +11,8 @@
     "pages/reduction/reduction",
     "pages/payment/payment",
     "pages/my/detailed/detailed",
-    "pages/progress/progress"
+    "pages/progress/progress",
+    "pages/message/message"
   ],
   "window": {
     "backgroundTextStyle": "light",
