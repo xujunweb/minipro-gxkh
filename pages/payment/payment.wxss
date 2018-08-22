@@ -1,0 +1,44 @@
+/* pages/payment/payment.wxss */
+@import '../my/deposit/deposit.wxss'
+.payment{
+  height: 100%;
+  background: #f3f2f2;
+  overflow: hidden;
+}
+.money-box{
+  width: 600rpx;
+  padding: 30rpx 40rpx;
+  margin: 30rpx auto;
+  background: #fff;
+  border-radius: 20rpx;
+  border: 2rpx solid #e6e4e4;
+  box-shadow: 0 0 20rpx #e6e4e4;
+}
+.money-box .money{
+  color: #2da747;
+  font-size: 46rpx;
+}
+.money-box .time{
+  font-size: 28rpx;
+  color: #999;
+  padding-left: 10rpx;
+}
+.weixinplay{
+  border-top: 2rpx solid #eee;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

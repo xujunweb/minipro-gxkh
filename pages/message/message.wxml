@@ -1,0 +1,37 @@
+<view>
+    <view class='head'>
+        <view><image src='{{orgLogo}}'/></view>
+        <view class='name'>{{orgName}}</view>
+    </view>
+    
+    <view class="btn_view">
+        <button class='wx' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+            <image src='http://yamxcx.oss-cn-shenzhen.aliyuncs.com/xcx/wx_icon.png'/>
+            <text>微信授权快捷登录</text>
+        </button>
+        <button class='tel' bindtap="showPhoneLogin">
+            <image src='http://yamxcx.oss-cn-shenzhen.aliyuncs.com/xcx/tel_icon.png'/>
+            <text>短信验证码登录</text>
+        </button>
+    </view>  
+</view>
+
+<!-- 短信验证码登录 -->
+<view class='login_view' wx:if='{{showLayer}}'> 
+    <view class='layer_bg'></view>
+    <view class='login_main'>
+        <view class='login_title'>短信验证码登录</view>
+        <view class='input_view'>
+            <view class="item"> 
+                <input bindinput="phoneChange" type="number" placeholder="手机号" placeholder-style="color: #aaa" maxlength='11'/>
+            </view>
+            <view class="item code">
+                <input type="number" bindinput="codeChange" placeholder="短信验证码" placeholder-style="color: #aaa" maxlength='6'/>
+                <text bindtap="sendCode" class='code_def {{codeText=="获取验证码"?"":"code_sel"}}'>{{codeText}}</text>
+            </view> 
+        </view>
+        <button class='login_btn {{isLogin?"":"login_btn_no"}}' catchtap='submitBind'>登录</button>
+    </view>
+    <view class='logout_btn' catchtap='closeLayer'></view>
+    
+</view>

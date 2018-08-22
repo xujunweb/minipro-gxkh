@@ -1,0 +1,22 @@
+/* pages/progress/progress.wxss */
+.progress{
+  height: 100%;
+  background: #f3f2f2;
+}
+.conter{
+  text-align: center;
+  padding: 0 60rpx;
+}
+.image{
+  height: 240rpx;
+  margin-top: 60rpx;
+}
+.title-h2{
+  font-size: 28rpx;
+  margin-bottom: 10rpx;
+}
+.title-h3{
+  font-size: 20rpx;
+  color: #999;
+  margin-bottom: 20rpx;
+}

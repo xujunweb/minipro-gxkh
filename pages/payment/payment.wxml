@@ -1,0 +1,43 @@
+<!--pages/payment/payment.wxml-->
+<view class='payment'>
+  <view class='money-box'>
+    <view class='money'>￥20</view>
+    <view class='time'>共2小时</view>
+  </view>
+  <view class='weixinplay'>
+    <view class='image'>
+      <image src='../../../images/weixinplay.png' mode='aspectFit'></image>
+      <text>微信支付</text>
+    </view>
+    <icon type="{{weixin?'success':'circle'}}" size='17' class='icon' bindtap='seletPlay' data-type="1"></icon>
+  </view>
+  <view class='weixinplay'>
+    <view class='image'>
+      <image src='../../../images/weixinplay.png' mode='aspectFit'></image>
+      <text>余额支付</text>
+    </view>
+    <icon type="{{weixin?'circle':'success'}}" size='17' class='icon' bindtap='seletPlay' data-type="2"></icon>
+  </view>
+  <view class='button'>
+    <button disabled="{{disabled}}">确认支付</button>
+  </view>
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

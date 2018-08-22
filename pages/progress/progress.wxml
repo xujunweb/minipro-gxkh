@@ -1,0 +1,9 @@
+<!--pages/progress/progress.wxml-->
+<view class='progress'>
+  <view class='conter'>
+    <image src='' class='image' mode='aspectFit'></image>
+    <view class='title-h2'>请及时取出陪护床</view>
+    <view class='title-h3'>若箱门未打开，请稍等片刻</view>
+    <progress percent="{{progress}}" show-info stroke-width='4' />
+  </view>
+</view>
