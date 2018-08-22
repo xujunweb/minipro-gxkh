@@ -1,2 +1,9 @@
 <!--pages/reduction/reduction.wxml-->
-<text>pages/reduction/reduction.wxml</text>
+<view class="container log-list">
+  <view class="image">
+    <image src='https://ss0.bdstatic.com/-0U0b8Sm1A5BphGlnYG/kmarketingadslogo/6d8621a5a6fdad570aa7d1f3df7560a1_259_194.jpg' lazy-load="{{true}}" mode="aspectFit"></image>
+  </view>
+  <view class="text_line"><text>请点击下方按钮后扫描移动箱二维码</text></view>
+  <button class="button" bindtap="scan" hover-class="other-button-hover">还</button>
+</view>
+

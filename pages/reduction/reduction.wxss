@@ -1,4 +1,5 @@
 /* pages/reduction/reduction.wxss */
+@import '../borrow/borrow.wxss'
 .reduction{
   height: 100%;
   background: #f3f2f2;

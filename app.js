@@ -16,10 +16,12 @@ App({
     // 获取用户信息
     wx.getSetting({
       success: res => {
+        console.log('获取微信登录状态---', res)
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
+              console.log('微信用户信息---',res)
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
 
@@ -35,12 +37,7 @@ App({
     })
   },
   globalData: {
-    userInfo: {
-      'id': 206,
-      'userName': '13113864577',
-      'password': 'fanjunlin123',
-      'token': 'abcdefghijklmn123456'
-    },
+    userInfo: null,
     code: '',
     openid: '',
     env: {

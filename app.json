@@ -1,14 +1,16 @@
 {
   "pages": [
+    "pages/borrow/borrow",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/borrow/borrow",
     "pages/my/my",
     "pages/my/order/order",
     "pages/my/wallet/wallet",
     "pages/my/recharge/recharge",
     "pages/my/deposit/deposit",
-    "pages/reduction/reduction"
+    "pages/reduction/reduction",
+    "pages/payment/payment",
+    "pages/progress/progress"
   ],
   "window": {
     "backgroundTextStyle": "light",

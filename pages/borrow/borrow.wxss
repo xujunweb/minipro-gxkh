@@ -23,4 +23,8 @@
   margin-top: 40rpx;
   width: 85%;
   background:#ca2c89;
+  border-radius:40rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  box-shadow: 0 0 20rpx #c1bbbb;
 }
