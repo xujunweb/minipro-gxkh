@@ -31,14 +31,45 @@ Page({
   scan:function(){
     wx.scanCode({
       onlyFromCamera:false,   //可以从相册选择照片
-      success:function(e){
+      success:(e)=>{
         console.log(e)
-      },
-      fail:function(){
+        var userInfo = app.globalData.loginUserInfo || wx.getStorageSync('loginUserInfo')
+        if (userInfo.deposit>0 && userInfo.money>0){
+          this.unlock(123456)
+        } else if (!userInfo.deposit){
+          wx.navigateTo({
+            url: '/pages/my/deposit/deposit'
+          })
+        }else{
+          wx.navigateTo({
+            url: '/pages/my/recharge/recharge'
+          })
+        }
         
       },
-      complete:function(){
+      fail:()=>{
+        
+      },
+      complete:()=>{
 
+      }
+    })
+  },
+  //解锁请求
+  unlock: function (lock){
+    console.log(app.globalData.loginUserInfo, wx.getStorageSync('loginUserInfo'))
+    wx.request({
+      url: wx.envConfig.host + 'lockOrder/unLock',
+      data: { lock_no: lock},
+      method: 'POST',
+      header:{
+        ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
+      },
+      success: (res) => {
+        console.log('解锁请求--------', res)
+        if (res.data.data){
+
+        }
       }
     })
   }

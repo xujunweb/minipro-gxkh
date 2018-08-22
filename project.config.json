@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 8,
+			"current": 9,
 			"list": [
 				{
 					"id": -1,
@@ -88,6 +88,11 @@
 					"name": "余额充值",
 					"pathName": "pages/my/recharge/recharge",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "授权登陆",
+					"pathName": "pages/message/message"
 				}
 			]
 		}

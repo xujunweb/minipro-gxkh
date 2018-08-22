@@ -1,4 +1,23 @@
 /**index.wxss**/
+.head{
+  margin: 120rpx auto 100rpx auto; width: 300rpx; text-align: center;
+}
+.head .userAvatarUrl{ width: 120rpx; height: 120rpx; border-radius: 100rpx;margin: 0 auto;}
+.head .name { font-size: 26rpx; color: #999; margin-top: 10rpx; }
+
+.btn_view button {
+  width: 690rpx; height: 88rpx; margin: 0 auto; border-radius: 88rpx; font-size: 34rpx;
+  display: flex; align-items: center; justify-content: center;
+}
+.btn_view .wx{
+  color: #fff; background-color: #d3a95a;
+}
+.wx image { width: 34rpx; height: 29rpx; margin-right: 12rpx; }
+.btn_view .tel {
+  color: #d3a95a; border: 1rpx solid #d3a95a; margin-top: 50rpx;
+ }
+.tel image {  width: 22rpx; height: 36rpx; margin-right: 12rpx; }
+button::after{ border:none; }
 .userinfo {
   display: flex;
   flex-direction: column;

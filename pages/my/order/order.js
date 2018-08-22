@@ -5,13 +5,13 @@ Page({
     orderlist:[
       {
         order_no:'jjdk454787',
-        time: 1534673721000,
-        place:'深圳市第六人名医院'
+        start_time: 1534673721000,
+        address:'深圳市第六人名医院'
       },
       {
         order_no: 'jjdk454dfd7',
-        time: 1534600000000,
-        place: '深圳市'
+        start_time: 1534600000000,
+        address: '深圳市'
       }
     ],
     isloading:false,
@@ -64,12 +64,15 @@ Page({
       isloading:true
     })
     wx.request({
-      url: wx.envConfig.host,
+      url: wx.envConfig.host +'lockOrder/pageByLockOrder',
       method: "POST",
-      data: { select: this.data.select, p: this.data.thisp },
+      header: {
+        ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
+      },
+      data: { type: this.data.select, pageNum: this.data.thisp, pageSize:8 },
       success: (res) => {
         this.setData({
-          orderlist: res.data.list
+          orderlist: res.data.data.list
         })
       },
       fail: (err) => {},

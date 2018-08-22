@@ -1,9 +1,15 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="usermotto">
-    <text class="user-motto">梦宝康护申请获得以下权限</text>
+  <view class='head'>
+      <view class='userAvatarUrl'>
+        <open-data type="userAvatarUrl" class="image"></open-data>
+      </view>
+      <view class='name'>
+        <open-data type="userNickName" class="userinfo-nickname"></open-data>
+      </view>
   </view>
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 微信授权 </button>
+  <view class="btn_view">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='wx'> <image src='http://yamxcx.oss-cn-shenzhen.aliyuncs.com/xcx/wx_icon.png'/>
+            <text>微信授权</text> </button>
   </view>
 </view>

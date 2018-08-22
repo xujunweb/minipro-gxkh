@@ -12,13 +12,13 @@
   <view class='block deposit'>
     <view class='left'>
       <view class='title'>押金</view>
-      <view class='conter'>{{deposit?'未缴纳':'已缴纳'}}</view>
+      <view class='conter'>{{deposit?'已缴纳':'未缴纳'}}</view>
     </view>
-    <navigator url="/pages/my/deposit/deposit">
+    <navigator url="/pages/my/deposit/deposit" wx:if="{{!deposit}}">
       <button class='block-button'>缴纳押金</button>
     </navigator>
   </view>
-  <navigator url="" class="weui-cell_link" hover-class="weui-cell_active">
+  <navigator url="/pages/my/detailed/detailed" class="weui-cell_link" hover-class="weui-cell_active">
       <view class="weui-cell__bd">交易查询</view>
       <view class="weui-cell__ft weui-cell__ft_in-access"></view>
   </navigator>

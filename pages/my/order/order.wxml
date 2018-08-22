@@ -14,8 +14,8 @@
   <view class='orderlist'>
     <view class='item' wx:for="{{orderlist}}" wx:key="index">
       <view class='orderno'>订单编号:{{item.order_no}}</view>
-      <view class='time'>{{dateFr.getDate(item.time)}}</view>
-      <view class='place'>{{item.place}}</view>
+      <view class='time'>{{item.start_time}}</view>
+      <view class='place'>{{item.address}}</view>
     </view>
   </view>
 </view>

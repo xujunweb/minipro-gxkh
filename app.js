@@ -11,6 +11,7 @@ App({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         console.log('wx.login---------',res)
+        this.getOpenIdUserInfo({ code: res.code})
       }
     })
     // 获取用户信息
@@ -36,17 +37,52 @@ App({
       }
     })
   },
+  //获取openid
+  getOpenIdUserInfo:function(data,callback){
+    wx.request({
+      url: wx.envConfig.host + 'pay/wx/getWeixinUserInfo',
+      data:data,
+      method:'POST',
+      success:(res)=>{
+        console.log('后台获取的用户信息--------',res)
+        this.globalData.loginUserInfo = res.data.data
+        wx.setStorageSync('loginUserInfo', res.data.data)
+        if (this.getLoginUserInfo){
+          this.getLoginUserInfo(res.data.data)
+        }
+        callback && callback(res)
+      }
+    })
+  },
+  //获取openid
+  getNewUserInfo: function (callback) {
+    wx.request({
+      url: wx.envConfig.host + 'user/getUserInfo',
+      data: {},
+      header:{
+        ticket: this.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
+      },
+      method: 'POST',
+      success: (res) => {
+        console.log('后台最新的用户信息--------', res)
+        this.globalData.loginUserInfo = res.data.data
+        wx.setStorageSync('loginUserInfo', res.data.data)
+        callback && callback(res)
+      }
+    })
+  },
   globalData: {
     userInfo: null,
+    loginUserInfo:null,
     code: '',
     openid: '',
     env: {
       mode: 'dev',
       dev: {
-        host: 'http://47.107.54.207:8080',
+        host: 'http://47.107.54.207:8080/mobile/',
       },
       production: {
-        host: 'https://app.1sju.com/yishuju-app',
+        host: 'http://47.107.54.207:8080/mobile/',
       }
     }
   }

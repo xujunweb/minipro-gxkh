@@ -1,8 +1,8 @@
 <!--pages/my/detailed/detailed.wxml-->
 <view class='detailed'>
-  <view class='list'>
-    <view class='title-h2'>余额支付</view>
-    <view class='time'>2018-08-10 10:22 ~ 2018-08-10 10:55</view>
-    <view class='money'>-20</view>
+  <view class='list' wx:for="{{orderlist}}" wx:key="{{index}}">
+    <view class='title-h2'>{{typeMap[item.type]}}</view>
+    <view class='time'>{{item.update_time}}</view>
+    <view class='money'>{{item.fee<=0?item.fee:'+'+item.fee}}</view>
   </view>
 </view>

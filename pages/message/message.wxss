@@ -2,7 +2,7 @@
 .head{
   margin: 120rpx auto 100rpx auto; width: 300rpx; text-align: center;
 }
-.head image { width: 160rpx; height: 160rpx; background-color: #eee; border-radius: 160rpx; }
+.head .image{ width: 100rpx; height: 100rpx; background-color: #eee; border-radius: 100rpx; }
 .head .name { font-size: 26rpx; color: #999; margin-top: 10rpx; }
 
 .btn_view button {

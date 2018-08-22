@@ -1,7 +1,11 @@
 <view>
     <view class='head'>
-        <view><image src='{{orgLogo}}'/></view>
-        <view class='name'>{{orgName}}</view>
+        <view>
+          <open-data type="userAvatarUrl" class="userinfo-avatar" class="image"></open-data>
+        </view>
+        <view class='name'>
+          <open-data type="userNickName" class="userinfo-nickname"></open-data>
+        </view>
     </view>
     
     <view class="btn_view">

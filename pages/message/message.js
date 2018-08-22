@@ -1,6 +1,6 @@
 var app = getApp();
-import { phoneValidCodeM } from '../../../../components/model/my/my_m'; //会员卡开关
-import { loginM } from '../../components/model/member_m';
+// import { phoneValidCodeM } from '../../../../components/model/my/my_m'; //会员卡开关
+// import { loginM } from '../../components/model/member_m';
 
 Page({
 
@@ -23,16 +23,6 @@ Page({
   onLoad: function (options) {
 
     var that = this;
-
-    //获取门店信息
-    app.getOrgInfo((err, orgInfo) => {
-
-      if (err) return;
-
-      if (orgInfo) {
-        that.setData({ orgLogo: orgInfo.logo, orgName: orgInfo.orgName });
-      }
-    })
   },
   //手机号验证码登录
   showPhoneLogin: function () {
