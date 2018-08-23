@@ -7,6 +7,7 @@
   width: 600rpx;
   padding: 60rpx 40rpx;
   border: 2rpx solid #eee;
+  border-left: 10rpx solid #e55798;
   box-shadow: 0rpx 0 20rpx #eee;
   margin: 0 auto;
   font-size: 32rpx;
@@ -35,8 +36,7 @@
   height: 80rpx;
   line-height: 80rpx;
   color: #fff;
-  background: #ca2c89;
-  background: linear-gradient(to right, #ec53ca , #ca2c89);
+  background: #9de371;
   box-shadow: 0 0 14rpx #eca0dc;
 }
 
