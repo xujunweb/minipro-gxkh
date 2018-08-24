@@ -39,6 +39,10 @@ App({
   },
   //获取openid
   getOpenIdUserInfo:function(data,callback){
+    wx.showLoading({
+      title:'加载中...',
+      mask:true
+    })
     wx.request({
       url: wx.envConfig.host + 'pay/wx/getWeixinUserInfo',
       data:data,
@@ -46,11 +50,21 @@ App({
       success:(res)=>{
         console.log('后台获取的用户信息--------',res)
         this.globalData.loginUserInfo = res.data.data
+        this.globalData.openid = res.data.data.openid
         wx.setStorageSync('loginUserInfo', res.data.data)
         if (this.getLoginUserInfo){
           this.getLoginUserInfo(res.data.data)
         }
         callback && callback(res)
+      },
+      fail:function(){
+        wx.showToast({
+          title:'登陆失败',
+          icon:'none'
+        })
+      },
+      complete:function(){
+        wx.hideLoading()
       }
     })
   },

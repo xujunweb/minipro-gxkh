@@ -1,7 +1,9 @@
 <!--my.wxml-->
 <view class="container my">
   <view class='top'>
-    <open-data type="userAvatarUrl" class="userinfo-avatar"></open-data>
+    <view class="userinfo-avatar">
+      <open-data type="userAvatarUrl"></open-data>
+    </view>
     <open-data type="userNickName" class="userinfo-nickname"></open-data>
     <!-- <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
     <text class="userinfo-nickname">{{userInfo.nickName}}</text> -->
@@ -9,13 +11,13 @@
   <view class='operation'>
     <view class='order item'>
       <navigator url='/pages/my/order/order'>
-        <image src="http://pics.sc.chinaz.com/Files/pic/icons128/7060/g1.png"></image>
+        <image src="../../images/icon-order.png"></image>
         <view class='text'>我的订单</view>
       </navigator>
     </view>
     <view class='wallet item'>
       <navigator url="/pages/my/wallet/wallet">
-        <image src="http://pics.sc.chinaz.com/Files/pic/icons128/7060/g1.png"></image>
+        <image src="../../images/icon-money.png"></image>
         <view class='text'>我的钱包</view>
       </navigator>
     </view>

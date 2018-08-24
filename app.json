@@ -19,5 +19,21 @@
     "navigationBarBackgroundColor": "#000",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/borrow/borrow",
+        "text": "借",
+        "iconPath":"images/scan.png",
+        "selectedIconPath":"images/selectScan.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath":"images/my.png",
+        "selectedIconPath":"images/mySelect.png"
+      }
+    ]
   }
 }
