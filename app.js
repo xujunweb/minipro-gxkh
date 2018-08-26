@@ -93,10 +93,11 @@ App({
     env: {
       mode: 'dev',
       dev: {
-        host: 'http://47.107.54.207:8080/mobile/',
+        // host: 'https://47.107.54.207:8080/mobile/',
+        host: 'https://www.chmbkh.com/mobile/'
       },
       production: {
-        host: 'http://47.107.54.207:8080/mobile/',
+        host: 'https://www.chmbkh.com/mobile/',
       }
     }
   }

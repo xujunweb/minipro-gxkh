@@ -12,7 +12,8 @@
     "pages/payment/payment",
     "pages/my/detailed/detailed",
     "pages/progress/progress",
-    "pages/message/message"
+    "pages/message/message",
+    "pages/feedback/feedback"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -25,14 +26,14 @@
       {
         "pagePath": "pages/borrow/borrow",
         "text": "借",
-        "iconPath":"images/scan.png",
-        "selectedIconPath":"images/selectScan.png"
+        "iconPath": "images/scan.png",
+        "selectedIconPath": "images/selectScan.png"
       },
       {
         "pagePath": "pages/my/my",
         "text": "我的",
-        "iconPath":"images/my.png",
-        "selectedIconPath":"images/mySelect.png"
+        "iconPath": "images/my.png",
+        "selectedIconPath": "images/mySelect.png"
       }
     ]
   }
