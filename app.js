@@ -85,6 +85,7 @@ App({
       }
     })
   },
+  //公共数据
   globalData: {
     userInfo: null,
     loginUserInfo:null,
