@@ -1,7 +1,9 @@
 <!--logs.wxml-->
 <view class="container log-list">
-  <view class="image">
-    <image src='../../images/bg1.png' lazy-load="{{true}}" mode="aspectFit"></image>
+  <view class='content'>
+    <view class="image">
+      <image src='../../images/bg1.png' lazy-load="{{true}}" mode="widthFix"></image>
+    </view>
+    <button class="button" bindtap="scan" hover-class="other-button-hover">扫码借床</button>
   </view>
-  <button class="button" bindtap="scan" hover-class="other-button-hover">扫码借床</button>
 </view>

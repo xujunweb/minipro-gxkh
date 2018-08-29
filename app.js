@@ -6,6 +6,7 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
     wx.envConfig = this.globalData.env[this.globalData.env.mode];
+    //注释1
     // 登录
     wx.login({
       success: res => {

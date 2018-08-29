@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 9,
+			"current": 11,
 			"list": [
 				{
 					"id": -1,
@@ -92,7 +92,20 @@
 				{
 					"id": -1,
 					"name": "授权登陆",
-					"pathName": "pages/message/message"
+					"pathName": "pages/message/message",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "充值成功",
+					"pathName": "pages/playsuccess/playsuccess",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "申报故障",
+					"pathName": "pages/fault/fault",
+					"query": ""
 				}
 			]
 		}

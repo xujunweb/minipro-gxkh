@@ -1,0 +1,44 @@
+/* pages/playsuccess/playsuccess.wxss */
+.playsuccess{
+  height: 100%;
+  background: #fff;
+  padding:0 60rpx;
+}
+.playsuccess .content{
+  margin-top: 80rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.playsuccess .content .tips{
+  font-size: 40rpx;margin-top: 50rpx;
+}
+.playsuccess .content button{
+  border-radius: 80rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 36rpx;
+}
+.playsuccess .content .button1{
+  margin-top: 80rpx;
+  background: #E23364;
+  color: #fff;
+  border: 2rpx solid #E23364;
+}
+.playsuccess .content .button2{
+  margin-top: 40rpx;
+  background: #fff;
+  color: #333;
+  border: 2rpx solid #999;
+}
+
+
+
+
+
+
+
+
+
+

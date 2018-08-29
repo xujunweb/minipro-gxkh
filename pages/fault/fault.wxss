@@ -1,0 +1,71 @@
+/* pages/fault/fault.wxss */
+.fault{
+  height: 100%;
+  background: #fff;
+  font-size: 30rpx;
+  padding-left: 60rpx;
+}
+.fault .item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2rpx solid #eee;
+  padding: 30rpx 0;
+}
+.fault .item text{display: inline-block;width: 150rpx;line-height: 50rpx;}
+.fault .item .copywrit{color: #999;width: auto;}
+.fault .item input{
+  flex-grow: 1;
+  line-height: 50rpx;
+}
+.fault .item .arrwo{
+  margin-right: 60rpx;
+  width: 20rpx;
+  height: 20rpx;
+  border-top: 2rpx solid #ccc;
+  border-right: 2rpx solid #ccc;
+  transform: rotate(45deg);
+}
+
+
+.upload-image{
+  margin-top: 50rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+.upload-image .upload{
+  border: 2rpx dashed #979797;
+  width: 130rpx;
+  height: 130rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10rpx;
+  font-size: 24rpx;
+  color: #999;
+  margin-right: 40rpx;
+  margin-bottom: 30rpx;
+}
+.upload-image .upload view{
+  margin-top: 10rpx;
+}
+.upload-image .upload image{
+  width: 50rpx;height: 44rpx;
+}
+.upload-image .image{
+  position: relative;
+}
+.upload-image .image .delete{
+  position: absolute;top: -10rpx;right: 23rpx;
+  background: #fff;
+  border-radius: 50rpx;
+}
+.upload-image .image image{
+  width: 130rpx;height: 130rpx;
+  margin-right: 40rpx;
+}
+
+
+
+

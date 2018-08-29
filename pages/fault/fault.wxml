@@ -1,0 +1,27 @@
+<!--pages/fault/fault.wxml-->
+<view class='fault'>
+  <view class='item'>
+    <text>输入编号：</text><input placeholder='请输入编号'></input>
+  </view>
+  <view class='item' bindtap='choiceFault'>
+    <view>
+      <text>故障类型</text>
+      <text class='copywrit'>{{faultText}}</text>
+    </view>
+    <view class='arrwo'></view>
+  </view>
+  <view class='item'>
+    <text>备注：</text><input placeholder='请输入备注'></input>
+  </view>
+  <view class='upload-image'>
+    <view class='upload' bindtap='getImage'>
+      <image src='../../images/camera.png'></image>
+      <view>最多6张</view>
+    </view>
+    <view class='image' wx:for="{{imgList}}" wx:key="{{index}}">
+      <image src='{{item}}'></image>
+      <icon type='clear' size='15' class='delete' color='#E23364' bindtap='deleteImg' data-index="{{index}}"></icon>
+    </view>
+    
+  </view>
+</view>
