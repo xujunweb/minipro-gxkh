@@ -11,7 +11,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if (options) {
+      this.setData({
+        isPlaysuccess: options.result
+      })
+      wx.setNavigationBarTitle({
+        title: options.result?'租借成功':'租借失败'
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
