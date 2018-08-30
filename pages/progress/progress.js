@@ -1,4 +1,5 @@
 // pages/progress/progress.js
+const app = getApp()
 Page({
 
   /**
@@ -43,5 +44,25 @@ Page({
     setTimeout(function(){
         that.next()
     }, 50);
+  },
+  //解锁请求
+  unlock: function (lock) {
+    console.log(app.globalData.loginUserInfo, wx.getStorageSync('loginUserInfo'))
+    wx.request({
+      url: wx.envConfig.host + 'lockOrder/unLock',
+      data: { lock_no: lock },
+      method: 'POST',
+      header: {
+        ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
+      },
+      success: (res) => {
+        console.log('解锁请求--------', res)
+        if (res.data.data) {
+          wx.redirectTo({
+            url:'/pages/leasesuccess/index'
+          })
+        }
+      }
+    })
   }
 })

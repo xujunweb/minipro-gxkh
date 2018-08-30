@@ -1,7 +1,7 @@
 <!--pages/fault/fault.wxml-->
 <view class='fault'>
   <view class='item'>
-    <text>输入编号：</text><input placeholder='请输入编号'></input>
+    <text>输入编号：</text><input placeholder='请输入编号' bindinput='inputNo' value='{{proNo}}'></input>
   </view>
   <view class='item' bindtap='choiceFault'>
     <view>
@@ -11,7 +11,7 @@
     <view class='arrwo'></view>
   </view>
   <view class='item'>
-    <text>备注：</text><input placeholder='请输入备注'></input>
+    <text>备注：</text><input placeholder='请输入备注' bindinput='inputDesc' value='{{describe}}'></input>
   </view>
   <view class='upload-image'>
     <view class='upload' bindtap='getImage'>
@@ -22,6 +22,10 @@
       <image src='{{item}}'></image>
       <icon type='clear' size='15' class='delete' color='#E23364' bindtap='deleteImg' data-index="{{index}}"></icon>
     </view>
-    
   </view>
 </view>
+<view class='button'>
+  <button bindtap=''>提交</button>
+</view>
+
+

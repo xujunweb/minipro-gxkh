@@ -13,9 +13,9 @@
     "pages/my/detailed/detailed",
     "pages/progress/progress",
     "pages/message/message",
-    "pages/feedback/feedback",
     "pages/playsuccess/playsuccess",
-    "pages/fault/fault"
+    "pages/fault/fault",
+    "pages/leasesuccess/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

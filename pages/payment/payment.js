@@ -1,4 +1,5 @@
 // pages/payment/payment.js
+const app = getApp()
 Page({
 
   /**
@@ -6,7 +7,9 @@ Page({
    */
   data: {
     weixin:true,
-    yue:false
+    yue:false,
+    money:20,
+    time:0
   },
 
   /**
@@ -48,11 +51,42 @@ Page({
       })
     }
   },
-  //查询时间和金额
-  getTime:function(data){
-    wx.request({
-      url: '',
-      data:data,
+  //输入时间
+  inputTime: function (e) {
+    this.setData({
+      time: e.detail.value,
+      money: e.detail.value*5
     })
+  },
+  //余额支付
+  balancePlay:function(){
+    var userInfo = app.globalData.loginUserInfo || wx.getStorageSync('loginUserInfo')
+    if (userInfo.money > this.data.money) {
+      wx.request({
+        url: wx.envConfig.host + 'play/play',
+        data: { money: this.data.money },
+        method: 'POST',
+        header: {
+          ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
+        },
+        success: (res) => {
+          console.log('余额支付请求--------', res)
+          if (res.data.data) {
+            wx.redirectTo({
+              url:'/pages/progress/progress'
+            })
+          }
+        }
+      })
+    } else {
+      //余额不足，跳转余额充值页面
+      wx.navigateTo({
+        url: '/pages/my/recharge/recharge'
+      })
+    }
+  },
+  //微信支付
+  weixinPlay:function(){
+
   }
 })

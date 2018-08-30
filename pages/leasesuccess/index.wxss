@@ -1,0 +1,39 @@
+/* pages/leasesuccess/index.wxss */
+@import '../playsuccess/playsuccess.wxss'
+
+.leasesuccess{
+  height: 100%;
+  background: #f5f5f5;
+  overflow: hidden;
+}
+.playsuccess{height: 570rpx;margin-top: 0;padding-top: 6rpx;}
+.playsuccess .content .button1{
+  margin-top: 50rpx;
+}
+.playsuccess .content .oper{
+  margin-top: 50rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.playsuccess .content .oper button{
+  width: 300rpx;
+}
+.playsuccess .content .oper .button1{
+  margin-top: 0;
+}
+.playsuccess .content .oper .button2{
+  margin-top: 0;
+}
+.rule{
+  margin-top: 40rpx;
+  padding: 0 60rpx;
+}
+.rule .rule-title{
+  font-size: 30rpx;color: #999;text-align: center;
+}
+.rule .rule-de{
+  font-size: 30rpx;color: #333;margin-top: 40rpx;
+}
+.rule .rule-content{
+  font-size: 26rpx;color: #999;
+}

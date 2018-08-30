@@ -65,7 +65,21 @@
   width: 130rpx;height: 130rpx;
   margin-right: 40rpx;
 }
-
+.button{
+  position: fixed;
+  text-align: center;
+  bottom: 50rpx;
+  width: 100%;
+}
+.button button{
+  margin: 0 60rpx;
+  color: #fff;
+  background: #E23364;
+  line-height: 88rpx;
+  height: 88rpx;
+  border-radius: 80rpx;
+  font-size: 36rpx;
+}
 
 
 

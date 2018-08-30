@@ -90,6 +90,7 @@ App({
   globalData: {
     userInfo: null,
     loginUserInfo:null,
+    device_no:null,   //设备编号
     code: '',
     openid: '',
     env: {

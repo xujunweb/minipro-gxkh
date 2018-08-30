@@ -26,6 +26,12 @@
 .weixinplay{
   border-top: 2rpx solid #eee;
 }
+.remarks{
+  margin-top: 20rpx;
+  padding:0 60rpx;
+  font-size: 28rpx;
+  color: #999;
+}
 
 
 

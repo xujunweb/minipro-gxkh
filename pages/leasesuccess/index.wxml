@@ -1,0 +1,30 @@
+<!--pages/leasesuccess/index.wxml-->
+<view class='leasesuccess'>
+  <view class='playsuccess'>
+    <view class='content' wx:if="{{isPlaysuccess}}">
+      <icon type="success" size="70"/>
+      <view class='tips'>租借成功</view>
+      <view class='oper'>
+        <navigator url='/pages/fault/fault'>
+          <button class='button2' hover-class="none">申报故障</button>
+        </navigator>
+        <navigator url='/pages/borrow/borrow' open-type="switchTab">
+          <button class='button1' hover-class="none">返回首页</button>
+        </navigator>
+      </view>
+    </view>
+    <view class='content' wx:else="{{isPlaysuccess}}">
+      <icon type="clear" size="70" color="#E52B22" />
+      <view class='tips'>租借失败,金额已退回账户余额</view>
+      <navigator url='/pages/borrow/borrow' open-type="switchTab">
+        <button class='button1' hover-class="none">重新扫码</button>
+      </navigator>
+    </view>
+  </view>
+  <view class='rule'>
+    <view class='rule-title'>计费规则</view>
+    <view class='rule-de'>分时计费</view>
+    <view class='rule-content'>自借出后，每小时xx元，不足1小时按1小时算</view>
+  </view>
+</view>
+
