@@ -1,5 +1,5 @@
 <!--pages/payment/payment.wxml-->
-<view class='payment'>
+<!-- <view class='payment'>
   <view class='money-box'>
     <view class='money'>￥{{money}}</view>
     <view class='time'>共2小时</view>
@@ -24,7 +24,28 @@
   <view class='button'>
     <button disabled="{{disabled}}">确认支付</button>
   </view>
+</view> -->
+<view class='leasesuccess'>
+  <view class='playsuccess'>
+    <view class='inputTime'>
+      <text>租借时间(h)：</text><input bindinput='inputTime' type='number' maxlength='3' placeholder='请输入时间' value='{{time}}'></input>
+    </view>
+    <view class='money'>共计：{{money}}元</view>
+    <view class='content'>
+      <button class='button1' hover-class="none">余额支付</button>
+      <button class='button2' hover-class="none">微信支付</button>
+    </view>
+  </view>
+  <view class='rule'>
+    <view class='rule-title'>计费规则</view>
+    <view class='rule-de'>分时计费</view>
+    <view class='rule-content'>自借出后，每小时{{hourly}}元，不足1小时按1小时算</view>
+  </view>
 </view>
+
+
+
+
 
 
 

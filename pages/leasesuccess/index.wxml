@@ -24,7 +24,7 @@
   <view class='rule'>
     <view class='rule-title'>计费规则</view>
     <view class='rule-de'>分时计费</view>
-    <view class='rule-content'>自借出后，每小时xx元，不足1小时按1小时算</view>
+    <view class='rule-content'>自借出后，每小时{{hourly}}元，不足1小时按1小时算</view>
   </view>
 </view>
 

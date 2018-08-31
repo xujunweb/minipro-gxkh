@@ -1,5 +1,5 @@
 /* pages/payment/payment.wxss */
-@import '../my/deposit/deposit.wxss'
+/* @import '../my/deposit/deposit.wxss'
 .payment{
   height: 100%;
   background: #f3f2f2;
@@ -31,6 +31,30 @@
   padding:0 60rpx;
   font-size: 28rpx;
   color: #999;
+} */
+ @import '../leasesuccess/index.wxss'
+ .playsuccess{
+   padding: 0;
+   height: auto;
+   padding-bottom: 70rpx;
+ }
+ .playsuccess .content{
+   margin-top:60rpx;
+ }
+.inputTime{
+  display: flex;align-items: center;
+  text-align: left;border-bottom: 2rpx solid #ccc;
+  margin-left: 60rpx;
+  padding: 30rpx 0;
+  font-size: 30rpx;
+}
+.money{
+  padding-left: 60rpx;
+  font-size: 30rpx;color: #666;
+  margin-top: 30rpx;
+}
+.playsuccess .content button{
+  width: 630rpx;
 }
 
 

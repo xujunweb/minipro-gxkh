@@ -8,35 +8,26 @@ Page({
   data: {
     weixin:true,
     yue:false,
-    money:20,
-    time:0
+    money:0,
+    time:'',
+    hourly:''
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-  
-  },
-
+  onReady: function () {},
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
-  },
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
+    this.setData({
+      hourly: app.globalData.hourly
+    })
   },
   //选择支付方式
   seletPlay:function(e){

@@ -8,7 +8,7 @@
   <view class='fixedDIV'></view>
   <!-- <view class='loading' wx:if="{{isloading}}">加载中...</view> -->
   <view class='noorder' wx:if="{{orderlist.length === 0}}">
-    <image src="http://pics.sc.chinaz.com/Files/pic/icons128/7060/g1.png" mode="aspectFit"></image>
+    <!-- <image src="http://pics.sc.chinaz.com/Files/pic/icons128/7060/g1.png" mode="aspectFit"></image> -->
     <view>你还没有一个订单哦</view>
   </view>
   <view class='orderlist'>

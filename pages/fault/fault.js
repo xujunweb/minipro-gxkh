@@ -1,4 +1,5 @@
 // pages/fault/fault.js
+const app = getApp()
 Page({
 
   /**
@@ -16,23 +17,21 @@ Page({
     },
     fault:1,
     describe:'',
-    proNo:''
+    proNo:'',
+    postImgList:[]  //传给后台的文件
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
 
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
 
   },
-
   /**
    * 生命周期函数--监听页面显示
    */
@@ -65,14 +64,55 @@ Page({
   },
   //选择相片
   getImage:function(){
+    if (this.data.imgList.length == 6){
+      wx.showToast({
+        title:'最多选择6张图片',
+        icon:'none'
+      })
+      return
+    }
     wx.chooseImage({
-      count:6,
+      count: 6 - this.data.imgList.length,
       success:(res)=>{
         console.log(res)
-        this.setData({
-          imgList:[...this.data.imgList,...res.tempFilePaths]
+        wx.showLoading({
+          title:'上传中...',
+          mask:true
+        })
+        var pro = []
+        for (let i = 0, img; img = res.tempFilePaths[i];i++){
+          pro.push(this.uploadFile(img))
+        }
+        Promise.all(pro).then(()=>{
+          wx.hideLoading()
+          console.log(this.data.postImgList)
         })
       }
+    })
+  },
+  //文件上传
+  uploadFile:function(file){
+    return new Promise((resolve, reject)=>{
+      wx.uploadFile({
+        url: wx.envConfig.host + 'file/upload',
+        filePath: file,
+        name: 'file',
+        header: {
+          ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
+        },
+        formData: {},
+        success: (res) => {
+          console.log(res.data)
+          this.setData({
+            imgList: [...this.data.imgList, ...[file]],
+            postImgList: [...this.data.postImgList, ...[res.data[0].url]]
+          })
+          resolve(res.data)
+        },
+        fail: () => {
+          reject()
+        }
+      })
     })
   },
   //删除图片

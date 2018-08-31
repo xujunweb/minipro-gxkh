@@ -93,6 +93,7 @@ App({
     device_no:null,   //设备编号
     code: '',
     openid: '',
+    hourly:'xxx',   //每小时计费数额
     env: {
       mode: 'dev',
       dev: {

@@ -3,10 +3,10 @@
   flex-direction: column;
   justify-content: center;
   background: #F5F5F5;
-  padding: 0 60rpx;
 }
 .log-list .content{
-  background: #fff;
+  width: 678rpx;
+  margin: 0 auto;
   border-radius: 30rpx;
 }
 .log-list image{

@@ -9,17 +9,17 @@
     <text class="userinfo-nickname">{{userInfo.nickName}}</text> -->
   </view>
   <view class='operation'>
-    <view class='order item'>
-      <navigator url='/pages/my/order/order'>
-        <image src="../../images/icon-order.png"></image>
+    <navigator url='/pages/my/order/order'>
+      <view class='order item'>
+        <image src="../../images/order-icon.png"></image>
         <view class='text'>我的订单</view>
-      </navigator>
-    </view>
-    <view class='wallet item'>
-      <navigator url="/pages/my/wallet/wallet">
-        <image src="../../images/icon-money.png"></image>
+      </view>
+    </navigator>
+    <navigator url="/pages/my/wallet/wallet">
+      <view class='wallet item'>
+        <image src="../../images/money-icon.png"></image>
         <view class='text'>我的钱包</view>
-      </navigator>
-    </view>
+      </view>
+    </navigator>
   </view>
 </view>
