@@ -1,7 +1,6 @@
 // pages/my/detailed/detailed.js
 const app = getApp()
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -9,13 +8,15 @@ Page({
     orderlist: [
       {
         order_no: 'jjdk454787',
-        time: 1534673721000,
-        place: '深圳市第六人名医院'
+        type:'1',
+        update_time: '2018-10-10 10:10',
+        fee:200
       },
       {
-        order_no: 'jjdk454dfd7',
-        time: 1534600000000,
-        place: '深圳市'
+        order_no: 'jjdk454787',
+        type: '1',
+        update_time: '2018-10-10 10: 10',
+        fee: 200
       }
     ],
     isloading: false,
@@ -28,27 +29,20 @@ Page({
       4:'充值'
     }
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.getOrderList()
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-
-  },
-
+  onReady: function () {},
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
-  },
+  onShow: function () {},
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
@@ -91,9 +85,9 @@ Page({
       },
       data: { pageNum: this.data.thisp, pageSize: 8 },
       success: (res) => {
-        this.setData({
-          orderlist: res.data.data.list
-        })
+        // this.setData({
+        //   orderlist: res.data.data.list
+        // })
       },
       fail: (err) => { },
       complete: (data) => {

@@ -6,12 +6,14 @@ Page({
       {
         order_no:'jjdk454787',
         start_time: 1534673721000,
-        address:'深圳市第六人名医院'
+        address:'深圳市第六人名医院',
+        fee:50
       },
       {
         order_no: 'jjdk454dfd7',
         start_time: 1534600000000,
-        address: '深圳市'
+        address: '深圳市',
+        fee: 50
       }
     ],
     isloading:false,
@@ -71,9 +73,9 @@ Page({
       },
       data: { type: this.data.select, pageNum: this.data.thisp, pageSize:8 },
       success: (res) => {
-        this.setData({
-          orderlist: res.data.data.list
-        })
+        // this.setData({
+        //   orderlist: res.data.data.list
+        // })
       },
       fail: (err) => {},
       complete: (data) => {

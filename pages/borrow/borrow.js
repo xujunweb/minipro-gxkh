@@ -16,6 +16,12 @@ Page({
     })
   },
   scan:function(){
+    if (!app.globalData.loginUserInfo.phone){
+      wx.navigateTo({
+        url: '/pages/message/message',
+      })
+      return
+    }
     wx.scanCode({
       onlyFromCamera:false,   //可以从相册选择照片
       success:(e)=>{

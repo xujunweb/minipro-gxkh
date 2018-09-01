@@ -40,5 +40,29 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  //我的订单
+  goMyOrder(){
+    if (!app.globalData.loginUserInfo.phone) {
+      wx.navigateTo({
+        url: '/pages/message/message',
+      })
+      return
+    }
+    wx.navigateTo({
+      url: '/pages/my/order/order'
+    })
+  },
+  //我的钱包
+  goMyMoney(){
+    if (!app.globalData.loginUserInfo.phone) {
+      wx.navigateTo({
+        url: '/pages/message/message',
+      })
+      return
+    }
+    wx.navigateTo({
+      url: '/pages/my/wallet/wallet',
+    })
   }
 })

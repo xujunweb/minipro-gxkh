@@ -1,5 +1,5 @@
 <!--wallet.wxml-->
-<view class="container wallet">
+<!-- <view class="container wallet">
   <view class='block balance'>
     <view class='left'>
       <view class='title'>余额</view>
@@ -9,7 +9,7 @@
       <button class='block-button'>充值余额</button>
     </navigator>
   </view>
-  <!-- <view class='block deposit'>
+  <view class='block deposit'>
     <view class='left'>
       <view class='title'>押金</view>
       <view class='conter'>{{deposit?'已缴纳':'未缴纳'}}</view>
@@ -17,12 +17,31 @@
     <navigator url="/pages/my/deposit/deposit" wx:if="{{!deposit}}">
       <button class='block-button'>缴纳押金</button>
     </navigator>
-  </view> -->
+  </view>
   <navigator url="/pages/my/detailed/detailed" class="weui-cell_link" hover-class="weui-cell_active">
       <view class="weui-cell__bd">交易查询</view>
       <view class="weui-cell__ft weui-cell__ft_in-access"></view>
   </navigator>
-  <!-- <view class='button'>
+  <view class='button'>
     <button disabled="{{disabled}}">提现</button>
-  </view> -->
+  </view>
+</view> -->
+<view class='newwallet'>
+  <view class='top'>
+    <view class='money'>{{balance}}</view>
+    <view class='text'>账户余额(元)</view>
+  </view>
+  <view class='button'>
+    <navigator url='/pages/my/recharge/recharge'>
+      <button class='button1' hover-class="none">充值</button>
+    </navigator>
+    <navigator url='/pages/my/detailed/detailed'>
+      <button class='button2' hover-class="none">交易明细</button>
+    </navigator>
+  </view>
 </view>
+
+
+
+
+

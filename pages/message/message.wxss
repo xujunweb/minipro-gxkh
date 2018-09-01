@@ -1,6 +1,8 @@
 /* pages/message/message.wxss */
 .head{
-  margin: 120rpx auto 100rpx auto; width: 300rpx; text-align: center;
+  display: flex;justify-content: center;align-items: center;
+  flex-direction: column;
+  padding: 100rpx 0;
 }
 .head .image{ width: 100rpx; height: 100rpx; background-color: #eee; border-radius: 100rpx; }
 .head .name { font-size: 26rpx; color: #999; margin-top: 10rpx; }
@@ -8,6 +10,9 @@
 .btn_view button {
   width: 690rpx; height: 88rpx; margin: 0 auto; border-radius: 88rpx; font-size: 34rpx;
   display: flex; align-items: center; justify-content: center;
+}
+.img{
+  width: 150rpx;height: 150rpx;border-radius: 150rpx;overflow: hidden;
 }
 .btn_view .wx{
   color: #fff; background-color: #d3a95a;
@@ -18,6 +23,10 @@
  }
 .tel image {  width: 22rpx; height: 36rpx; margin-right: 12rpx; }
 button::after{ border:none; }
+
+.xieyi{font-size: 24rpx;text-align: center;color: #666;margin-top: 200rpx;}
+.xieyi text{color: #E85B96}
+
 
 /* 短信验证码登录 */
 .layer_bg {

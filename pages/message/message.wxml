@@ -1,6 +1,6 @@
 <view>
     <view class='head'>
-        <view>
+        <view class='img'>
           <open-data type="userAvatarUrl" class="userinfo-avatar" class="image"></open-data>
         </view>
         <view class='name'>
@@ -17,7 +17,8 @@
             <image src='http://yamxcx.oss-cn-shenzhen.aliyuncs.com/xcx/tel_icon.png'/>
             <text>短信验证码登录</text>
         </button>
-    </view>  
+    </view>
+    <view class='xieyi'>点击登录，表示已阅并同意<text bindtap='readXieyi'>《梦宝康护陪护床用户协议》</text></view>  
 </view>
 
 <!-- 短信验证码登录 -->

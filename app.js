@@ -69,7 +69,7 @@ App({
       }
     })
   },
-  //获取openid
+  //获取后台最新的用户信息
   getNewUserInfo: function (callback) {
     wx.request({
       url: wx.envConfig.host + 'user/getUserInfo',

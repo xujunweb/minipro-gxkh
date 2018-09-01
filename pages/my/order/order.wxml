@@ -13,9 +13,10 @@
   </view>
   <view class='orderlist'>
     <view class='item' wx:for="{{orderlist}}" wx:key="index">
-      <view class='orderno'>订单编号:{{item.order_no}}</view>
-      <view class='time'>{{item.start_time}}</view>
-      <view class='place'>{{item.address}}</view>
+      <view class='orderno'><text>编号：</text>{{item.order_no}}</view>
+      <view class='time'><text>时间：</text>{{item.start_time}}</view>
+      <view class='place'><text>地址：</text>{{item.address}}</view>
+      <view class='money'>￥ {{item.fee}}</view>
     </view>
   </view>
 </view>

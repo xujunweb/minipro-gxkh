@@ -1,43 +1,24 @@
-.wallet{
-  height: 100%;
-  background: #fff;
-}
+/* .wallet{height: 100%;background: #fff;}
 
 .wallet .block{
-  width: 600rpx;
-  padding: 60rpx 40rpx;
-  border: 2rpx solid #eee;
-  border-left: 10rpx solid #e55798;
-  box-shadow: 0rpx 0 20rpx #eee;
-  margin: 0 auto;
-  font-size: 32rpx;
-  border-radius: 16rpx;
-  margin-top: 40rpx;
-  display: flex;
+  width: 600rpx;padding: 60rpx 40rpx;border: 2rpx solid #eee;
+  border-left: 10rpx solid #e55798;box-shadow: 0rpx 0 20rpx #eee;margin: 0 auto;
+  font-size: 32rpx;border-radius: 16rpx;margin-top: 40rpx;display: flex;
   justify-content: space-between;
 }
 .wallet .block .title{
   margin-bottom: 10rpx;
 }
 .wallet .balance .conter{
-  color: #999;
-  font-size: 28rpx;
+  color: #999;font-size: 28rpx;
 }
 .wallet .deposit .conter{
-  font-size: 28rpx;
-  color: #2da747;
+  font-size: 28rpx;color: #2da747;
 }
 .wallet .block .block-button{
-  margin-left: 0;
-  margin-right: 0;
-  font-size: 32rpx;
-  width: 200rpx;
-  border-radius: 40rpx;
-  height: 80rpx;
-  line-height: 80rpx;
-  color: #fff;
-  background: #9de371;
-  box-shadow: 0 0 14rpx #eca0dc;
+  margin-left: 0;margin-right: 0;font-size: 32rpx;width: 200rpx;
+  border-radius: 40rpx;height: 80rpx;line-height: 80rpx;color: #fff;
+  background: #9de371;box-shadow: 0 0 14rpx #eca0dc;
 }
 
 .wallet .block .button-hover{
@@ -47,10 +28,7 @@
   border: 0;
 }
 .weui-cell_link{
-  display: flex;
-  justify-content: space-between;
-  margin-top: 30rpx;
-  padding:0 40rpx;
+  display: flex;justify-content: space-between;margin-top: 30rpx;padding:0 40rpx;
 }
 .weui-cell_active{
  background: #fff; 
@@ -60,21 +38,52 @@
 }
 
 .button{
-  position: fixed;
-  bottom: 40rpx;
-  width: 680rpx;
-  left: 35rpx;
+  position: fixed;bottom: 40rpx;width: 680rpx;left: 35rpx;
 }
 .button button{
-  width: 80%;
-  color: #fff;
-  background: #2da747;
-  margin: 0 auto;
-  border-radius: 50rpx;
-  font-size: 32rpx;
+  width: 80%;color: #fff;background: #2da747;margin: 0 auto;
+  border-radius: 50rpx;font-size: 32rpx;
 }
 .button button::after{
   border: 0
+} */
+.newwallet{
+  
 }
+.newwallet .top{
+ background: #f5f5f5;
+ text-align: center;
+ padding: 100rpx 0;
+}
+.newwallet .top .money{
+  color: #E23364;
+  font-size: 72rpx;
+}
+.newwallet .top .text{
+  color: #666;
+  font-size: 30rpx;
+}
+.newwallet .button button{
+  border-radius: 80rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 36rpx;
+  margin: 0 60rpx;
+}
+.newwallet .button .button1{
+  margin-top: 80rpx;
+  background: #E23364;
+  color: #fff;
+  border: 2rpx solid #E23364;
+}
+.newwallet .button .button2{
+  margin-top: 40rpx;
+  background: #fff;
+  color: #333;
+  border: 2rpx solid #999;
+}
+
+
+
 
 
