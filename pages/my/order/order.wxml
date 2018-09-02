@@ -1,4 +1,5 @@
 <!--my.wxml-->
+<wxs module="util" src="../../../utils/util.wxs" />
 <wxs module="dateFr" src="../../../filter/dateFr.wxs"></wxs>
 <view class="container order">
   <view class='top'>
@@ -8,15 +9,15 @@
   <view class='fixedDIV'></view>
   <!-- <view class='loading' wx:if="{{isloading}}">加载中...</view> -->
   <view class='noorder' wx:if="{{orderlist.length === 0}}">
-    <!-- <image src="http://pics.sc.chinaz.com/Files/pic/icons128/7060/g1.png" mode="aspectFit"></image> -->
-    <view>你还没有一个订单哦</view>
+    <image src="../../../images/noorder.png" mode="aspectFit"></image>
+    <view>暂无订单</view>
   </view>
   <view class='orderlist'>
     <view class='item' wx:for="{{orderlist}}" wx:key="index">
       <view class='orderno'><text>编号：</text>{{item.order_no}}</view>
       <view class='time'><text>时间：</text>{{item.start_time}}</view>
       <view class='place'><text>地址：</text>{{item.address}}</view>
-      <view class='money'>￥ {{item.fee}}</view>
+      <view class='money' wx:if="{{item.type == 1}}">￥ {{util.formatMoney(item.fee)}}</view>
     </view>
   </view>
 </view>

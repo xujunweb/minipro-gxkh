@@ -43,7 +43,7 @@ Page({
   },
   //我的订单
   goMyOrder(){
-    if (!app.globalData.loginUserInfo.phone) {
+    if (!app.globalData.loginUserInfo.telphone) {
       wx.navigateTo({
         url: '/pages/message/message',
       })
@@ -55,7 +55,7 @@ Page({
   },
   //我的钱包
   goMyMoney(){
-    if (!app.globalData.loginUserInfo.phone) {
+    if (!app.globalData.loginUserInfo.telphone) {
       wx.navigateTo({
         url: '/pages/message/message',
       })

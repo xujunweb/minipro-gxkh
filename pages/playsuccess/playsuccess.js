@@ -1,11 +1,11 @@
 // pages/playsuccess/playsuccess.js
+const app = getApp()
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-    isPlaysuccess:true    //充值是否成功
+    isPlaysuccess:1    //充值是否成功
   },
 
   /**

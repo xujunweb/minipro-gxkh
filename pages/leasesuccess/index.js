@@ -1,11 +1,12 @@
 // pages/leasesuccess/index.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    isPlaysuccess:true,
+    isPlaysuccess:1,
     hourly:''
   },
   /**

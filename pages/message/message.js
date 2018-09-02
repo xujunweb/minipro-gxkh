@@ -157,7 +157,7 @@ Page({
     var data = {
       randomKey: this.data.uuid,
       phone: phone,
-      validCode: code
+      verifyCode: code
     }
     wx.request({
       url: wx.envConfig.host + 'user/bindPhone',
@@ -168,11 +168,25 @@ Page({
       },
       success: (res) => {
         console.log('绑定手机号--------', res)
-        if (res.data.data) {
+        if (res.data.code === 100) {
+          app.globalData.loginUserInfo.telphone = phone
           wx.redirectTo({
             url: '/pages/borrow/borrow'
           })
         }
+        wx.showToast({
+          title: app.globalData.typeMap[res.data.code]||'未知错误',
+          icon: 'none'
+        })
+      },
+      fail:()=>{
+        wx.showToast({
+          title: '登陆失败',
+          icon:'none'
+        })
+      },
+      complete:()=>{
+        wx.hideLoading()
       }
     })
   },

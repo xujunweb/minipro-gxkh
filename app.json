@@ -38,6 +38,6 @@
         "selectedIconPath": "images/mySelect.png"
       }
     ],
-    "borderStyle": "white"
+    "borderStyle": "black"
   }
 }

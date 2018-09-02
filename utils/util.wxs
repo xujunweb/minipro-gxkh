@@ -1,0 +1,9 @@
+var formatMoney = function (num){
+  var money = num/100
+  return money
+}
+
+
+module.exports = {
+  formatMoney: formatMoney
+}

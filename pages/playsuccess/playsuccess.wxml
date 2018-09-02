@@ -1,6 +1,6 @@
 <!--pages/playsuccess/playsuccess.wxml-->
 <view class='playsuccess'>
-  <view class='content' wx:if="{{isPlaysuccess}}">
+  <view class='content' wx:if="{{isPlaysuccess==1}}">
     <icon type="success" size="70"/>
     <view class='tips'>充值成功</view>
     <navigator url='/pages/my/wallet/wallet'>
@@ -10,7 +10,7 @@
       <button class='button2' hover-class="none">返回首页</button>
     </navigator>
   </view>
-  <view class='content' wx:else="{{isPlaysuccess}}">
+  <view class='content' wx:else="{{isPlaysuccess=='0'}}">
     <icon type="clear" size="70" color="#E52B22" />
     <view class='tips'>充值失败</view>
     <navigator url='/pages/my/recharge/recharge'>

@@ -38,11 +38,13 @@
 .noorder{
   margin-top: 60rpx;
   text-align: center;
-  font-size: 28rpx;
+  font-size: 30rpx;
+  color: #ccc;
 }
 .noorder image{
   width: 200rpx;
-  margin-bottom: 40rpx;
+  height: 200rpx;
+  margin-top: 100rpx;
 }
 
 .orderlist{

@@ -92,8 +92,15 @@ App({
     loginUserInfo:null,
     device_no:null,   //设备编号
     code: '',
+    typeMap:{
+      500: '请求错误',
+      401: '无权限',
+      408: '请求超时,请稍后再试',
+      100: '操作成功',
+      302: '解锁失败'
+    },
     openid: '',
-    hourly:'xxx',   //每小时计费数额
+    hourly:'5',   //每小时计费数额
     env: {
       mode: 'dev',
       dev: {

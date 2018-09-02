@@ -25,7 +25,7 @@
   </view>
 </view>
 <view class='button'>
-  <button bindtap=''>提交</button>
+  <button bindtap='postFault'>提交</button>
 </view>
 
 

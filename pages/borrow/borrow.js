@@ -16,7 +16,7 @@ Page({
     })
   },
   scan:function(){
-    if (!app.globalData.loginUserInfo.phone){
+    if (!app.globalData.loginUserInfo.telphone){
       wx.navigateTo({
         url: '/pages/message/message',
       })
@@ -26,8 +26,11 @@ Page({
       onlyFromCamera:false,   //可以从相册选择照片
       success:(e)=>{
         console.log(e)
+        // wx.navigateTo({
+        //   url: '/pages/payment/payment?num='+e.result
+        // })
         wx.navigateTo({
-          url: '/pages/payment/payment?num='+e
+          url: '/pages/progress/progress?num=' + e.result
         })
       },
       fail:()=>{

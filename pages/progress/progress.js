@@ -6,14 +6,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-    progress:0
+    progress:0,
+    num:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    if (options) {
+      this.data.num = options.num
+    }
   },
 
   /**
@@ -27,12 +30,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.unlock(this.data.num)
     this.next()
   },
   //进度条增加
   next:function(){
     var that = this;
-    if(this.data.progress >= 100){
+    if(this.data.progress >= 99){
         this.setData({
             disabled: false
         });
@@ -57,9 +61,20 @@ Page({
       },
       success: (res) => {
         console.log('解锁请求--------', res)
-        if (res.data.data) {
+        if (res.data.code == 100) {
+          this.setData({
+            progress:100
+          })
           wx.redirectTo({
-            url:'/pages/leasesuccess/index'
+            url:'/pages/leasesuccess/index?result=1'
+          })
+        }else{
+          wx.showToast({
+            title: app.globalData.typeMap[res.data.code] || '未知错误',
+            icon: 'none'
+          })
+          wx.redirectTo({
+            url: '/pages/leasesuccess/index?result=0'
           })
         }
       }

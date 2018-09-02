@@ -1,4 +1,5 @@
 <!--wallet.wxml-->
+<wxs module="util" src="../../../utils/util.wxs" />
 <!-- <view class="container wallet">
   <view class='block balance'>
     <view class='left'>
@@ -28,7 +29,7 @@
 </view> -->
 <view class='newwallet'>
   <view class='top'>
-    <view class='money'>{{balance}}</view>
+    <view class='money'>{{util.formatMoney(balance)}}</view>
     <view class='text'>账户余额(元)</view>
   </view>
   <view class='button'>

@@ -10,12 +10,16 @@ Page({
     yue:false,
     money:0,
     time:'',
-    hourly:''
+    hourly:'',
+    num:''
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options){
+      this.data.num = options.num
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -64,7 +68,7 @@ Page({
           console.log('余额支付请求--------', res)
           if (res.data.data) {
             wx.redirectTo({
-              url:'/pages/progress/progress'
+              url: '/pages/progress/progress?num=' + this.data.num
             })
           }
         }

@@ -15,7 +15,7 @@ Page({
       2:3,
       3:0
     },
-    fault:1,
+    fault:null,
     describe:'',
     proNo:'',
     postImgList:[]  //传给后台的文件
@@ -102,10 +102,11 @@ Page({
         },
         formData: {},
         success: (res) => {
-          console.log(res.data)
+          console.log(res)
+          var data = JSON.parse(res.data)
           this.setData({
             imgList: [...this.data.imgList, ...[file]],
-            postImgList: [...this.data.postImgList, ...[res.data[0].url]]
+            postImgList: [...this.data.postImgList, ...[data.data[0].url]]
           })
           resolve(res.data)
         },
@@ -129,7 +130,21 @@ Page({
       fault_type: this.data.fault,
       device_no: this.data.proNo,
       desc: this.data.describe,
-      imgs: this.data.imgList.join(',')
+      imgs: this.data.postImgList.join(',')
+    }
+    if (!this.data.fault){
+      wx.showToast({
+        title: '请选择故障类型',
+        icon: 'none'
+      })
+      return
+    }
+    if (!this.data.proNo){
+      wx.showToast({
+        title: '请输入编号',
+        icon: 'none'
+      })
+      return
     }
     wx.showLoading({
       title:'提交中',
@@ -143,17 +158,23 @@ Page({
       },
       data: data,
       success: (res) => {
-        wx.showToast({
-          title:'提交成功',
-          icon:'none'
-        })
-        wx.switchTab({
-          url: 'pages/borrow/borrow',
-        })
+        if(res.data.code == 100 && res.data.data){
+          wx.hideLoading()
+          wx.showToast({
+            title: '提交成功',
+            icon: 'success',
+            mask:true
+          })
+          setTimeout(()=>{
+            wx.switchTab({
+              url: '/pages/borrow/borrow',
+            })
+          },1000)
+        }
       },
       fail: (err) => { },
       complete: (data) => {
-        wx.hideLoading()
+        
       }
     })
   }

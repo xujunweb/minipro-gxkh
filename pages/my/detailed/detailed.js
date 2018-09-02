@@ -85,9 +85,9 @@ Page({
       },
       data: { pageNum: this.data.thisp, pageSize: 8 },
       success: (res) => {
-        // this.setData({
-        //   orderlist: res.data.data.list
-        // })
+        this.setData({
+          orderlist: res.data.data.list
+        })
       },
       fail: (err) => { },
       complete: (data) => {

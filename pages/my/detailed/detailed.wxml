@@ -1,8 +1,13 @@
 <!--pages/my/detailed/detailed.wxml-->
+<wxs module="util" src="../../../utils/util.wxs" />
 <view class='detailed'>
   <view class='list' wx:for="{{orderlist}}" wx:key="{{index}}">
     <view class='title-h2'>{{typeMap[item.type]}}</view>
     <view class='time'>{{item.update_time}}</view>
-    <view class='money'>{{item.fee<=0?item.fee:'+'+item.fee}}</view>
+    <view class='money'>{{util.formatMoney(item.fee<=0?item.fee:'+'+item.fee)}}</view>
+  </view>
+  <view class='noorder' wx:if="{{orderlist.length === 0}}">
+    <image src="../../../images/nodetail.png" mode="aspectFit"></image>
+    <view>暂无明细</view>
   </view>
 </view>
