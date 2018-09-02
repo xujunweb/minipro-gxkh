@@ -53,7 +53,7 @@ Page({
           openId: app.globalData.openid
         }
         wx.request({
-          url: app.globalData.shopMHost + 'xcx/member/wechat/phone/decrypt',
+          url: app.globalData.shopMHost + 'user/bindWeixinInfo',
           method: "post",
           data: params,
           header: { 
@@ -67,10 +67,10 @@ Page({
               return
             }
             var data = res.data.data;
-            //将会员信息存入本地
-            if (data.sessionId) {
-              wx.setStorageSync('memberCardInfo', data);
-            }
+            app.globalData.loginUserInfo.telphone = phone
+            wx.switchTab({
+              url: '/pages/borrow/borrow'
+            })
           },
           fail: () => {
             wx.hideLoading();
@@ -167,10 +167,11 @@ Page({
         ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
       },
       success: (res) => {
+        wx.hideLoading()
         console.log('绑定手机号--------', res)
         if (res.data.code === 100) {
           app.globalData.loginUserInfo.telphone = phone
-          wx.redirectTo({
+          wx.switchTab({
             url: '/pages/borrow/borrow'
           })
         }
@@ -186,7 +187,7 @@ Page({
         })
       },
       complete:()=>{
-        wx.hideLoading()
+        
       }
     })
   },
