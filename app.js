@@ -86,6 +86,45 @@ App({
       }
     })
   },
+  /** 
+   * ajaxSubmit公用方法
+   */
+  ajaxSubmit(options) {
+    !options.isHideLoading && wx.showLoading({
+      title: '加载中...',
+      icon: 'loading'
+    })
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: options.url,
+        method: options.method,
+        header: options.header,
+        data: options.data,
+        success: (res) => {
+          res.cb = () => {
+            wx.hideLoading()//setData后关闭loading
+          }
+          if (res.statusCode >= 400 || res.data.code !== '000000') {
+            // wx.showToast({
+            //   title: '网络错误',
+            //   icon: 'none'
+            // })
+            resolve(res)
+            return
+          }
+
+          resolve(res)
+        },
+        fail: (err) => {
+          wx.hideLoading()
+          reject()
+        },
+        complete: () => {
+          // wx.hideLoading()
+        }
+      })
+    })
+  },
   //公共数据
   globalData: {
     userInfo: null,
