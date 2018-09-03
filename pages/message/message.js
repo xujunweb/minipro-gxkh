@@ -1,4 +1,5 @@
 var app = getApp();
+import { agreeText } from '../../utils/agree.js'
 const util = require('../../utils/util.js')
 Page({
   /**
@@ -53,7 +54,7 @@ Page({
           openId: app.globalData.openid
         }
         wx.request({
-          url: app.globalData.shopMHost + 'user/bindWeixinInfo',
+          url: wx.envConfig.host + 'user/bindWeixinInfo',
           method: "post",
           data: params,
           header: { 
@@ -63,11 +64,19 @@ Page({
           success: (res) => {
             wx.hideLoading();
             console.log('xcx/member/wechat/phone/decrypt', res.data)
-            if (res.data.code != '000000') {
+            if (res.data.code != 100) {
+              wx.showToast({
+                title: ""+ res.data.code,
+                icon: 'none'
+              })
               return
             }
             var data = res.data.data;
-            app.globalData.loginUserInfo.telphone = phone
+            app.globalData.loginUserInfo.telphone = data.telphone
+            wx.showToast({
+              title: "登陆成功",
+              icon: 'none'
+            })
             wx.switchTab({
               url: '/pages/borrow/borrow'
             })
@@ -210,7 +219,7 @@ Page({
   readXieyi(){
     wx.showModal({
       title:'梦宝康护陪护床用户协议',
-      content:' 请在注册成为梦宝康护陪护床用户之前，务必认真阅读《梦宝智能陪护床用户协议》及相关附属协议（以下简称为：“本协议”）。',
+      content: agreeText,
       showCancel:false,
       confirmText:'确定已阅',
       confirmColor:'#E85B96',
