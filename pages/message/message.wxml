@@ -10,11 +10,11 @@
     
     <view class="btn_view">
         <button class='wx' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
-            <image src='http://yamxcx.oss-cn-shenzhen.aliyuncs.com/xcx/wx_icon.png'/>
+            <image src='../../images/wx_icon.png'/>
             <text>微信授权快捷登录</text>
         </button>
         <button class='tel' bindtap="showPhoneLogin">
-            <image src='http://yamxcx.oss-cn-shenzhen.aliyuncs.com/xcx/tel_icon.png'/>
+            <image src='../../images/tel_icon.png'/>
             <text>短信验证码登录</text>
         </button>
     </view>
