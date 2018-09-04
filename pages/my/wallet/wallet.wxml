@@ -33,10 +33,10 @@
     <view class='text'>账户余额(元)</view>
   </view>
   <view class='button'>
-    <navigator url='/pages/my/recharge/recharge'>
+    <navigator url='/pages/my/recharge/recharge' hover-class='none'>
       <button class='button1' hover-class="none">充值</button>
     </navigator>
-    <navigator url='/pages/my/detailed/detailed'>
+    <navigator url='/pages/my/detailed/detailed' hover-class='none'>
       <button class='button2' hover-class="none">交易明细</button>
     </navigator>
   </view>

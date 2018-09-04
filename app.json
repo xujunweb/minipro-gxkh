@@ -38,6 +38,8 @@
         "selectedIconPath": "images/mySelect.png"
       }
     ],
-    "borderStyle": "black"
+    "borderStyle": "black",
+    "backgroundColor":"#fff",
+    "selectedColor":"#E24473"
   }
 }
