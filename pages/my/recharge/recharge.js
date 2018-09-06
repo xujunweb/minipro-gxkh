@@ -1,6 +1,6 @@
 // pages/my/recharge/recharge.js
+var app = getApp()
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -69,19 +69,18 @@ Page({
   rechargeHandler() {
     return new Promise((resolve, reject) => {
       app.ajaxSubmit({
-        url: app.globalData.shopMHost + 'xcx/member/recharge',
+        url: wx.envConfig.host + 'pay/wx/generatePayParams',
         method: 'post',
         header: {
-          sessionId: wx.getStorageSync('memberCardInfo') && wx.getStorageSync('memberCardInfo').sessionId
+          ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
         },
         data: {
-          amount: (this.data.rechargeAmount || this.data.rechargeValue) * 100,
-          memberId: wx.getStorageSync('memberCardInfo') && wx.getStorageSync('memberCardInfo').id,
-          openId: app.globalData.openid,
-          orgId: app.globalData.orgId,
-          returnAmount: this.data.returnAmount * 100 || 0,
-          // sessionId: '',
-          xcxId: app.globalData.xcxId
+          attach: 'type=4',
+          openid: app.globalData.openid,
+          // total_fee: this.data.selectMoney * 100 || 0,
+          total_fee:1,
+          body:'余额充值',
+          user_id: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo').id
         },
         isHideLoading: true
       }).then((res) => {
@@ -93,7 +92,7 @@ Page({
           });
           return;
         }
-        else if (res.data.code !== '000000') {
+        else if (res.data.code !== 100) {
           wx.showToast({
             title: res.data.msg || '服务器异常',
             icon: 'none'
@@ -112,11 +111,16 @@ Page({
       package: data.package,
       signType: data.signType,
       paySign: data.paySign,
-      success: function (payRes) { // 支付成功后
-        this.triggerEvent("paySuccess")
+      success: (payRes)=> { // 支付成功后
+        // this.triggerEvent("paySuccess")
+        console.log(payRes)
+        if (payRes.errMsg === 'requestPayment:ok'){
+          wx.navigateTo({
+            url: '/pages/playsuccess/playsuccess?result=1',
+          })
+        }
       },
       fail: (res) => { // 支付失败回调
-        this.triggerEvent("paySuccess")
         wx.showToast({
           title: '用户取消支付',
           icon: 'none'

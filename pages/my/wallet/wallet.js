@@ -7,22 +7,36 @@ Page({
     disabled:true       //提现开启
   },
   onLoad: function () {
-    if (app.globalData.loginUserInfo || wx.getStorageSync('loginUserInfo')){
-      var info = app.globalData.loginUserInfo || wx.getStorageSync('loginUserInfo')
-      this.setData({
-        balance: info.money,
-        deposit: info.deposit,
-        disabled: info.deposit
-      })
-    }else{
-      app.getLoginUserInfo = (res) =>{
-        this.setData({
-          balance: res.money,
-          deposit: res.deposit,
-          disabled: res.deposit
-        })
-      }
-    }
+    
   },
+  onShow:function(){
+    this.updata()
+  },
+  //更新数据
+  updata:function(){
+    app.getNewUserInfo(() => {
+      if (app.globalData.loginUserInfo || wx.getStorageSync('loginUserInfo')) {
+        var info = app.globalData.loginUserInfo || wx.getStorageSync('loginUserInfo')
+        this.setData({
+          balance: info.money,
+          deposit: info.deposit,
+          disabled: info.deposit
+        })
+        wx.stopPullDownRefresh()
+      } else {
+        app.getLoginUserInfo = (res) => {
+          this.setData({
+            balance: res.money,
+            deposit: res.deposit,
+            disabled: res.deposit
+          })
+          wx.stopPullDownRefresh()
+        }
+      }
+    })
+  },
+  onPullDownRefresh:function(){
+    this.updata()
+  }
   
 })

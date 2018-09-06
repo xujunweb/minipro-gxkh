@@ -71,6 +71,10 @@ App({
   },
   //获取后台最新的用户信息
   getNewUserInfo: function (callback) {
+    wx.showLoading({
+      title: '加载中...',
+      mask:true
+    })
     wx.request({
       url: wx.envConfig.host + 'user/getUserInfo',
       data: {},
@@ -83,6 +87,9 @@ App({
         this.globalData.loginUserInfo = res.data.data
         wx.setStorageSync('loginUserInfo', res.data.data)
         callback && callback(res)
+      },
+      complete:()=>{
+        wx.hideLoading()
       }
     })
   },
