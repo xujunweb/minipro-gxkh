@@ -57,7 +57,7 @@
   box-shadow: 0rpx 0 20rpx #ccc;
   margin: 0 auto;
   margin-top: 30rpx;
-  font-size: 28rpx;
+  font-size: 26rpx;
   padding: 30rpx 40rpx;
   line-height: 48rpx;
   position: relative;
@@ -67,9 +67,9 @@
 }
 .orderlist .item .money{
   color: #E23364;
-  position: absolute;
-  top: 30rpx;
-  right: 40rpx;
+  /* position: absolute; */
+  /* top: 30rpx; */
+  /* right: 40rpx; */
 }
 
 

@@ -2,20 +2,7 @@
 const app = getApp()
 Page({
   data: {
-    orderlist:[
-      {
-        order_no:'jjdk454787',
-        start_time: '2018-09-28 10:30',
-        address:'深圳市第六人名医院',
-        fee:50
-      },
-      {
-        order_no: 'jjdk454dfd7',
-        start_time: '2018-09-28 10:30',
-        address: '深圳市',
-        fee: 50
-      }
-    ],
+    orderlist:[],
     isloading:false,
     thisp:1,
     select:'0'

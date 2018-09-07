@@ -5,20 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    orderlist: [
-      {
-        order_no: 'jjdk454787',
-        type:'1',
-        update_time: '2018-10-10 10:10',
-        fee:200
-      },
-      {
-        order_no: 'jjdk454787',
-        type: '1',
-        update_time: '2018-10-10 10: 10',
-        fee: 200
-      }
-    ],
+    orderlist: [],
     isloading: false,
     thisp: 1,
     typeMap:{

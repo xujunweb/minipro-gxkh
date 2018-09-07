@@ -101,11 +101,15 @@ var dateFormat = (function () {
   };
 })()
 
-
+//剔除最后两位
+var lastString = function(str){
+  return str.substring(0,str.length-3)
+}
 
 
 module.exports = {
   formatMoney: formatMoney,
   formatMoney2: formatMoney2,
-  transTime: transTime
+  transTime: transTime,
+  lastString: lastString
 }

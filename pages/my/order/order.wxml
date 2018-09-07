@@ -14,10 +14,15 @@
   </view>
   <view class='orderlist'>
     <view class='item' wx:for="{{orderlist}}" wx:key="index">
+      <view class='money' wx:if="{{item.type == 1}}"><text>金额：</text>￥ {{util.formatMoney(item.fee)}}</view>
       <view class='orderno'><text>编号：</text>{{item.order_no}}</view>
-      <view class='time'><text>时间：</text>{{item.start_time}}</view>
+      <view class='time' wx:if="{{item.end_time}}">
+        <text>时间：</text>{{util.lastString(item.start_time)}} 至 {{util.lastString(item.end_time)}}
+      </view>
+      <view class='time' wx:if="{{!item.end_time}}">
+        <text>时间：</text>{{util.lastString(item.start_time)}}
+      </view>
       <view class='place'><text>地址：</text>{{item.address}}</view>
-      <view class='money' wx:if="{{item.type == 1}}">￥ {{util.formatMoney(item.fee)}}</view>
     </view>
   </view>
 </view>
