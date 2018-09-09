@@ -7,11 +7,30 @@ Page({
     defaultSize:'',
     loading:'',
     plain:false,
+    imgUrls: [
+      '../../images/bed.png',
+      '../../images/bed.png',
+      '../../images/bed.png'
+    ],
+    indicatorDots: true,
+    autoplay: true,
+    interval: 5000,
+    duration: 1000
   },
   onLoad: function () {
     this.setData({
       logs: (wx.getStorageSync('logs') || []).map(log => {
         return util.formatTime(new Date(log))
+      })
+    })
+    this.getImages()
+  },
+  //获取轮播图
+  getImages:function(){
+    app.getAppInfo('carousel_img').then((res) => {
+      console.log('轮播图-----', res)
+      this.setData({
+        imgUrls: res.data.value.split(',')
       })
     })
   },
@@ -26,12 +45,12 @@ Page({
       onlyFromCamera:false,   //可以从相册选择照片
       success:(e)=>{
         console.log(e)
-        // wx.navigateTo({
-        //   url: '/pages/payment/payment?num='+e.result
-        // })
         wx.navigateTo({
-          url: '/pages/progress/progress?num=' + e.result
+          url: '/pages/payment/payment?num='+e.result
         })
+        // wx.navigateTo({
+        //   url: '/pages/progress/progress?num=' + e.result
+        // })
       },
       fail:()=>{
         

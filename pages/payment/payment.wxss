@@ -56,6 +56,12 @@
 .playsuccess .content button{
   width: 630rpx;
 }
+.picker{
+  color: #ccc;
+}
+.value{
+  width: 100rpx;
+}
 
 
 

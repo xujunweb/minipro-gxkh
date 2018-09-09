@@ -93,6 +93,84 @@ App({
       }
     })
   },
+  //根据key请求应用数据
+  getAppInfo: function (key){
+    wx.showLoading({
+      title: '加载中...',
+      icon: 'loading'
+    })
+    return new Promise((resolve, reject) => {
+      var post = ()=>{
+        wx.request({
+          url: wx.envConfig.host + 'dictionary/getByKey',
+          method: 'post',
+          header: {
+            ticket: this.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
+          },
+          data: { key: key },
+          success: (res) => {
+            // res.data.cb = () => {
+            //   wx.hideLoading()//setData后关闭loading
+            // }
+            if (res.statusCode >= 400 || res.data.code != '100') {
+              reject(res)
+              return
+            }
+            wx.hideLoading()
+            resolve(res.data)
+          },
+          fail: (err) => {
+            wx.hideLoading()
+            reject(err)
+          }
+        })
+      }
+      if (this.globalData.loginUserInfo) {
+        post()
+      } else {
+        this.getLoginUserInfo = post
+      }
+    })
+  },
+  //请求所有的应用数据
+  getAppAllInfo: function () {
+    wx.showLoading({
+      title: '加载中...',
+      icon: 'loading'
+    })
+    return new Promise((resolve, reject) => {
+      var post = () => {
+        wx.request({
+          url: wx.envConfig.host + 'dictionary/listByDictionary',
+          method: 'post',
+          header: {
+            ticket: this.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
+          },
+          data: {},
+          success: (res) => {
+            // res.data.cb = () => {
+            //   wx.hideLoading()//setData后关闭loading
+            // }
+            if (res.statusCode >= 400 || res.data.code != '100') {
+              reject(res)
+              return
+            }
+            wx.hideLoading()
+            resolve(res.data)
+          },
+          fail: (err) => {
+            wx.hideLoading()
+            reject(err)
+          }
+        })
+      }
+      if (this.globalData.loginUserInfo) {
+        post()
+      } else {
+        this.getLoginUserInfo = post
+      }
+    })
+  },
   /** 
    * ajaxSubmit公用方法
    */

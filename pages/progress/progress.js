@@ -7,7 +7,8 @@ Page({
    */
   data: {
     progress:0,
-    num:''
+    num:'',
+    fee:''
   },
 
   /**
@@ -16,6 +17,7 @@ Page({
   onLoad: function (options) {
     if (options) {
       this.data.num = options.num
+      this.data.fee = options.fee
     }
   },
 
@@ -54,7 +56,7 @@ Page({
     console.log(app.globalData.loginUserInfo, wx.getStorageSync('loginUserInfo'))
     wx.request({
       url: wx.envConfig.host + 'lockOrder/unLock',
-      data: { lock_no: lock },
+      data: { lock_no: lock, fee: +this.data.fee },
       method: 'POST',
       header: {
         ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')

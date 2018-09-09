@@ -1,9 +1,17 @@
 <!--logs.wxml-->
 <view class="container log-list">
   <view class='content'>
-    <view class="image">
+    <swiper indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" width="355" height="150"/>
+        </swiper-item>
+      </block>
+    </swiper>
+    <!-- <view class="image">
       <image src='../../images/bed.png' lazy-load="{{true}}" mode="widthFix"></image>
-    </view>
+    </view> -->
     <button class="button" bindtap="scan" hover-class="other-button-hover">扫码借床</button>
   </view>
 </view>

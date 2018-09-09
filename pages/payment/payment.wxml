@@ -28,12 +28,17 @@
 <view class='leasesuccess'>
   <view class='playsuccess'>
     <view class='inputTime'>
-      <text>租借时间(h)：</text><input bindinput='inputTime' type='number' maxlength='3' placeholder='请输入时间' value='{{time}}'></input>
+      <text>租借时间(h)：</text>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{hourList}}">
+        <view class="picker" wx:if="{{!time}}">请输入时间</view>
+        <view class='value' wx:if="{{time}}">{{time}}</view>
+      </picker>
+      <!-- <input bindinput='inputTime' type='number' maxlength='3' placeholder='请输入时间' value='{{time}}'></input> -->
     </view>
     <view class='money'>共计：{{money}}元</view>
     <view class='content'>
-      <button class='button1' hover-class="none">余额支付</button>
-      <button class='button2' hover-class="none">微信支付</button>
+      <button class='button1' hover-class="none" bindtap='balancePlay'>余额支付</button>
+      <button class='button2' hover-class="none" bindtap='rechargeHandler'>微信支付</button>
     </view>
   </view>
   <view class='rule'>
@@ -42,6 +47,7 @@
     <view class='rule-content'>自借出后，每小时{{hourly}}元，不足1小时按1小时算</view>
   </view>
 </view>
+
 
 
 
