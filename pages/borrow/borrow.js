@@ -34,6 +34,14 @@ Page({
       })
     })
   },
+  //查看大图
+  clickImg:function(e){
+    var index = e.currentTarget.dataset.index
+    wx.previewImage({
+      current: this.data.imgUrls[index],
+      urls: this.data.imgUrls
+    });
+  },
   scan:function(){
     if (!app.globalData.loginUserInfo.telphone){
       wx.navigateTo({
