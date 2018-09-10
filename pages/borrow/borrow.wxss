@@ -25,11 +25,17 @@
 .button{
   color: #fff;
   margin-top: 70rpx;
-  margin-bottom: 70rpx;
   width: 85%;
   background:#E23364;
   border-radius:40rpx;
   height: 88rpx;
   line-height: 88rpx;
   box-shadow: 0 0 20rpx #c1bbbb;
+}
+.text{
+  font-size: 30rpx;color: #999;margin-top: 30rpx;text-align: center;
+}
+.swiper{
+  width: 630rpx;height: 480rpx;margin: 0 auto;background: #999;
+  border-radius: 20rpx;overflow: hidden;box-shadow: 0 0 20rpx #999;
 }

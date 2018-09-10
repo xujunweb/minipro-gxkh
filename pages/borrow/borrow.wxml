@@ -1,8 +1,8 @@
 <!--logs.wxml-->
 <view class="container log-list">
   <view class='content'>
-    <swiper indicator-dots="{{indicatorDots}}"
-  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <swiper indicator-dots="{{indicatorDots}}" class='swiper' indicator-color="#fff"
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="#E23364">
       <block wx:for="{{imgUrls}}" wx:key="{{index}}">
         <swiper-item>
           <image src="{{item}}" class="slide-image" width="355" height="150"/>
@@ -13,5 +13,6 @@
       <image src='../../images/bed.png' lazy-load="{{true}}" mode="widthFix"></image>
     </view> -->
     <button class="button" bindtap="scan" hover-class="other-button-hover">扫码借床</button>
+    <view class='text'>提示：扫描柜前二维码，即可解锁使用</view>
   </view>
 </view>

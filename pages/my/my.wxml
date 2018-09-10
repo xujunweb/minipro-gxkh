@@ -18,4 +18,42 @@
       <view class='text'>我的钱包</view>
     </view>
   </view>
+  <view class='fenge'></view>
+  <view class='caidan'>
+    <view class='item' bindtap='goFault'>
+      <view class='left'>
+        <image src='../../images/icon1.png'></image>
+        <text>故障反馈</text>
+      </view>
+      <view class='arrwo'></view>
+    </view>
+    <view class='item'>
+      <view class='left'>
+        <image src='../../images/icon2.png'></image>
+        <text>新手指南</text>
+      </view>
+      <view class='arrwo'></view>
+    </view>
+    <view class='item'>
+      <view class='left'>
+        <image src='../../images/icon3.png'></image>
+        <text>关于我们</text>
+      </view>
+      <view class='arrwo'></view>
+    </view>
+    <view class='item'>
+      <view class='left'>
+        <image src='../../images/icon4.png'></image>
+        <text>联系客服</text>
+      </view>
+      <view class='text'>{{phone}}</view>
+    </view>
+    <view class='item'>
+      <view class='left'>
+        <image src='../../images/icon5.png'></image>
+        <text>技术支持</text>
+      </view>
+      <view class='text'>深圳市梦宝智能科技有限公司</view>
+    </view>
+  </view>
 </view>

@@ -4,6 +4,8 @@ Page({
   data: {
     userInfo: {},
     hasUserInfo: false,
+    phone:'',
+    canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   onLoad: function () {
     if (app.globalData.userInfo) {
@@ -33,6 +35,9 @@ Page({
       })
     }
   },
+  onShow:function(){
+    this.getPhone()
+  },
   getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
@@ -41,28 +46,47 @@ Page({
       hasUserInfo: true
     })
   },
-  //我的订单
-  goMyOrder(){
+  //获取客服电话
+  getPhone: function () {
+    app.getAppInfo('customer_service_phone').then((res) => {
+      console.log('电话-----', res)
+      this.setData({
+        phone: res.data.value
+      })
+    })
+  },
+  //未登录跳转登录
+  goLogin(){
     if (!app.globalData.loginUserInfo.telphone) {
       wx.navigateTo({
         url: '/pages/message/message',
       })
-      return
+      return false
     }
-    wx.navigateTo({
-      url: '/pages/my/order/order'
-    })
+    return true
+  },
+  //我的订单
+  goMyOrder(){
+    if (this.goLogin()){
+      wx.navigateTo({
+        url: '/pages/my/order/order'
+      })
+    }
   },
   //我的钱包
   goMyMoney(){
-    if (!app.globalData.loginUserInfo.telphone) {
+    if(this.goLogin()){
       wx.navigateTo({
-        url: '/pages/message/message',
+        url: '/pages/my/wallet/wallet',
       })
-      return
     }
-    wx.navigateTo({
-      url: '/pages/my/wallet/wallet',
-    })
+  },
+  //故障反馈
+  goFault(){
+    if (this.goLogin()){
+      wx.navigateTo({
+        url: '/pages/fault/fault',
+      })
+    }
   }
 })
