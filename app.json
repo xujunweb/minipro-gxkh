@@ -33,7 +33,7 @@
       },
       {
         "pagePath": "pages/my/my",
-        "text": "个人中心",
+        "text": "梦宝康护",
         "iconPath": "images/my.png",
         "selectedIconPath": "images/mySelect.png"
       }
