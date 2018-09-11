@@ -37,8 +37,15 @@
 }
 .swiper{
   width: 630rpx;height: 480rpx;margin: 0 auto;background: #999;
-  border-radius: 20rpx;overflow: hidden;box-shadow: 0 0 20rpx #999;
+  border-radius: 10rpx;overflow: hidden;box-shadow: 0 0 20rpx #999;
+}
+.swiper swiper{
+  width: 630rpx;height: 480rpx;overflow: hidden;
+}
+.swiper swiper-item{
+  border-radius: 10rpx;overflow: hidden;
 }
 .swiper image{
-  border-radius: 20rpx;
+  /* border-radius: 20rpx; */
+  width: 630rpx;height: 480rpx;
 }
