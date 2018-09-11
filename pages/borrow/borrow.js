@@ -7,11 +7,7 @@ Page({
     defaultSize:'',
     loading:'',
     plain:false,
-    imgUrls: [
-      '../../images/bed.png',
-      '../../images/bed.png',
-      '../../images/bed.png'
-    ],
+    imgUrls: [],
     indicatorDots: true,
     autoplay: true,
     interval: 5000,

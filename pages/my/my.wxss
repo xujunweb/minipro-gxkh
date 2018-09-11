@@ -15,17 +15,33 @@
 .userinfo-avatar {
   width: 128rpx;
   height: 128rpx;
-  margin: 20rpx;
-  margin-top: 40rpx;
   border-radius: 100rpx;
   overflow: hidden;
-  border: 12rpx solid #ed88b2;
+  border: 6rpx solid #fff;
 }
 
 .userinfo-nickname {
   color: #fff;
-  font-size: 28rpx;
+  font-size: 36rpx;
 }
+
+.newTop{
+  background: #E23364;border-radius: 36rpx;display: flex;align-items: center;
+  height: 300rpx;width: 650rpx;margin: 0 auto;overflow: hidden;
+}
+.newTop .bigR{
+  background: #e23968;width: 350rpx;height: 350rpx;border-radius: 175rpx;
+  margin-top: -25rpx;margin-left: -3rpx;display: flex;justify-content: center;align-items: center;
+}
+.newTop .litR{
+  background: #e3406d;width: 260rpx;height: 260rpx;border-radius: 130rpx;
+  display: flex;justify-content: center;align-items: center;
+}
+.newTop .right{margin-left: 20rpx;}
+.newTop .userID{
+  color: #ec7e9d;font-size: 24rpx;
+}
+
 
 .operation{
   margin-top:60rpx;

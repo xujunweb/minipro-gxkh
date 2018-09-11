@@ -1,14 +1,12 @@
 <!--my.wxml-->
 <view class="container my">
-  <view class='top'>
+  <!-- <view class='top'>
     <view class="userinfo-avatar">
       <open-data type="userAvatarUrl"></open-data>
     </view>
     <open-data type="userNickName" class="userinfo-nickname"></open-data>
-    <!-- <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text> -->
-  </view>
-  <view class='operation'>
+  </view> -->
+  <!-- <view class='operation'>
     <view class='order item' bindtap='goMyOrder'>
       <image src="../../images/order-icon.png"></image>
       <view class='text'>我的订单</view>
@@ -17,9 +15,40 @@
       <image src="../../images/money-icon.png"></image>
       <view class='text'>我的钱包</view>
     </view>
+  </view> -->
+  <view class='newTop'>
+    <view class='left'>
+      <view class='bigR'>
+        <view class='litR'>
+          <view class="userinfo-avatar">
+            <open-data type="userAvatarUrl"></open-data>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='right'>
+      <view class='userName'>
+        <open-data type="userNickName" class="userinfo-nickname"></open-data>
+      </view>
+      <view class='userID'>ID：{{userInfo.id}}</view>
+    </view>
   </view>
   <view class='fenge'></view>
   <view class='caidan'>
+  <view class='item' bindtap='goMyOrder'>
+      <view class='left'>
+        <image src='../../images/icon6.png'></image>
+        <text>我的订单</text>
+      </view>
+      <view class='arrwo'></view>
+    </view>
+    <view class='item' bindtap='goMyMoney'>
+      <view class='left'>
+        <image src='../../images/icon7.png'></image>
+        <text>我的钱包</text>
+      </view>
+      <view class='arrwo'></view>
+    </view>
     <view class='item' bindtap='goFault'>
       <view class='left'>
         <image src='../../images/icon1.png'></image>

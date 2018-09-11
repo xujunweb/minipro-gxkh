@@ -27,13 +27,13 @@
     "list": [
       {
         "pagePath": "pages/borrow/borrow",
-        "text": "借",
+        "text": "首页",
         "iconPath": "images/scan.png",
         "selectedIconPath": "images/selectScan.png"
       },
       {
         "pagePath": "pages/my/my",
-        "text": "我的",
+        "text": "个人中心",
         "iconPath": "images/my.png",
         "selectedIconPath": "images/mySelect.png"
       }
