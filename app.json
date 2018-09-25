@@ -15,7 +15,8 @@
     "pages/message/message",
     "pages/playsuccess/playsuccess",
     "pages/fault/fault",
-    "pages/leasesuccess/index"
+    "pages/leasesuccess/index",
+    "pages/blue/blue"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -39,7 +40,7 @@
       }
     ],
     "borderStyle": "black",
-    "backgroundColor":"#fff",
-    "selectedColor":"#E24473"
+    "backgroundColor": "#fff",
+    "selectedColor": "#E24473"
   }
 }
