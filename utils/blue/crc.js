@@ -1,30 +1,30 @@
-function CRC16(data) {
-  var len = data.length;
-  if (len > 0) {
-    var crc = 0xFFFF;
+// function CRC16(data) {
+//   var len = data.length;
+//   if (len > 0) {
+//     var crc = 0xFFFF;
 
-    for (var i = 0; i < len; i++) {
-      crc = (crc ^ (data[i]));
-      for (var j = 0; j < 8; j++) {
-        crc = (crc & 1) != 0 ? ((crc >> 1) ^ 0xA001) : (crc >> 1);
-      }
-    }
-    var hi = ((crc & 0xFF00) >> 8); //高位置
-    var lo = (crc & 0x00FF); //低位置
+//     for (var i = 0; i < len; i++) {
+//       crc = (crc ^ (data[i]));
+//       for (var j = 0; j < 8; j++) {
+//         crc = (crc & 1) != 0 ? ((crc >> 1) ^ 0xA001) : (crc >> 1);
+//       }
+//     }
+//     var hi = ((crc & 0xFF00) >> 8); //高位置
+//     var lo = (crc & 0x00FF); //低位置
 
-    // return [hi, lo];
-    return [lo, hi]; // 大端模式
-  }
-  return [0, 0];
-};
+//     // return [hi, lo];
+//     return [lo, hi]; // 大端模式
+//   }
+//   return [0, 0];
+// };
 
 function isArray(arr) {
   return Object.prototype.toString.call(arr) === '[object Array]';
 };
 
-function ToCRC16(str, isReverse) {
-  return toString(CRC16(isArray(str) ? str : strToByte(str)), isReverse);
-};
+// function ToCRC16(str, isReverse) {
+//   return toString(CRC16(isArray(str) ? str : strToByte(str)), isReverse);
+// };
 
 
 

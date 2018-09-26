@@ -1,0 +1,24 @@
+<!--index.wxml-->
+<view class="userinfo">
+    <button bindtap='openBluetoothAdapter'> openBluetoothAdapter </button>
+    <button bindtap='closeBluetoothAdapter'> closeBluetoothAdapter </button>
+    <button bindtap='getBluetoothAdapterState'> getBluetoothAdapterState </button>
+    <button bindtap='onBluetoothAdapterStateChange'> onBluetoothAdapterStateChange </button>
+    <button bindtap='startBluetoothDevicesDiscovery'> startBluetoothDevicesDiscovery </button>
+    <button bindtap='stopBluetoothDevicesDiscovery'> stopBluetoothDevicesDiscovery </button>
+    <button bindtap='getBluetoothDevices'> getBluetoothDevices </button>
+    <button bindtap='onBluetoothDeviceFound'> onBluetoothDeviceFound </button>
+    <button bindtap='getConnectedBluetoothDevices'> getConnectedBluetoothDevices </button>
+    <text>{{text}}</text>
+    <button bindtap='createBLEConnection'> createBLEConnection </button>
+    <button bindtap='closeBLEConnection'> closeBLEConnection </button>
+    <button bindtap='getBLEDeviceServices'> getBLEDeviceServices </button>
+    <button bindtap='getBLEDeviceCharacteristics'> getBLEDeviceCharacteristics </button>
+    <button bindtap='readBLECharacteristicValue'> readBLECharacteristicValue </button>
+    <button bindtap='writeBLECharacteristicValue'> writeBLECharacteristicValue </button>
+    <button bindtap='notifyBLECharacteristicValueChange'> notifyBLECharacteristicValueChange </button>
+    <button bindtap='onBLEConnectionStateChange'> onBLEConnectionStateChange </button>
+    <button bindtap='onBLECharacteristicValueChange'> onBLECharacteristicValueChange </button>
+    <button bindtap='gettoken'> gettoken </button>
+    <button bindtap='open'> open </button>
+</view>

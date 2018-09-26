@@ -33,9 +33,9 @@ Page({
     var token = '060101012D1A683D48271A18316E471A'
     blue.writeCommend({
       services: ['FEE7'], sendCommend: token, 
-      indicateCharacteristicUUID:'0000FEC8-0000-1000-8000-00805F9B34FB',
-      notifyCharacteristicUUID:'0000FEC8-0000-1000-8000-00805F9B34FB',
-      writeCharacteristicUUID:'0000FEC7-0000-1000-8000-00805F9B34FB',
+      indicateCharacteristicUUID:'000036F6-0000-1000-8000-00805F9B34FB',
+      notifyCharacteristicUUID:'000036F6-0000-1000-8000-00805F9B34FB',
+      writeCharacteristicUUID:'000036F5-0000-1000-8000-00805F9B34FB',
       writeServiceUUID:'0000FEE7-0000-1000-8000-00805F9B34FB',
       notifyServiceUUID:'0000FEE7-0000-1000-8000-00805F9B34FB',
       key:'3A60432A5C01211F291E0F4E0C132825',

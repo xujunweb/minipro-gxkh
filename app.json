@@ -16,7 +16,8 @@
     "pages/playsuccess/playsuccess",
     "pages/fault/fault",
     "pages/leasesuccess/index",
-    "pages/blue/blue"
+    "pages/blue/blue",
+    "pages/newBlue/index"
   ],
   "window": {
     "backgroundTextStyle": "dark",

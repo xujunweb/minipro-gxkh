@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 15,
+			"current": 17,
 			"list": [
 				{
 					"id": -1,
@@ -128,7 +128,19 @@
 				{
 					"id": -1,
 					"name": "蓝牙页面",
-					"pathName": "pages/blue/blue"
+					"pathName": "pages/blue/blue",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "蓝牙",
+					"pathName": "pages/blue/blue",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "新蓝牙",
+					"pathName": "pages/newBlue/index"
 				}
 			]
 		}

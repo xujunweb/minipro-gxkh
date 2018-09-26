@@ -306,10 +306,10 @@ function initNotifyListener(params) {
     state: true,
     success: function (res) {
       console.log(`开启监听成功${res.errMsg}`);
-      setTimeout( ()=> {
-        onConnectCallback('ok');// 连接成功后，初始化回调监听回调
-        sendCmd(params.sendCommend, params.onSuccessCallBack, params.onFailCallBack,params.key);
-      }, 200);
+      // setTimeout( ()=> {
+      //   onConnectCallback('ok');// 连接成功后，初始化回调监听回调
+      //   sendCmd(params.sendCommend, params.onSuccessCallBack, params.onFailCallBack,params.key);
+      // }, 200);
     },
     fail: function (res) {
       console.log("开启监听失败" + res.errMsg);
@@ -323,9 +323,26 @@ function initNotifyListener(params) {
 * 必须设备的特征值支持notify才可以成功调用，具体参照 characteristic 的 properties 属性
 */
 function onBLECharacteristicValueChange() {
-  wx.onBLECharacteristicValueChange(function (res) {
+  wx.onBLECharacteristicValueChange((res) => {
     console.log(`characteristic ${res.characteristicId} has changed, now is ${bleUtils.arrayBuffer2HexString(res.value)}`);
     onSendSuccessCallBack(bleUtils.arrayBuffer2HexString(res.value));
+    var readdata = wx.arrayBufferToBase64(res.value)
+    wx.request({
+      url: 'https://www.rocolock.com/aes.aspx',
+      data: {
+        cmd: 'updata', data: readdata
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: (res)=> {
+        if (res.data.cmd == "show") {
+          //获取令牌并开锁
+          gettoken()
+        }
+      }
+    })
   })
 }
 /**
@@ -388,6 +405,67 @@ function writeCommendToBle(commonds, onSendCallback, onFailCallback,key) {
     }
   })
 }
+
+//发送消息(获取令牌)
+function gettoken(){
+  wx.request({
+    url: 'https://www.rocolock.com/aes.aspx',
+    data: {
+      cmd: 'gettoken', data: ''
+    },
+    method: 'POST',
+    header: {
+      'content-type': 'application/json' // 默认值
+    },
+    success: function (res) {
+      console.log('获取令牌成功-----', res.data.data)
+      if (res.data.cmd == "send") {
+        var buffer = wx.base64ToArrayBuffer(res.data.data)
+        wx.writeBLECharacteristicValue({
+          deviceId: deviceId,
+          serviceId: serviceId,
+          characteristicId: characteristicIdW,
+          value: buffer,
+          success: function (res) {
+            console.log('发送令牌成功-----',res.errMsg)
+            //开锁
+            open()
+          }
+        })
+      }
+    }
+  })
+}
+
+//开锁指令
+function open(){
+  wx.request({
+    url: 'https://www.rocolock.com/aes.aspx',
+    data: {
+      cmd: 'open', data: ''
+    },
+    method: 'POST',
+    header: {
+      'content-type': 'application/json' // 默认值
+    },
+    success: function (res) {
+      console.log('获取开锁指令------', res.data.data)
+      if (res.data.cmd == "send") {
+        var buffer = wx.base64ToArrayBuffer(res.data.data)
+        wx.writeBLECharacteristicValue({
+          deviceId: deviceId,
+          serviceId: serviceId,
+          characteristicId: characteristicIdW,
+          value: buffer,
+          success: function (res) {
+            console.log('写入开锁指令成功----', res.errMsg)
+          }
+        })
+      }
+    }
+  })
+}
+
 
 
 //接收消息
