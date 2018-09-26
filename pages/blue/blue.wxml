@@ -15,6 +15,7 @@
   <button type="primary" class="button" bindtap="lanya8">8发送指定消息</button>
   <button type="primary" class="button" bindtap="lanya9">9启用设备特征值变化时的notify</button>
   <button type="primary" class="button" bindtap="lanya10">10接收消息</button>
+  <button type="primary" class="button" bindtap="lanya11">111111</button>
   <view class="section">
     <text class="status">接收到消息：{{ jieshou }}</text>
  

@@ -115,9 +115,9 @@ function startBluetoothDevicesDiscovery(params, connectCallback) {
     }
   })
   //每隔一秒获取一次
-  delayTimer = setInterval(function () {
-    getBluetoothDevices(params)
-  }, 1000)
+  // delayTimer = setInterval(function () {
+  //   getBluetoothDevices(params)
+  // }, 1000)
 }
 /**
 * 获取所有已发现的蓝牙设备，包括已经和本机处于连接状态的设备
@@ -310,6 +310,8 @@ function initNotifyListener(params) {
       //   onConnectCallback('ok');// 连接成功后，初始化回调监听回调
       //   sendCmd(params.sendCommend, params.onSuccessCallBack, params.onFailCallBack,params.key);
       // }, 200);
+      //获取令牌并开锁
+      gettoken()
     },
     fail: function (res) {
       console.log("开启监听失败" + res.errMsg);
@@ -330,7 +332,7 @@ function onBLECharacteristicValueChange() {
     wx.request({
       url: 'https://www.rocolock.com/aes.aspx',
       data: {
-        cmd: 'updata', data: readdata
+        cmd: 'updata', data: readdata, uid: currentDevice.deviceId
       },
       method: 'POST',
       header: {
@@ -338,8 +340,7 @@ function onBLECharacteristicValueChange() {
       },
       success: (res)=> {
         if (res.data.cmd == "show") {
-          //获取令牌并开锁
-          gettoken()
+          
         }
       }
     })
@@ -411,7 +412,7 @@ function gettoken(){
   wx.request({
     url: 'https://www.rocolock.com/aes.aspx',
     data: {
-      cmd: 'gettoken', data: ''
+      cmd: 'gettoken', uid: currentDevice.deviceId
     },
     method: 'POST',
     header: {
@@ -442,7 +443,7 @@ function open(){
   wx.request({
     url: 'https://www.rocolock.com/aes.aspx',
     data: {
-      cmd: 'open', data: ''
+      cmd: 'open', uid: currentDevice.deviceId
     },
     method: 'POST',
     header: {

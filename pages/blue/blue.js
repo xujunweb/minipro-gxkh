@@ -48,6 +48,35 @@ Page({
       }
     })
   },
+  lanya11:function(){
+    wx.request({
+      url: 'https://www.rocolock.com/aes.aspx',
+      data: {
+        cmd: 'gettoken', data: ''
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log('获取令牌成功-----', res.data.data)
+        if (res.data.cmd == "send") {
+          var buffer = wx.base64ToArrayBuffer(res.data.data)
+          wx.writeBLECharacteristicValue({
+            deviceId: deviceId,
+            serviceId: serviceId,
+            characteristicId: characteristicIdW,
+            value: buffer,
+            success: function (res) {
+              console.log('发送令牌成功-----', res.errMsg)
+              //开锁
+              open()
+            }
+          })
+        }
+      }
+    })
+  },
   // 初始化蓝牙适配器
   lanya1: function () {
     var that = this;
