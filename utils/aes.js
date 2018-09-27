@@ -4,6 +4,19 @@ import CryptoJS from './crypto.js'
 // 设置数据块长度
 const keySize = 128;
 /**
+  * 16进制字符串转ArrayBuffer
+  */
+const hexString2ArrayBuffer = function (hexStr) {
+  var count = hexStr.length / 2;
+  let buffer = new ArrayBuffer(count);
+  let dataView = new DataView(buffer);
+  for (var i = 0; i < count; i++) {
+    var curCharCode = parseInt(hexStr.substr(i * 2, 2), 16);
+    dataView.setUint8(i, curCharCode);
+  }
+  return buffer;
+}
+/**
  * 生成密钥字节数组, 原始密钥字符串不足128位, 补填0.
  * @param {string} key - 原始 key 值
  * @return Buffer

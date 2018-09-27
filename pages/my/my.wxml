@@ -72,6 +72,13 @@
     </view>
     <view class='item'>
       <view class='left'>
+        <image src='../../images/icon8.png'></image>
+        <text>商户合作</text>
+      </view>
+      <view class='arrwo'></view>
+    </view>
+    <view class='item'>
+      <view class='left'>
         <image src='../../images/icon4.png'></image>
         <text>联系客服</text>
       </view>

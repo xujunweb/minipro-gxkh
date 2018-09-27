@@ -339,5 +339,6 @@ module.exports = {
   hexToString: hexToString,
   getRamNumber: getRamNumber,
   isContains: isContains,
-  removeBytes: removeBytes
+  removeBytes: removeBytes,
+  strToByte: strToByte
 }
