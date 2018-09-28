@@ -33,7 +33,7 @@ Page({
     var token = '060101012D1A683D48271A18316E471A'  //获取token的指令
     var token2 = [0x06, 0x01, 0x01, 0x01, 0x2D, 0x1A, 0x68, 0x3D,0x48, 0x27, 0x1A, 0x18, 0x31, 0x6E, 0x47, 0x1A]
     blue.writeCommend({
-      services: ['FEE7'], sendCommend: token2, 
+      services: ['FEE7'], sendCommend: token, 
       indicateCharacteristicUUID:'000036F6-0000-1000-8000-00805F9B34FB',
       notifyCharacteristicUUID:'000036F6-0000-1000-8000-00805F9B34FB',
       writeCharacteristicUUID:'000036F5-0000-1000-8000-00805F9B34FB',

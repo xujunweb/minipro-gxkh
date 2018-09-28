@@ -1,5 +1,4 @@
 var app = getApp()
-import aes from '../aes.js'
 var currentDevice = {};//ble设备
 var indicateCharacteristic = {};//唤醒特征值
 var writeService = {};//写入服务
@@ -9,8 +8,10 @@ var notifyCharacteristic = {};//唤醒特征值
 var onSendSuccessCallBack = undefined;//成功回调
 var onConnectCallback = undefined;// 链接回调
 var bleUtils = require('strUtils.js');
-var crc = require('crc.js');
 var isConnected = false;//是否已链接
+var token = ''
+var seachNum = 0
+var password = '303030303030'
 module.exports = {
   writeCommend: writeCommend,
   closeBLEConnection: closeBLEConnection
@@ -93,8 +94,12 @@ function startBluetoothDevicesDiscovery(params, connectCallback) {
     else {
       console.log("搜索设备超时");
       params.onFailCallBack("搜索设备超时")
-      stopBluetoothDevicesDiscovery();
-      // clearInterval(delayTimer)
+      seachNum++
+      if (seachNum < 3){
+        startBluetoothDevicesDiscovery(params, connectCallback)
+      }else{
+        stopBluetoothDevicesDiscovery();
+      }
       return
     }
   }, 10000);
@@ -115,10 +120,6 @@ function startBluetoothDevicesDiscovery(params, connectCallback) {
       console.log(res);
     }
   })
-  //每隔一秒获取一次
-  // delayTimer = setInterval(function () {
-  //   getBluetoothDevices(params)
-  // }, 1000)
 }
 /**
 * 获取所有已发现的蓝牙设备，包括已经和本机处于连接状态的设备
@@ -132,15 +133,6 @@ function getBluetoothDevices(params) {
         //忽略传入的deviceName大小写
         // isContains bleUtils
         console.log("搜索到要链接的设备....")
-        var lockNameFinal = bleUtils.removeBytes(params.adviceId, ":")
-        if (bleUtils.isContains(res.devices[i].name, lockNameFinal)) {
-          // console.log("搜索到要链接的设备....")
-          // stopBluetoothDevicesDiscovery();
-          // isFound = true
-          // clearInterval(delayTimer)
-          // currentDevice = res.devices[0]
-          // createBLEConnection(params)
-        }
         if (res.devices[i].localName === 'k06_YPP'){
           stopBluetoothDevicesDiscovery();
           isFound = true
@@ -265,10 +257,8 @@ function getNotifyBLEDeviceCharacteristics(params) {
           writeCharacteristic = res.characteristics[i]
         }
       }
-      // getWriteBLEDeviceCharacteristics();
       console.log("唤醒特征值 :", notifyCharacteristic)
       console.log("特征值列表 :", res.characteristics)
-      // getWriteBLEDeviceCharacteristics(params)
       initNotifyListener(params);
     }
   })
@@ -311,8 +301,6 @@ function initNotifyListener(params) {
         onConnectCallback('ok');// 连接成功后，初始化回调监听回调
         sendCmd(params.sendCommend, params.onSuccessCallBack, params.onFailCallBack,params.key);
       }, 200);
-      //获取令牌并开锁
-      // gettoken()
     },
     fail: function (res) {
       console.log("开启监听失败" + res.errMsg);
@@ -329,28 +317,20 @@ function onBLECharacteristicValueChange() {
   wx.onBLECharacteristicValueChange((res) => {
     var hexStr = bleUtils.arrayBuffer2HexString(res.value)
     console.log(`characteristic ${res.characteristicId} has changed, now is ${hexStr}`);
-    // onSendSuccessCallBack(bleUtils.arrayBuffer2HexString(res.value));
-    var result = ""
-    for (let i = 0, len = hexStr.length; i < len; i++) {
-      result += hexStr[i];
-      if (i % 2 == 1) result += ',';
-    }
-    result = result.substr(0, result.length - 1)
-    var arry = result.split(',')
-    for (let i = 0; i < arry.length; i++) {
-      arry[i] = parseInt(arry[i], 16)
-    }
-    arry.length = 16
-    console.log('锁返回的数据--10进制数组----', arry)
-    // var readdata = wx.arrayBufferToBase64(res.value)
     //解密请求
-    postAESdecrypt(arry).then((res)=>{
-      console.log('解密之后的数据10进制-------', res.data.data)
-      var data = JSON.parse(res.data.data)
-      for (let i = 0; i < data.length; i++) {
-        data[i] = data[i].toString(16)
+    postAESdecrypt(hexStr.substr(0,32)).then((res)=>{
+      console.log('解密之后的数据-------', res.data.data)
+      if (res.data.data){
+        if (res.data.data.substr(0,4) === '0602'){
+          token = res.data.data.substr(6, 8)
+          var open = '050106'+ password + token+'000000'
+          //发送开锁指令
+          writeCommendToBle(open)
+        }
+        if (res.data.data.substr(0, 6) === '050201'){
+          
+        }
       }
-      console.log('解密之后的数据16进制-------', data)
     })
   })
 }
@@ -360,7 +340,6 @@ function onBLECharacteristicValueChange() {
 * @param onSuccess 指令执行成功回调
 */
 function sendCmd(commond, onSuccess, onFailCallback,key) {
-  // var sendCommonds = crc.getCRCCmd(commond);//对commond的CRC处理必须放在这里
   var sendCommonds = commond
   if (typeof onSuccess == 'undefined') {
     onSuccess = function (result) { }
@@ -393,16 +372,9 @@ function sendCmds(commond, index, onFailCallback) {
 function writeCommendToBle(commonds, onSendCallback, onFailCallback,key) {
   var commond = commonds;
   console.log("commond ：" + commond)
-  // commond = aes.aesEncrypt(commond, key)
-  // console.log('加密后的数据', commond)
   postAES(commond).then((res)=>{
     console.log('加密后的数据', res.data.data)
-    var encryption = JSON.parse(res.data.data)
-    var encStr = ''
-    encryption.forEach((item,index)=>{
-      encStr = encStr + item.toString(16)
-    })
-    let buffer = bleUtils.hexString2ArrayBuffer(encStr);
+    let buffer = bleUtils.hexString2ArrayBuffer(res.data.data);
     console.log(`执行指令:${bleUtils.arrayBuffer2HexString(buffer)}`);
     wx.writeBLECharacteristicValue({
       deviceId: currentDevice.deviceId + "",
@@ -413,11 +385,11 @@ function writeCommendToBle(commonds, onSendCallback, onFailCallback,key) {
       success: function (res) {
         console.log('发送指令成功')
         console.log('writeBLECharacteristicValue success', res.errMsg)
-        onSendCallback('ok');
+        // onSendCallback('ok');
       },
       fail: function (res) {
         console.log(`执行指令失败${res.errMsg}`);
-        onFailCallback("执行指令失败");
+        // onFailCallback("执行指令失败");
       }
     })
   })
@@ -445,84 +417,6 @@ function postAESdecrypt(data) {
     data: { decrypt: data },
     header: {
       ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
-    }
-  })
-}
-
-
-//发送消息(获取令牌)
-function gettoken(){
-  wx.request({
-    url: 'https://www.rocolock.com/aes.aspx',
-    data: {
-      cmd: 'gettoken', uid: currentDevice.deviceId
-    },
-    method: 'POST',
-    header: {
-      'content-type': 'application/json' // 默认值
-    },
-    success: function (res) {
-      console.log('获取令牌成功-----', res.data.data)
-      if (res.data.cmd == "send") {
-        var buffer = wx.base64ToArrayBuffer(res.data.data)
-        wx.writeBLECharacteristicValue({
-          deviceId: deviceId,
-          serviceId: serviceId,
-          characteristicId: characteristicIdW,
-          value: buffer,
-          success: function (res) {
-            console.log('发送令牌成功-----',res.errMsg)
-            //开锁
-            open()
-          }
-        })
-      }
-    }
-  })
-}
-
-//开锁指令
-function open(){
-  wx.request({
-    url: 'https://www.rocolock.com/aes.aspx',
-    data: {
-      cmd: 'open', uid: currentDevice.deviceId
-    },
-    method: 'POST',
-    header: {
-      'content-type': 'application/json' // 默认值
-    },
-    success: function (res) {
-      console.log('获取开锁指令------', res.data.data)
-      if (res.data.cmd == "send") {
-        var buffer = wx.base64ToArrayBuffer(res.data.data)
-        wx.writeBLECharacteristicValue({
-          deviceId: deviceId,
-          serviceId: serviceId,
-          characteristicId: characteristicIdW,
-          value: buffer,
-          success: function (res) {
-            console.log('写入开锁指令成功----', res.errMsg)
-          }
-        })
-      }
-    }
-  })
-}
-
-
-
-//接收消息
-function getBLEinfo() {
-  wx.readBLECharacteristicValue({
-    // 这里的 deviceId 需要在上面的 getBluetoothDevices 或 onBluetoothDeviceFound 接口中获取
-    deviceId: currentDevice.deviceId + "",
-    // 这里的 serviceId 需要在上面的 getBLEDeviceServices 接口中获取
-    serviceId: writeService.uuid + "",
-    // 这里的 characteristicId 需要在上面的 getBLEDeviceCharacteristics 接口中获取
-    characteristicId: indicateCharacteristic.uuid + "",
-    success: function (res) {
-      console.log('readBLECharacteristicValue:', res.errMsg);
     }
   })
 }
