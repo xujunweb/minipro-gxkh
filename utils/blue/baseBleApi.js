@@ -47,38 +47,72 @@ function writeCommend(options) {
     writeCharacteristicUUID: ""
   };
   params = Object.assign(defalt, options)
-  // setConnectionStateChange(params.onFailCallBack)
-  if (!setConnectionStateChange()) {
-    openBluetoothAdapter(params);
-  } else {
-    // typeof str == 'string'
-    sendCmd(params.sendCommend, params.onSuccessCallBack, params.onFailCallBack);
-  }
+  onSendSuccessCallBack = params.onSendSuccessCallBack
+  openBluetoothAdapter(params);
+}
+
+//获取已经链接的设备列表
+function getConnectedBluetoothDevices(params){
+  wx.getConnectedBluetoothDevices({
+    services: params.services,
+    success:(res)=>{
+      console.log('已经链接的设备-----',res.devices)
+    }
+  })
+}
+/**
+* 监控链接状态
+*/
+function setConnectionStateChange(callback) {
+  console.log('监控链接状态')
+  wx.onBLEConnectionStateChange(function (res) {
+    // 该方法回调中可以用于处理连接意外断开等异常情况
+    console.log(`device ${res.deviceId} state has changed, connected: ${res.connected}`);
+    callback(res)
+    // return res.connected;
+  });
+}
+/**
+ * 获取本机蓝牙适配器状态
+ */
+function getBluetoothAdapterState(callback){
+  wx.getBluetoothAdapterState({
+    success:(res)=>{
+      callback(res)
+    }
+  })
 }
 /**
 * 初始化蓝牙适配器
 */
 function openBluetoothAdapter(params) {
-  wx.openBluetoothAdapter({
-    success: function (res) {
-      console.log("初始化蓝牙适配器成功")
-      console.log(res)
+  getBluetoothAdapterState((res)=>{
+    if (!res.available){
+      wx.openBluetoothAdapter({
+        success: function (res) {
+          console.log("初始化蓝牙适配器成功")
+          console.log(res)
+          startBluetoothDevicesDiscovery(params)
+        }, fail: function (res) {
+          console.log("初始化蓝牙适配器失败")
+          params.onFailCallBack(res.errMsg)
+          console.log(res);
+          return
+        },
+        complete: function (res) {
+          console.log(res);
+        }
+      })
+    }else {
       startBluetoothDevicesDiscovery(params)
-    }, fail: function (res) {
-      console.log("初始化蓝牙适配器失败")
-      params.onFailCallBack(res.errMsg)
-      console.log(res);
-      return
-    },
-    complete: function (res) {
-      console.log(res);
     }
   })
+
+  
 }
 /**
 * 开始搜寻附近的蓝牙外围设备。注意，该操作比较耗费系统资源，请在搜索并连接到设备后调用 stop 方法停止搜索。
 * @ params services:['4asdga'],根据主ServiceUUID进行搜索特定蓝牙，提高搜索效率
-* 本ble设备主ServiceUUid: "6E400001-B5A3-F393-E0A9-E50E24DCCA9E"
 */
 var delayTimer;//停止循环获取tag
 var isFound = false
@@ -89,7 +123,7 @@ function startBluetoothDevicesDiscovery(params, connectCallback) {
   onConnectCallback = connectCallback;
   setTimeout(function () {
     if (isFound) {
-      return;
+      return
     }
     else {
       console.log("搜索设备超时");
@@ -181,7 +215,6 @@ function createBLEConnection(params) {
       console.log(`连接成功 : ${currentDevice.deviceId}`)
       isConnected = true
       getBLEDeviceServices(params);
-
     }, fail: function (res) {
       console.log(res)
       params.onFailCallBack(res)
@@ -200,17 +233,6 @@ function closeBLEConnection(deviceId) {
       console.log(res)
     }
   })
-}
-/**
-*
-* 返回蓝牙是否正处于链接状态
-*/
-function setConnectionStateChange(onFailCallback) {
-  wx.onBLEConnectionStateChange(function (res) {
-    // 该方法回调中可以用于处理连接意外断开等异常情况
-    console.log(`device ${res.deviceId} state has changed, connected: ${res.connected}`);
-    return res.connected;
-  });
 }
 /**
 * 获取蓝牙设备所有 service（服务）
@@ -263,25 +285,6 @@ function getNotifyBLEDeviceCharacteristics(params) {
     }
   })
 }
-function getWriteBLEDeviceCharacteristics(params) {
-  wx.getBLEDeviceCharacteristics({
-    // 这里的 deviceId 需要在上面的 getBluetoothDevices 或 onBluetoothDeviceFound 接口中获取
-    deviceId: currentDevice.deviceId + "",
-    // 这里的 serviceId 需要在上面的 getBLEDeviceServices 接口中获取
-    serviceId: writeService.uuid + "",
-    success: function (res) {
-      console.log("写入特征值获取成功：")
-      console.log('device getBLEDeviceCharacteristics:', res.characteristics)
-      for (var i = 0; i < res.characteristics.length; i++) {
-        if (res.characteristics[i].uuid == params.writeCharacteristicUUID) {
-          writeCharacteristic = res.characteristics[i]
-        }
-      }
-      console.log("xieru :", writeCharacteristic)
-      initNotifyListener(params);
-    }
-  })
-}
 /**
 *
 * 连接成功后，初始化回调监听
@@ -297,10 +300,11 @@ function initNotifyListener(params) {
     state: true,
     success: function (res) {
       console.log(`开启监听成功${res.errMsg}`);
-      setTimeout( ()=> {
-        onConnectCallback('ok');// 连接成功后，初始化回调监听回调
-        sendCmd(params.sendCommend, params.onSuccessCallBack, params.onFailCallBack,params.key);
-      }, 200);
+      // setTimeout( ()=> {
+      //   onConnectCallback('ok');// 连接成功后，初始化回调监听回调
+      //   sendCmd(params.sendCommend, params.onSuccessCallBack, params.onFailCallBack,params.key);
+      // }, 200);
+      writeCommendToBle(params.sendCommend, params.onSuccessCallBack, params.onFailCallBack)
     },
     fail: function (res) {
       console.log("开启监听失败" + res.errMsg);
@@ -308,31 +312,6 @@ function initNotifyListener(params) {
     }
   });
   onBLECharacteristicValueChange();
-}
-/**
-* 启用低功耗蓝牙设备特征值变化时的 notify 功能。注意：
-* 必须设备的特征值支持notify才可以成功调用，具体参照 characteristic 的 properties 属性
-*/
-function onBLECharacteristicValueChange() {
-  wx.onBLECharacteristicValueChange((res) => {
-    var hexStr = bleUtils.arrayBuffer2HexString(res.value)
-    console.log(`characteristic ${res.characteristicId} has changed, now is ${hexStr}`);
-    //解密请求
-    postAESdecrypt(hexStr.substr(0,32)).then((res)=>{
-      console.log('解密之后的数据-------', res.data.data)
-      if (res.data.data){
-        if (res.data.data.substr(0,4) === '0602'){
-          token = res.data.data.substr(6, 8)
-          var open = '050106'+ password + token+'000000'
-          //发送开锁指令
-          writeCommendToBle(open)
-        }
-        if (res.data.data.substr(0, 6) === '050201'){
-          
-        }
-      }
-    })
-  })
 }
 /**
 * 发送指令，不关心指令具体长度
@@ -367,8 +346,7 @@ function sendCmds(commond, index, onFailCallback) {
     }
   }, onFailCallback)
 }
-
-// 向蓝牙中写入数据（ble蓝牙）(增加指纹)
+// 向蓝牙中写入数据（ble蓝牙）
 function writeCommendToBle(commonds, onSendCallback, onFailCallback,key) {
   var commond = commonds;
   console.log("commond ：" + commond)
@@ -420,3 +398,36 @@ function postAESdecrypt(data) {
     }
   })
 }
+
+/**
+* 启用低功耗蓝牙设备特征值变化时的 notify 功能。注意：
+* 必须设备的特征值支持notify才可以成功调用，具体参照 characteristic 的 properties 属性
+*/
+function onBLECharacteristicValueChange() {
+  wx.onBLECharacteristicValueChange((res) => {
+    var hexStr = bleUtils.arrayBuffer2HexString(res.value)
+    console.log(`characteristic ${res.characteristicId} has changed, now is ${hexStr}`);
+    //解密请求
+    postAESdecrypt(hexStr.substr(0, 32)).then((res) => {
+      console.log('解密之后的数据-------', res.data.data)
+      if (res.data.data) {
+        if (res.data.data.substr(0, 4) === '0602') {
+          token = res.data.data.substr(6, 8)
+          var open = '050106' + password + token + '000000'
+          //发送开锁指令
+          writeCommendToBle(open)
+          //发送获取GSMID指令
+          var gsm = '05230100' + token + '0000000000000000'
+          writeCommendToBle(gsm)
+        }
+        if (res.data.data.substr(0, 6) === '052306') {
+          currentDevice.msgId = res.data.data.substr(7, 16)
+          onSendSuccessCallBack(currentDevice)
+        }
+      }
+    })
+  })
+}
+
+
+

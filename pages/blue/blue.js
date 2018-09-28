@@ -40,12 +40,13 @@ Page({
       writeServiceUUID:'0000FEE7-0000-1000-8000-00805F9B34FB',
       notifyServiceUUID:'0000FEE7-0000-1000-8000-00805F9B34FB',
       key:'3A60432A5C01211F291E0F4E0C132825',
-      onSuccessCallBack: function (result) {
-        wx.showToast({
-          title: result,
-          icon: 'none',
-          duration: 1500
-        })
+      onSendSuccessCallBack: function (result) {
+        // wx.showToast({
+        //   title: result,
+        //   icon: 'none',
+        //   duration: 1500
+        // })
+        console.log('完全成功-----',result)
       }
     })
   },
