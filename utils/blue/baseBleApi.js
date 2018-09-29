@@ -14,7 +14,8 @@ var seachNum = 0
 var password = '303030303030'
 module.exports = {
   writeCommend: writeCommend,
-  closeBLEConnection: closeBLEConnection
+  closeBLEConnection: closeBLEConnection,
+  writeCommendToBle: writeCommendToBle
   // disConnect, disConnect,
   // openBluetoothAdapter: openBluetoothAdapter
 }
@@ -422,6 +423,7 @@ function onBLECharacteristicValueChange() {
         }
         if (res.data.data.substr(0, 6) === '052306') {
           currentDevice.msgId = res.data.data.substr(7, 16)
+          currentDevice.open = '050106' + password + token + '000000'
           onSendSuccessCallBack(currentDevice)
         }
       }

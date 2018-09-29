@@ -1,5 +1,6 @@
 // pages/progress/progress.js
 const app = getApp()
+import blue from '../../utils/blue/baseBleApi.js'
 Page({
 
   /**
@@ -34,6 +35,25 @@ Page({
   onShow: function () {
     this.unlock(this.data.num)
     this.next()
+  },
+  //通过api开启蓝牙
+  bluetext: function () {
+    var pwd = "050106303030303030FFFFFFFFAEAEAE"    //开锁指令
+    var token = '060101012D1A683D48271A18316E471A'  //获取token的指令
+    var token2 = [0x06, 0x01, 0x01, 0x01, 0x2D, 0x1A, 0x68, 0x3D, 0x48, 0x27, 0x1A, 0x18, 0x31, 0x6E, 0x47, 0x1A]
+    blue.writeCommend({
+      services: ['FEE7'], sendCommend: token,
+      indicateCharacteristicUUID: '000036F6-0000-1000-8000-00805F9B34FB',
+      notifyCharacteristicUUID: '000036F6-0000-1000-8000-00805F9B34FB',
+      writeCharacteristicUUID: '000036F5-0000-1000-8000-00805F9B34FB',
+      writeServiceUUID: '0000FEE7-0000-1000-8000-00805F9B34FB',
+      notifyServiceUUID: '0000FEE7-0000-1000-8000-00805F9B34FB',
+      key: '3A60432A5C01211F291E0F4E0C132825',
+      onSendSuccessCallBack: (result) => {
+        console.log('完全成功-----', result)
+        this.data.currentDevice = result
+      }
+    })
   },
   //进度条增加
   next:function(){

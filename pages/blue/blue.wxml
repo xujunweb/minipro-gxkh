@@ -5,6 +5,7 @@
   <text class="msg">消息：{{ msg }} </text>
   <text class="msg1">消息：{{ msg1 }}</text>
   <button type="primary" class="button" bindtap='bluetext'>0000000</button>
+  <button type="primary" class="button" bindtap='writeCommendToBle'>发送开锁指令</button>
   <button type="primary" class="button" bindtap="lanya1">1初始化蓝牙适配器</button>
   <button type="primary" class="button" bindtap="lanya2">2本机蓝牙适配状态</button>
   <button type="primary" class="button" bindtap="lanya3">3搜索周边设备</button>

@@ -40,44 +40,21 @@ Page({
       writeServiceUUID:'0000FEE7-0000-1000-8000-00805F9B34FB',
       notifyServiceUUID:'0000FEE7-0000-1000-8000-00805F9B34FB',
       key:'3A60432A5C01211F291E0F4E0C132825',
-      onSendSuccessCallBack: function (result) {
+      onSendSuccessCallBack:(result)=> {
         // wx.showToast({
         //   title: result,
         //   icon: 'none',
         //   duration: 1500
         // })
         console.log('完全成功-----',result)
+        this.data.currentDevice = result
       }
     })
   },
-  lanya11:function(){
-    wx.request({
-      url: 'https://www.rocolock.com/aes.aspx',
-      data: {
-        cmd: 'gettoken', data: ''
-      },
-      method: 'POST',
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        console.log('获取令牌成功-----', res.data.data)
-        if (res.data.cmd == "send") {
-          var buffer = wx.base64ToArrayBuffer(res.data.data)
-          wx.writeBLECharacteristicValue({
-            deviceId: deviceId,
-            serviceId: serviceId,
-            characteristicId: characteristicIdW,
-            value: buffer,
-            success: function (res) {
-              console.log('发送令牌成功-----', res.errMsg)
-              //开锁
-              open()
-            }
-          })
-        }
-      }
-    })
+  //已连接状态下开锁
+  writeCommendToBle:function(){
+    var params = this.data.currentDevice
+    blue.writeCommendToBle(params.open)
   },
   // 初始化蓝牙适配器
   lanya1: function () {
