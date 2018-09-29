@@ -3,9 +3,10 @@ var currentDevice = {};//ble设备
 var indicateCharacteristic = {};//唤醒特征值
 var writeService = {};//写入服务
 var notifyService = {}
-var writeCharacteristic = {};//写入特征值
-var notifyCharacteristic = {};//唤醒特征值
+var writeCharacteristic = null;//写入特征值
+var notifyCharacteristic = null;//唤醒特征值
 var onSendSuccessCallBack = undefined;//成功回调
+var onFailCallBack = undefined; //失败回调
 var onConnectCallback = undefined;// 链接回调
 var bleUtils = require('strUtils.js');
 var isConnected = false;//是否已链接
@@ -49,6 +50,8 @@ function writeCommend(options) {
   };
   params = Object.assign(defalt, options)
   onSendSuccessCallBack = params.onSendSuccessCallBack
+  onFailCallBack = params.onFailCallBack
+  writeCharacteristic = params.writeCharacteristicUUID
   openBluetoothAdapter(params);
 }
 
@@ -96,7 +99,7 @@ function openBluetoothAdapter(params) {
           startBluetoothDevicesDiscovery(params)
         }, fail: function (res) {
           console.log("初始化蓝牙适配器失败")
-          params.onFailCallBack(res.errMsg)
+          params.onFailCallBack('1')
           console.log(res);
           return
         },
@@ -128,11 +131,11 @@ function startBluetoothDevicesDiscovery(params, connectCallback) {
     }
     else {
       console.log("搜索设备超时");
-      params.onFailCallBack("搜索设备超时")
       seachNum++
       if (seachNum < 3){
         startBluetoothDevicesDiscovery(params, connectCallback)
       }else{
+        params.onFailCallBack("3")
         stopBluetoothDevicesDiscovery();
       }
       return
@@ -147,7 +150,7 @@ function startBluetoothDevicesDiscovery(params, connectCallback) {
     }, fail: function (res) {
       console.log("开启搜索失败")
       console.log(res)
-      params.onFailCallBack(res)
+      params.onFailCallBack('2')
       return
     },
     complete: function (res) {
@@ -181,7 +184,7 @@ function getBluetoothDevices(params) {
       // clearInterval(delayTimer)
       console.log("没有搜索到要链接的设备....")
       console.log(res)
-      params.onFailCallBack(res)
+      params.onFailCallBack("4")
       stopBluetoothDevicesDiscovery();
       return
     }
@@ -205,7 +208,7 @@ function createBLEConnection(params) {
   setTimeout(function () {
     if (isConnected) return;
     console.log("连接设备超时");
-    params.onFailCallBack("连接设备超时")
+    params.onFailCallBack("5")
     return
   }, 5000)
   wx.createBLEConnection({
@@ -218,7 +221,7 @@ function createBLEConnection(params) {
       getBLEDeviceServices(params);
     }, fail: function (res) {
       console.log(res)
-      params.onFailCallBack(res)
+      params.onFailCallBack('6')
       console.log(`连接失败 : ${currentDevice.deviceId}`)
     }
   })
@@ -256,12 +259,15 @@ function getBLEDeviceServices(params) {
         }
       }
       //获取
-      getNotifyBLEDeviceCharacteristics(params);
+      initNotifyListener(params);
+    },
+    fail:(res)=>{
+      params.onFailCallBack('7')
     }
   })
 }
 /**
-* 获取蓝牙设备唤醒characteristic（特征值）
+* 获取蓝牙设备唤醒characteristic（特征值）(不是必要操作)
 */
 function getNotifyBLEDeviceCharacteristics(params) {
   wx.getBLEDeviceCharacteristics({
@@ -283,6 +289,9 @@ function getNotifyBLEDeviceCharacteristics(params) {
       console.log("唤醒特征值 :", notifyCharacteristic)
       console.log("特征值列表 :", res.characteristics)
       initNotifyListener(params);
+    },
+    fail:()=>{
+      params.onFailCallBack('8')
     }
   })
 }
@@ -305,11 +314,11 @@ function initNotifyListener(params) {
       //   onConnectCallback('ok');// 连接成功后，初始化回调监听回调
       //   sendCmd(params.sendCommend, params.onSuccessCallBack, params.onFailCallBack,params.key);
       // }, 200);
-      writeCommendToBle(params.sendCommend, params.onSuccessCallBack, params.onFailCallBack)
+      writeCommendToBle(params.sendCommend, params)
     },
     fail: function (res) {
       console.log("开启监听失败" + res.errMsg);
-      params.onFailCallBack("开启监听失败");
+      params.onFailCallBack("9");
     }
   });
   onBLECharacteristicValueChange();
@@ -348,7 +357,7 @@ function sendCmds(commond, index, onFailCallback) {
   }, onFailCallback)
 }
 // 向蓝牙中写入数据（ble蓝牙）
-function writeCommendToBle(commonds, onSendCallback, onFailCallback,key) {
+function writeCommendToBle(commonds) {
   var commond = commonds;
   console.log("commond ：" + commond)
   postAES(commond).then((res)=>{
@@ -358,7 +367,7 @@ function writeCommendToBle(commonds, onSendCallback, onFailCallback,key) {
     wx.writeBLECharacteristicValue({
       deviceId: currentDevice.deviceId + "",
       serviceId: writeService.uuid + '',
-      characteristicId: writeCharacteristic.uuid + '',
+      characteristicId: writeCharacteristic + '',
       // 这里的value是ArrayBuffer类型
       value: buffer,
       success: function (res) {
@@ -368,7 +377,7 @@ function writeCommendToBle(commonds, onSendCallback, onFailCallback,key) {
       },
       fail: function (res) {
         console.log(`执行指令失败${res.errMsg}`);
-        // onFailCallback("执行指令失败");
+        onFailCallBack("10");
       }
     })
   })

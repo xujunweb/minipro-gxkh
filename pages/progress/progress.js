@@ -9,7 +9,20 @@ Page({
   data: {
     progress:0,
     num:'',
-    fee:''
+    fee:'',
+    fail:'',
+    failMap:{
+      1:'初始化蓝牙适配器失败',
+      2:'开启搜索失败',
+      3:'搜索设备超时',
+      4:'没有搜索到要链接的设备',
+      5:'连接设备超时',
+      6:'链接失败',
+      7:'获取服务失败',
+      8:'唤醒特征值失败',
+      9:'开启监听失败',
+      10:'执行指令失败'
+    }
   },
 
   /**
@@ -19,6 +32,15 @@ Page({
     if (options) {
       this.data.num = options.num
       this.data.fee = options.fee
+    }
+    if (wx.openBluetoothAdapter) {
+      wx.openBluetoothAdapter()
+    } else {
+      // 如果希望用户在最新版本的客户端上体验您的小程序，可以这样子提示
+      wx.showModal({
+        title: '提示',
+        content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+      })
     }
   },
 
@@ -33,11 +55,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.unlock(this.data.num)
+    // this.unlock(this.data.num)
+    this.bluetext()
     this.next()
   },
   //通过api开启蓝牙
   bluetext: function () {
+    console.log('蓝牙开启')
     var pwd = "050106303030303030FFFFFFFFAEAEAE"    //开锁指令
     var token = '060101012D1A683D48271A18316E471A'  //获取token的指令
     var token2 = [0x06, 0x01, 0x01, 0x01, 0x2D, 0x1A, 0x68, 0x3D, 0x48, 0x27, 0x1A, 0x18, 0x31, 0x6E, 0x47, 0x1A]
@@ -52,6 +76,12 @@ Page({
       onSendSuccessCallBack: (result) => {
         console.log('完全成功-----', result)
         this.data.currentDevice = result
+        this.unlock(("0" + '' + result.msgId).substr(0, 12))
+      },
+      onFailCallBack:(res)=>{
+        this.setData({
+          fail:res
+        })
       }
     })
   },
@@ -69,7 +99,7 @@ Page({
     });
     setTimeout(function(){
         that.next()
-    }, 50);
+    }, 70);
   },
   //解锁请求
   unlock: function (lock) {

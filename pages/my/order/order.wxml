@@ -22,7 +22,7 @@
       <view class='time' wx:if="{{!item.end_time}}">
         <text>时间：</text>{{util.lastString(item.start_time)}}
       </view>
-      <view class='place'><text>地址：</text>{{item.address}}</view>
+      <!-- <view class='place'><text>地址：</text>{{item.address}}</view> -->
     </view>
   </view>
 </view>
