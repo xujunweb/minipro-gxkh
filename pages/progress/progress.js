@@ -82,6 +82,7 @@ Page({
         this.setData({
           fail:res
         })
+        this.unlock()
       }
     })
   },

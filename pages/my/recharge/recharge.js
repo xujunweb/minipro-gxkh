@@ -77,8 +77,8 @@ Page({
         data: {
           attach: 'type=4',
           openid: app.globalData.openid,
-          // total_fee: this.data.selectMoney * 100 || 0,
-          total_fee:1,
+          total_fee: this.data.selectMoney * 100,
+          // total_fee:1,
           body:'余额充值',
           user_id: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo').id
         },
