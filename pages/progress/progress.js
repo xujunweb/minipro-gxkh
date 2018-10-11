@@ -22,7 +22,8 @@ Page({
       8:'唤醒特征值失败',
       9:'开启监听失败',
       10:'执行指令失败'
-    }
+    },
+    num:0
   },
 
   /**
@@ -58,6 +59,7 @@ Page({
     // this.unlock(this.data.num)
     this.bluetext()
     this.next()
+    this.data.num = 0
   },
   //通过api开启蓝牙
   bluetext: function () {
@@ -75,14 +77,45 @@ Page({
       key: '3A60432A5C01211F291E0F4E0C132825',
       onSendSuccessCallBack: (result) => {
         console.log('完全成功-----', result)
+        wx.showLoading({
+          title: '解锁成功,生成订单中...',
+          mask: true
+        })
         this.data.currentDevice = result
         this.unlock(("0" + '' + result.msgId).substr(0, 12))
       },
       onFailCallBack:(res)=>{
-        this.setData({
-          fail:res
-        })
-        this.unlock()
+        //开锁失败
+        //只允许一次重试
+        if(this.data.num<1){
+          wx.showModal({
+            title: '提示',
+            content: this.data.failMap[res] + ',是否重试？',
+            success: (res) => {
+              if (res.confirm) {
+                this.data.num = 1
+                this.setData({
+                  progress: 0
+                },()=>{
+                  this.next()
+                })
+                console.log('用户点击确定')
+                this.bluetext()
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+                wx.redirectTo({
+                  url: '/pages/leasesuccess/index?result=0'
+                })
+              }
+            }
+          })
+        }else{
+          wx.redirectTo({
+            url: '/pages/leasesuccess/index?result=0'
+          })
+        }
+        
+        // this.unlock()
       }
     })
   },
@@ -100,7 +133,7 @@ Page({
     });
     setTimeout(function(){
         that.next()
-    }, 70);
+    }, 200);
   },
   //解锁请求
   unlock: function (lock) {
@@ -114,6 +147,7 @@ Page({
       },
       success: (res) => {
         console.log('解锁请求--------', res)
+        wx.hideLoading()
         if (res.data.code == 100) {
           this.setData({
             progress:100

@@ -77,6 +77,13 @@ Page({
   //余额支付
   balancePlay:function(){
     var userInfo = app.globalData.loginUserInfo || wx.getStorageSync('loginUserInfo')
+    if (!this.data.money) {
+      wx.showToast({
+        title: '请选择租借时间',
+        icon: 'none'
+      })
+      return
+    }
     if (userInfo.money > this.data.money) {
       // wx.request({
       //   url: wx.envConfig.host + 'user/updateMoney',
@@ -116,6 +123,13 @@ Page({
   },
   //微信支付
   rechargeHandler() {
+    if (!this.data.money){
+      wx.showToast({
+        title:'请选择租借时间',
+        icon:'none'
+      })
+      return
+    }
     return new Promise((resolve, reject) => {
       app.ajaxSubmit({
         url: wx.envConfig.host + 'pay/wx/generatePayParams',
@@ -126,19 +140,14 @@ Page({
         data: {
           attach: 'type=4',
           openid: app.globalData.openid,
-          // total_fee: this.data.selectMoney * 100 || 0,
-          total_fee: 1,
+          total_fee: this.data.money * 100 || 0,
+          // total_fee: 1,
           body: '余额充值',
           user_id: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo').id
         },
         isHideLoading: true
       }).then((res) => {
         if (res.data.code == '100001') {
-          app.loginInOtherPlaceAlert(res, function () {
-            if (jsons.repeatLogin) {
-              jsons.repeatLogin();
-            }
-          });
           return;
         }
         else if (res.data.code !== 100) {
