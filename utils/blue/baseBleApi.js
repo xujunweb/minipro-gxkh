@@ -72,7 +72,7 @@ function setConnectionStateChange(callback) {
   wx.onBLEConnectionStateChange(function (res) {
     // 该方法回调中可以用于处理连接意外断开等异常情况
     console.log(`device ${res.deviceId} state has changed, connected: ${res.connected}`);
-    callback(res)
+    // callback(res)
     // return res.connected;
   });
 }
@@ -204,7 +204,9 @@ function stopBluetoothDevicesDiscovery() {
 * 连接低功耗蓝牙设备
 */
 function createBLEConnection(params) {
-  // setConnectionStateChange(params.onFailCallBack);
+  //监控连接状态
+  setConnectionStateChange();
+  isConnected = false
   setTimeout(function () {
     if (isConnected) return;
     console.log("连接设备超时");
@@ -214,6 +216,7 @@ function createBLEConnection(params) {
   wx.createBLEConnection({
     // 这里的 deviceId 需要在上面的 getBluetoothDevices 或 onBluetoothDeviceFound 接口中获取
     deviceId: currentDevice.deviceId + "",
+    timeout:5000,
     success: function (res) {
       console.log(res)
       console.log(`连接成功 : ${currentDevice.deviceId}`)
@@ -259,7 +262,8 @@ function getBLEDeviceServices(params) {
         }
       }
       //获取
-      initNotifyListener(params);
+      // initNotifyListener(params);
+      getNotifyBLEDeviceCharacteristics(params)
     },
     fail:(res)=>{
       params.onFailCallBack('7')
@@ -279,15 +283,15 @@ function getNotifyBLEDeviceCharacteristics(params) {
       console.log("唤醒特征值获取成功：")
       console.log('device getBLEDeviceCharacteristics:', res.characteristics)
       for (var i = 0; i < res.characteristics.length; i++) {
-        if (res.characteristics[i].uuid == params.indicateCharacteristicUUID) {
-          indicateCharacteristic = res.characteristics[i]
-        }
-        if (res.characteristics[i].uuid == params.writeCharacteristicUUID) {
-          writeCharacteristic = res.characteristics[i]
-        }
+        // if (res.characteristics[i].uuid == params.indicateCharacteristicUUID) {
+        //   indicateCharacteristic = res.characteristics[i]
+        // }
+        // if (res.characteristics[i].uuid == params.writeCharacteristicUUID) {
+        //   writeCharacteristic = res.characteristics[i]
+        // }
       }
-      console.log("唤醒特征值 :", notifyCharacteristic)
-      console.log("特征值列表 :", res.characteristics)
+      // console.log("唤醒特征值 :", notifyCharacteristic)
+      // console.log("特征值列表 :", res.characteristics)
       initNotifyListener(params);
     },
     fail:()=>{
@@ -314,11 +318,16 @@ function initNotifyListener(params) {
       //   onConnectCallback('ok');// 连接成功后，初始化回调监听回调
       //   sendCmd(params.sendCommend, params.onSuccessCallBack, params.onFailCallBack,params.key);
       // }, 200);
-      writeCommendToBle(params.sendCommend, params)
+      setTimeout(()=>{
+        writeCommendToBle(params.sendCommend, params)
+      },200)
     },
     fail: function (res) {
       console.log("开启监听失败" + res.errMsg);
-      params.onFailCallBack("9");
+      // params.onFailCallBack("9");
+      setTimeout(() => {
+        writeCommendToBle(params.sendCommend, params)
+      }, 200)
     }
   });
   onBLECharacteristicValueChange();
