@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 17,
+			"current": 18,
 			"list": [
 				{
 					"id": -1,
@@ -114,10 +114,10 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 13,
 					"name": "租借成功",
 					"pathName": "pages/leasesuccess/index",
-					"query": ""
+					"query": "result=1"
 				},
 				{
 					"id": -1,
@@ -140,7 +140,14 @@
 				{
 					"id": -1,
 					"name": "新蓝牙",
-					"pathName": "pages/newBlue/index"
+					"pathName": "pages/newBlue/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "关于我们",
+					"pathName": "pages/aboutme/index",
+					"query": ""
 				}
 			]
 		}

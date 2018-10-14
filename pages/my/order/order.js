@@ -52,13 +52,14 @@ Page({
     this.setData({
       isloading:true
     })
+    var userId = app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo').id
     wx.request({
       url: wx.envConfig.host +'lockOrder/pageByLockOrder',
       method: "POST",
       header: {
-        ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
+        ticket: userId
       },
-      data: { type: this.data.select, pageNum: this.data.thisp, pageSize:8 },
+      data: { type: this.data.select, pageNum: this.data.thisp, pageSize: 8, user_id:userId },
       success: (res) => {
         this.setData({
           orderlist: res.data.data.list

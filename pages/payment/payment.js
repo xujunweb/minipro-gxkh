@@ -49,7 +49,7 @@ Page({
   },
   //选择支付方式
   seletPlay:function(e){
-    var type = e.target.dataset.type
+    var type = e.currentTarget.dataset.type
     if (type == '1'){
       this.setData({
         weixin:true

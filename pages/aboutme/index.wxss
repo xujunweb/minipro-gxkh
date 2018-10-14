@@ -1,0 +1,16 @@
+/* pages/aboutme/index.wxss */
+.aboutme{
+  border-top: 1px solid #ddd;
+  padding-top: 20rpx;
+  padding-bottom: 50rpx;
+}
+.aboutlist{
+  padding: 10rpx 30rpx;font-size: 28rpx;
+}
+.title{
+  font-size: 32rpx;padding-left: 30rpx;margin-top: 20rpx;
+}
+.about-content{
+  display: inline-block;
+  font-size: 28rpx;padding: 0 30rpx;text-align: justify;
+}

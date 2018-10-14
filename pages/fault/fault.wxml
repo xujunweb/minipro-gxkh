@@ -1,7 +1,7 @@
 <!--pages/fault/fault.wxml-->
 <view class='fault'>
   <view class='item'>
-    <text>输入编号：</text><input placeholder='请输入编号' bindinput='inputNo' value='{{proNo}}'></input>
+    <text>输入柜子编号：</text><input placeholder='请输入编号' bindinput='inputNo' value='{{proNo}}'></input>
   </view>
   <view class='item' bindtap='choiceFault'>
     <view>

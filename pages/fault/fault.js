@@ -7,13 +7,14 @@ Page({
    */
   data: {
     imgList:[],
-    faultList:['床坏了','柜锁坏了','还床失败','其他'],
+    faultList: ['柜床不良', '开锁失败', '还床失败','二维码损坏','其他'],
     faultText:'',
     faultMap:{
       0:1,
       1:2,
       2:3,
-      3:0
+      3:4,
+      4:0
     },
     fault:null,
     describe:'',

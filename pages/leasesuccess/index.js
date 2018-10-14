@@ -18,7 +18,7 @@ Page({
         isPlaysuccess: options.result
       })
       wx.setNavigationBarTitle({
-        title: options.result?'租借成功':'租借失败'
+        title: options.result==1?'租借成功':'租借失败'
       })
     }
   },

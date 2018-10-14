@@ -22,7 +22,7 @@
 </view>
 
 <!-- 短信验证码登录 -->
-<view class='login_view' wx:if='{{showLayer}}'> 
+<view class='login_view' wx:if='{{showLayer}}'>
     <view class='layer_bg'></view>
     <view class='login_main'>
         <view class='login_title'>短信验证码登录</view>
@@ -37,6 +37,8 @@
         </view>
         <button class='login_btn {{isLogin?"":"login_btn_no"}}' catchtap='submitBind'>登录</button>
     </view>
-    <view class='logout_btn' catchtap='closeLayer'></view>
+    <view class='logout_btn' catchtap='closeLayer'>
+      <image src='../../images/guanbi.png'></image>
+    </view>
     
 </view>

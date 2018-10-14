@@ -60,7 +60,9 @@ button::after{ border:none; }
 .login_btn_no { opacity: 0.4; }
 
 .logout_btn {
-  background: url(http://yamxcx.oss-cn-shenzhen.aliyuncs.com/xcx/guanbi.png) no-repeat left center / 60rpx 60rpx;
   width: 60rpx; height: 60rpx; z-index: 999;
   position: fixed; top: 50%; left: 50%; margin-left: -30rpx; margin-top: 350rpx;
+}
+.logout_btn image{
+  width: 60rpx; height: 60rpx;
 }

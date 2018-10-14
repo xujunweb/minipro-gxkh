@@ -63,7 +63,7 @@
       </view>
       <view class='arrwo'></view>
     </view>
-    <view class='item'>
+    <view class='item' bindtap='goAboutMe'>
       <view class='left'>
         <image src='../../images/icon3.png'></image>
         <text>关于我们</text>

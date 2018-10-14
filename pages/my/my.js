@@ -61,5 +61,11 @@ Page({
         url: '/pages/fault/fault',
       })
     }
-  }
+  },
+  //关于我们
+  goAboutMe(){
+    wx.navigateTo({
+      url: '/pages/aboutme/index',
+    })
+  },
 })

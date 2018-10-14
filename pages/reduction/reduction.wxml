@@ -1,8 +1,0 @@
-<!--pages/reduction/reduction.wxml-->
-<view class="container log-list">
-  <view class="image">
-    <image src='../../images/bg1.png' lazy-load="{{true}}" mode="aspectFit"></image>
-  </view>
-  <button class="button" bindtap="scan" hover-class="other-button-hover">扫码还床</button>
-</view>
-
