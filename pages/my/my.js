@@ -68,4 +68,10 @@ Page({
       url: '/pages/aboutme/index',
     })
   },
+  //商户合作
+  goJointWork(){
+    wx.navigateTo({
+      url: '/pages/jointwork/index',
+    })
+  },
 })

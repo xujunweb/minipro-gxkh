@@ -1,0 +1,12 @@
+/* pages/jointwork/index.wxss */
+.jointwork{
+  border-top: 1px solid #ddd;
+  padding: 0 30rpx;
+  padding-top: 20rpx;
+  padding-bottom: 50rpx;
+}
+.content{font-size: 28rpx;line-height: 45rpx;display: inline-block;}
+.title-h2{font-weight: bold;font-size: 30rpx;margin-top: 20rpx;}
+.title-h3{font-size: 30rpx;}
+.modetext{font-size: 28rpx;line-height: 45rpx;display: inline-block;}
+

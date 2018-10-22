@@ -1,0 +1,21 @@
+<!--pages/jointwork/index.wxml-->
+<view class='jointwork'>
+  <view class='content'>
+    <text decode="{{true}}">{{content}}</text>
+  </view>
+  <view class='mode'>
+    <view class='title-h2'>合作模式一：</view>
+    <view class='title-h3'>购买智能产品定制：</view>
+    <text class='modetext'>拥有自己投资的生产基地，二十年精密钣金加工技术，生产能力及配套生产设施完善，手机操作系统软件及后台管理软件有专业的软件开发团队。从硬件方面到软件开发都可根据客户需求定制加工，能够有效提供一站式解决智能柜床或共享椅解决方案与产品。</text>
+  </view>
+  <view class='mode'>
+    <view class='title-h2'>合作模式二：</view>
+    <view class='title-h3'>项目合作运营：</view>
+    <text class='modetext'>我公司可以免费投放标准配置的智能柜床，双方合作开展医院资源落地，分时租赁服务，按照资源与产品，共同享受合作利益。</text>
+  </view>
+  <view class='mode'>
+    <view class='title-h2'>合作模式三：</view>
+    <view class='title-h3'>项目加盟合作：</view>
+    <text class='modetext'>我公司免费提供标准配置的智能柜床，由加盟者负责出资购买柜床与投放落地资源，运营按约定比列，共享佣金收益。</text>
+  </view>
+</view>

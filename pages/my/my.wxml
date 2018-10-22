@@ -70,7 +70,7 @@
       </view>
       <view class='arrwo'></view>
     </view>
-    <view class='item'>
+    <view class='item' bindtap='goJointWork'>
       <view class='left'>
         <image src='../../images/icon8.png'></image>
         <text>商户合作</text>
