@@ -1,6 +1,7 @@
 //app.js
 App({
-  onLaunch: function () {
+  onLaunch: function (e) {
+    console.log('app-onLaunch',e)
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -37,6 +38,9 @@ App({
         }
       }
     })
+  },
+  onShow: function (e) {
+    console.log('app-onShow',e)
   },
   //获取openid
   getOpenIdUserInfo:function(data,callback){
