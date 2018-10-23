@@ -435,14 +435,23 @@ function onBLECharacteristicValueChange() {
           var open = '050106' + password + token + '000000'
           //发送开锁指令
           writeCommendToBle(open)
-          //发送获取GSMID指令
-          var gsm = '05230100' + token + '0000000000000000'
-          writeCommendToBle(gsm)
         }
+        //获取GMI信息
         if (res.data.data.substr(0, 6) === '052306') {
           currentDevice.msgId = res.data.data.substr(7, 16)
           currentDevice.open = '050106' + password + token + '000000'
           onSendSuccessCallBack(currentDevice)
+        }
+        //开锁结果
+        if (res.data.data.substr(0, 6) === '050201'){
+          if (res.data.data.substr(7, 9) == '00') {   //开锁成功 
+            //发送获取GSMID指令
+            var gsm = '05230100' + token + '0000000000000000'
+            writeCommendToBle(gsm)
+          }else{
+            //开锁失败
+            onFailCallBack("11");
+          }
         }
       }
     })
