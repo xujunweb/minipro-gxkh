@@ -8,7 +8,7 @@ Page({
    */
   data: {
     progress:0,
-    num:'',
+    id:'',
     fee:'',
     fail:'',
     failMap:{
@@ -31,9 +31,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log('页面参数-----', options)
     if (options) {
-      this.data.num = options.num
+      this.data.id = options.num
       this.data.fee = options.fee
+      console.log('设备编号-----------',this.data.id)
     }
     if (wx.openBluetoothAdapter) {
       wx.openBluetoothAdapter()
@@ -67,43 +69,70 @@ Page({
     console.log('蓝牙开启')
     var pwd = "050106303030303030FFFFFFFFAEAEAE"    //开锁指令
     var token = '060101012D1A683D48271A18316E471A'  //获取token的指令
-    var token2 = [0x06, 0x01, 0x01, 0x01, 0x2D, 0x1A, 0x68, 0x3D, 0x48, 0x27, 0x1A, 0x18, 0x31, 0x6E, 0x47, 0x1A]
-    blue.writeCommend({
-      services: ['FEE7'], sendCommend: token,
-      indicateCharacteristicUUID: '000036F6-0000-1000-8000-00805F9B34FB',
-      notifyCharacteristicUUID: '000036F6-0000-1000-8000-00805F9B34FB',
-      writeCharacteristicUUID: '000036F5-0000-1000-8000-00805F9B34FB',
-      writeServiceUUID: '0000FEE7-0000-1000-8000-00805F9B34FB',
-      notifyServiceUUID: '0000FEE7-0000-1000-8000-00805F9B34FB',
-      key: '3A60432A5C01211F291E0F4E0C132825',
-      onSendSuccessCallBack: (result) => {
-        console.log('完全成功-----', result)
-        blue.closeBLEConnection(result.deviceId, () => {
-          wx.showLoading({
-            title: '解锁成功,生成订单中...',
-            mask: true
+    this.getLockInfo(this.data.id).then((data)=>{
+      blue.writeCommend({
+        services: ['FEE7'], sendCommend: token,
+        indicateCharacteristicUUID: '000036F6-0000-1000-8000-00805F9B34FB',
+        notifyCharacteristicUUID: '000036F6-0000-1000-8000-00805F9B34FB',
+        writeCharacteristicUUID: '000036F5-0000-1000-8000-00805F9B34FB',
+        writeServiceUUID: '0000FEE7-0000-1000-8000-00805F9B34FB',
+        notifyServiceUUID: '0000FEE7-0000-1000-8000-00805F9B34FB',
+        password: data.lock_pwd,
+        MAC: data.lock_mac,
+        qrCode: this.data.id,
+        onSendSuccessCallBack: (result) => {
+          console.log('完全成功-----', result)
+          blue.closeBLEConnection(result.deviceId, () => {
+            wx.showLoading({
+              title: '解锁成功,生成订单中...',
+              mask: true
+            })
+            this.data.currentDevice = result
+            this.unlock(("0" + '' + result.msgId).substr(0, 12))
           })
-          this.data.currentDevice = result
-          this.unlock(("0" + '' + result.msgId).substr(0, 12))
-        }) 
-      },
-      onFailCallBack: (res, dev)=>{
-        if (dev.deviceId){
-          blue.closeBLEConnection(dev.deviceId,()=>{
+        },
+        onFailCallBack: (res, dev) => {
+          if (dev.deviceId) {
+            blue.closeBLEConnection(dev.deviceId, () => {
+              this.again(res)
+            })
+          } else {
             this.again(res)
-          })
-        }else{
-          this.again(res)
+          }
         }
-        //开锁失败
-        
-        
-        // this.unlock()
-      }
+      })
+    })
+    
+  },
+  //获取锁相关信息
+  getLockInfo(no){
+    return new Promise((resolve, reject)=>{
+      wx.request({
+        url: wx.envConfig.host + 'lockOrder/getLockInfo',
+        method: 'post',
+        header: {
+          ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
+        },
+        data: { qr_code_no: no },
+        success: (res) => {
+          if (res.statusCode >= 400 || res.data.code != '100') {
+            reject(res)
+            return
+          }
+          if (res.data.data){
+            resolve(res.data.data)
+          }else{
+            reject(res)
+          }
+        },
+        fail: (err) => {
+          reject(err)
+        }
+      })
     })
   },
   //重试
-  again(){
+  again(res){
     //只允许一次重试
     if (this.data.num < 1) {
       wx.showModal({

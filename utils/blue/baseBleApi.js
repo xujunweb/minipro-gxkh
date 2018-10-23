@@ -13,6 +13,8 @@ var isConnected = false;//是否已链接
 var token = ''
 var seachNum = 0
 var password = '303030303030'
+var MAC = ''
+var qrCode = ''
 module.exports = {
   writeCommend: writeCommend,
   closeBLEConnection: closeBLEConnection,
@@ -48,6 +50,9 @@ function writeCommend(options) {
     notifyCharacteristicUUID: "",
     writeCharacteristicUUID: ""
   };
+  qrCode = options.qrCode
+  password = options.password || password
+  MAC = options.MAC || MAC
   params = Object.assign(defalt, options)
   onSendSuccessCallBack = params.onSendSuccessCallBack
   onFailCallBack = params.onFailCallBack
@@ -102,9 +107,6 @@ function openBluetoothAdapter(params) {
           params.onFailCallBack('1', currentDevice)
           console.log(res);
           return
-        },
-        complete: function (res) {
-          console.log(res);
         }
       })
     }else {
@@ -128,8 +130,7 @@ function startBluetoothDevicesDiscovery(params, connectCallback) {
   setTimeout(function () {
     if (isFound) {
       return
-    }
-    else {
+    }else {
       console.log("搜索设备超时");
       seachNum++
       if (seachNum < 3){
@@ -159,6 +160,16 @@ function startBluetoothDevicesDiscovery(params, connectCallback) {
     }
   })
 }
+// ArrayBuffer转16进度字符串示例
+function ab2hex(buffer) {
+  var hexArr = Array.prototype.map.call(
+    new Uint8Array(buffer),
+    function (bit) {
+      return ('00' + bit.toString(16)).slice(-2)
+    }
+  )
+  return hexArr.join('');
+}
 /**
 * 获取所有已发现的蓝牙设备，包括已经和本机处于连接状态的设备
 */
@@ -166,18 +177,30 @@ function getBluetoothDevices(params) {
   wx.getBluetoothDevices({
     success: function (res) {
       console.log("getBluetoothDevices");
-      console.log(res.devices);
+      console.log('设备列表--------',res.devices);
       for (let i = 0; i < res.devices.length; i++) {
         //忽略传入的deviceName大小写
         // isContains bleUtils
-        console.log("搜索到要链接的设备....")
-        if (res.devices[i].localName === 'k06_YPP'){
-          stopBluetoothDevicesDiscovery();
-          isFound = true
-          // clearInterval(delayTimer)
-          currentDevice = res.devices[i]
-          createBLEConnection(params)
-          break
+        if (res.devices[i].localName == 'k06_YPP'){
+          var macId = ''
+          try{
+            var bf = res.devices[i].advertisData.slice(2, 8);
+            macId = Array.prototype.map.call(new Uint8Array(bf), x => ('00' + x.toString(16).toUpperCase()).slice(-2)).join(':');
+          }catch(err){
+            macId = ''
+          }
+          // var bf = res.devices[i].advertisData.slice(2, 8);
+          // macId = Array.prototype.map.call(new Uint8Array(bf), x => ('00' + x.toString(16).toUpperCase()).slice(-2)).join(':');
+          console.log('设备的mac-----', macId,MAC)
+          if (macId == MAC) {
+            stopBluetoothDevicesDiscovery();
+            isFound = true
+            // clearInterval(delayTimer)
+            currentDevice = res.devices[i]
+            console.log('advertisDataTo--MAC-------', macId)
+            createBLEConnection(params)
+            break
+          }
         }
       }
     },
@@ -400,7 +423,7 @@ function postAES(data){
     url: wx.envConfig.host + 'anon/common/encrypt',
     method: 'post',
     isHideLoading:true,
-    data: { encrypt:data},
+    data: { encrypt: data, qr_code_no: qrCode},
     header: {
       ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
     }
@@ -413,7 +436,7 @@ function postAESdecrypt(data) {
     url: wx.envConfig.host + 'anon/common/decrypt',
     method: 'post',
     isHideLoading: true,
-    data: { decrypt: data },
+    data: { decrypt: data, qr_code_no:qrCode },
     header: {
       ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
     }
@@ -446,13 +469,13 @@ function onBLECharacteristicValueChange() {
         }
         //开锁结果
         if (res.data.data.substr(0, 6) === '050201'){
-          if (res.data.data.substr(7, 9) == '00') {   //开锁成功 
+          if (res.data.data.substr(6, 2) == '00') {   //开锁成功 
             //发送获取GSMID指令
             var gsm = '05230100' + token + '0000000000000000'
             writeCommendToBle(gsm)
           }else{
             //开锁失败
-            onFailCallBack("11");
+            onFailCallBack("11", currentDevice);
           }
         }
       }
