@@ -77,47 +77,60 @@ Page({
       key: '3A60432A5C01211F291E0F4E0C132825',
       onSendSuccessCallBack: (result) => {
         console.log('完全成功-----', result)
-        wx.showLoading({
-          title: '解锁成功,生成订单中...',
-          mask: true
-        })
-        this.data.currentDevice = result
-        this.unlock(("0" + '' + result.msgId).substr(0, 12))
+        blue.closeBLEConnection(result.deviceId, () => {
+          wx.showLoading({
+            title: '解锁成功,生成订单中...',
+            mask: true
+          })
+          this.data.currentDevice = result
+          this.unlock(("0" + '' + result.msgId).substr(0, 12))
+        }) 
       },
-      onFailCallBack:(res)=>{
-        //开锁失败
-        //只允许一次重试
-        if(this.data.num<1){
-          wx.showModal({
-            title: '提示',
-            content: this.data.failMap[res] + ',是否重试？',
-            success: (res) => {
-              if (res.confirm) {
-                this.data.num = 1
-                this.setData({
-                  progress: 0
-                },()=>{
-                  this.next()
-                })
-                console.log('用户点击确定')
-                this.bluetext()
-              } else if (res.cancel) {
-                console.log('用户点击取消')
-                wx.redirectTo({
-                  url: '/pages/leasesuccess/index?result=0'
-                })
-              }
-            }
+      onFailCallBack: (res, dev)=>{
+        if (dev.deviceId){
+          blue.closeBLEConnection(dev.deviceId,()=>{
+            this.again(res)
           })
         }else{
-          wx.redirectTo({
-            url: '/pages/leasesuccess/index?result=0'
-          })
+          this.again(res)
         }
+        //开锁失败
+        
         
         // this.unlock()
       }
     })
+  },
+  //重试
+  again(){
+    //只允许一次重试
+    if (this.data.num < 1) {
+      wx.showModal({
+        title: '提示',
+        content: this.data.failMap[res] + ',是否重试？',
+        success: (res) => {
+          if (res.confirm) {
+            this.data.num = 1
+            this.setData({
+              progress: 0
+            }, () => {
+              this.next()
+            })
+            console.log('用户点击确定')
+            this.bluetext()
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+            wx.redirectTo({
+              url: '/pages/leasesuccess/index?result=0'
+            })
+          }
+        }
+      })
+    } else {
+      wx.redirectTo({
+        url: '/pages/leasesuccess/index?result=0'
+      })
+    }
   },
   //进度条增加
   next:function(){

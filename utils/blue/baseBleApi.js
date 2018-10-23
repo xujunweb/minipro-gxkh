@@ -99,7 +99,7 @@ function openBluetoothAdapter(params) {
           startBluetoothDevicesDiscovery(params)
         }, fail: function (res) {
           console.log("初始化蓝牙适配器失败")
-          params.onFailCallBack('1')
+          params.onFailCallBack('1', currentDevice)
           console.log(res);
           return
         },
@@ -135,7 +135,7 @@ function startBluetoothDevicesDiscovery(params, connectCallback) {
       if (seachNum < 3){
         startBluetoothDevicesDiscovery(params, connectCallback)
       }else{
-        params.onFailCallBack("3")
+        params.onFailCallBack("3", currentDevice)
         stopBluetoothDevicesDiscovery();
       }
       return
@@ -150,7 +150,7 @@ function startBluetoothDevicesDiscovery(params, connectCallback) {
     }, fail: function (res) {
       console.log("开启搜索失败")
       console.log(res)
-      params.onFailCallBack('2')
+      params.onFailCallBack('2', currentDevice)
       return
     },
     complete: function (res) {
@@ -167,7 +167,7 @@ function getBluetoothDevices(params) {
     success: function (res) {
       console.log("getBluetoothDevices");
       console.log(res.devices);
-      for (var i = 0; i < res.devices.length; i++) {
+      for (let i = 0; i < res.devices.length; i++) {
         //忽略传入的deviceName大小写
         // isContains bleUtils
         console.log("搜索到要链接的设备....")
@@ -177,6 +177,7 @@ function getBluetoothDevices(params) {
           // clearInterval(delayTimer)
           currentDevice = res.devices[i]
           createBLEConnection(params)
+          break
         }
       }
     },
@@ -184,7 +185,7 @@ function getBluetoothDevices(params) {
       // clearInterval(delayTimer)
       console.log("没有搜索到要链接的设备....")
       console.log(res)
-      params.onFailCallBack("4")
+      params.onFailCallBack("4", currentDevice)
       stopBluetoothDevicesDiscovery();
       return
     }
@@ -210,7 +211,7 @@ function createBLEConnection(params) {
   setTimeout(function () {
     if (isConnected) return;
     console.log("连接设备超时");
-    params.onFailCallBack("5")
+    params.onFailCallBack("5", currentDevice)
     return
   }, 5000)
   wx.createBLEConnection({
@@ -224,7 +225,7 @@ function createBLEConnection(params) {
       getBLEDeviceServices(params);
     }, fail: function (res) {
       console.log(res)
-      params.onFailCallBack('6')
+      params.onFailCallBack('6', currentDevice)
       console.log(`连接失败 : ${currentDevice.deviceId}`)
     }
   })
@@ -233,11 +234,12 @@ function createBLEConnection(params) {
 * closeBLEConnection
 * 断开与低功耗蓝牙设备的连接
 */
-function closeBLEConnection(deviceId) {
+function closeBLEConnection(deviceId,fn) {
   wx.closeBLEConnection({
     deviceId: currentDevice.deviceId + "",
     success: function (res) {
       console.log(res)
+      fn()
     }
   })
 }
@@ -266,7 +268,7 @@ function getBLEDeviceServices(params) {
       getNotifyBLEDeviceCharacteristics(params)
     },
     fail:(res)=>{
-      params.onFailCallBack('7')
+      params.onFailCallBack('7', currentDevice)
     }
   })
 }
@@ -295,7 +297,7 @@ function getNotifyBLEDeviceCharacteristics(params) {
       initNotifyListener(params);
     },
     fail:()=>{
-      params.onFailCallBack('8')
+      params.onFailCallBack('8', currentDevice)
     }
   })
 }
@@ -386,7 +388,7 @@ function writeCommendToBle(commonds) {
       },
       fail: function (res) {
         console.log(`执行指令失败${res.errMsg}`);
-        onFailCallBack("10");
+        onFailCallBack("10", currentDevice);
       }
     })
   })
