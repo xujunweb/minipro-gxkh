@@ -5,8 +5,41 @@
   padding-top: 20rpx;
   padding-bottom: 50rpx;
 }
-.content{font-size: 28rpx;line-height: 45rpx;display: inline-block;}
-.title-h2{font-weight: bold;font-size: 30rpx;margin-top: 20rpx;}
-.title-h3{font-size: 30rpx;}
-.modetext{font-size: 28rpx;line-height: 45rpx;display: inline-block;}
-
+.content{font-size: 28rpx;line-height: 45rpx;display: inline-block;color: #666;text-align: justify;}
+.title-h2{
+  position: relative;
+  font-size: 30rpx;margin-top: 30rpx;
+  border-right: 0;line-height: 60rpx;width: 200rpx;text-align: center;
+}
+.title-h2 text{
+  border: 2rpx solid #E5496E;
+  display: block;
+  color: #E5496E;
+}
+.title-h2::after,.title-h2::before{
+  border: 32rpx solid transparent;
+  border-left: 24rpx solid #fff;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 0rpx;
+  right: -51rpx;
+  content: ' '
+}
+.title-h2::before {
+  border-left-color: #E5496E;
+  right: -54rpx;
+}
+.title-h3{
+  font-size: 30rpx;
+  color: #333;
+}
+.modetext{
+  font-size: 28rpx;line-height: 45rpx;display: inline-block;
+  text-align: justify;color: #666;margin-top: 10rpx;
+  text-indent: 2em;
+}
+.color{
+  background: #f5f5f5;border-radius: 8rpx;padding: 20rpx;
+  margin-top: 20rpx;
+}

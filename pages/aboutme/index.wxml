@@ -1,13 +1,10 @@
 <!--pages/aboutme/index.wxml-->
 <view class='aboutme'>
   <view class='title'>
-    公司介绍：
+    <image src='../../images/logo.png'></image>
   </view>
   <view class='about-content'>
     <text decode="{{true}}">{{content}}</text>
-  </view>
-  <view class='aboutlist'>
-    <text class='lable'>公司名称：</text><text>{{company_name}}</text>
   </view>
   <view class='aboutlist'>
     <text class='lable'>电话号码：</text><text>{{phone}}</text>
