@@ -82,7 +82,10 @@
   color: #333;
   border: 2rpx solid #999;
 }
-
+.tip{
+  padding:50rpx 70rpx;
+  font-size: 24rpx;color: #999;
+}
 
 
 

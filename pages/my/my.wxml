@@ -31,6 +31,7 @@
         <open-data type="userNickName" class="userinfo-nickname"></open-data>
       </view>
       <view class='userID'>ID：{{userInfo.id}}</view>
+      <view class='userID'>积分：{{userInfo.score}}</view>
     </view>
   </view>
   <view class='fenge'></view>

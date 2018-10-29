@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 19,
+			"current": 12,
 			"list": [
 				{
 					"id": -1,
@@ -108,16 +108,10 @@
 					"query": ""
 				},
 				{
-					"id": -1,
-					"name": "选时页",
-					"pathName": "pages/selecttime/index",
-					"query": ""
-				},
-				{
-					"id": 13,
+					"id": 12,
 					"name": "租借成功",
 					"pathName": "pages/leasesuccess/index",
-					"query": "result=1"
+					"query": "result=2"
 				},
 				{
 					"id": -1,
@@ -152,7 +146,8 @@
 				{
 					"id": -1,
 					"name": "商户合作",
-					"pathName": "pages/jointwork/index"
+					"pathName": "pages/jointwork/index",
+					"query": ""
 				}
 			]
 		}
