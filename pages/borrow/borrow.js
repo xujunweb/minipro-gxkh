@@ -109,7 +109,8 @@ Page({
                 }
                 wx.showToast({
                   title: stateMap[data.state] || '设备异常',
-                  icon: 'none'
+                  icon: 'none',
+                  duration:3000
                 })
               }
             })
@@ -117,7 +118,8 @@ Page({
             wx.hideLoading()
             wx.showToast({
               title: '您有进行中的订单\n请结束后再使用',
-              icon:'none'
+              icon:'none',
+              duration: 3000
             })
           }
         })
