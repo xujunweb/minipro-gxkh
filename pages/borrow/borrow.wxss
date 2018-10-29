@@ -49,3 +49,42 @@
   /* border-radius: 20rpx; */
   width: 630rpx;height: 480rpx;
 }
+
+/* 短信验证码登录 */
+.login_view{
+  position: fixed; z-index: 9; top: 0; left: 0; width: 100%; height: 100%;
+}
+.layer_bg {
+  position: absolute; z-index: 9; top: 0; left: 0; width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.login_view .content{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+.login_view .content .login_main {
+  position: relative;z-index: 99;
+  width: 400rpx; height: auto;
+  background-color: #fff; border-radius: 10rpx;
+  padding: 30rpx;margin-bottom: 20rpx;
+}
+.login_title {
+  text-align: center;font-size: 36rpx;line-height: 50rpx;color: #333;
+}
+.code .code_def{ 
+  width: 280rpx; height: 88rpx; line-height: 88rpx; 
+  color: #d3a95a; font-size:26rpx;
+  text-align: right; margin-right: 30rpx;
+}
+.code .code_sel { color: #888; }
+.logout_btn {
+  width: 60rpx; height: 60rpx; z-index: 999;
+}
+.logout_btn image{
+  width: 60rpx; height: 60rpx;
+}

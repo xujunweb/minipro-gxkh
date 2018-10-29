@@ -40,6 +40,9 @@
       <button class='button2' hover-class="none">交易明细</button>
     </navigator>
   </view>
+  <view class='tip'>
+    取现请联系人工客服，人工客服工作时间9:30-16:30，客服电话：{{phone}}
+  </view>
 </view>
 
 

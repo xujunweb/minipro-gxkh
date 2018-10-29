@@ -4,13 +4,15 @@ Page({
   data: {
     balance:'0',       //余额
     deposit:false,      //是否缴纳押金
-    disabled:true       //提现开启
+    disabled:true,       //提现开启
+    phone:'',
   },
   onLoad: function () {
     
   },
   onShow:function(){
     this.updata()
+    this.getPhone()
   },
   //更新数据
   updata:function(){
@@ -33,6 +35,14 @@ Page({
           wx.stopPullDownRefresh()
         }
       }
+    })
+  },
+  getPhone(){
+    app.getAppInfo('customer_service_phone').then((res) => {
+      console.log('电话-----', res)
+      this.setData({
+        phone: res.data.value
+      })
     })
   },
   onPullDownRefresh:function(){

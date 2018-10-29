@@ -13,9 +13,11 @@ Page({
     this.getPhone()
   },
   getUserInfo: function (e) {
-    this.setData({
-      userInfo: app.globalData.loginUserInfo,
-      hasUserInfo: true
+    app.getNewUserInfo(()=>{
+      this.setData({
+        userInfo: app.globalData.loginUserInfo,
+        hasUserInfo: true
+      })
     })
   },
   //获取客服电话

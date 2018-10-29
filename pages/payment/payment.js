@@ -62,16 +62,29 @@ Page({
   },
   //输入时间
   inputTime: function (e) {
+    //每24个小时封顶30元
+    var value = e.detail.value
+    var day = Math.floor(value / 24)
+    var rem = value % 24
+    var product = (rem * app.globalData.hourly) > 30 ? 30 : rem * app.globalData.hourly
+    var money = day * 30 + product
     this.setData({
       time: e.detail.value,
-      money: e.detail.value * app.globalData.hourly
+      money: money
     })
   },
   bindPickerChange: function (e) {
-    const val = e.detail.value
+    console.log('ddddddd',e)
+    //每24个小时封顶30元
+    var val = e.detail.value
+    var value = this.data.hourList[val]
+    var day = Math.floor(value / 24)
+    var rem = value % 24
+    var product = (rem * app.globalData.hourly) > 30 ? 30 : rem * app.globalData.hourly
+    var money = day * 30 + product
     this.setData({
-      time: this.data.hourList[val[0]],
-      money: this.data.hourList[val[0]] * app.globalData.hourly
+      time: this.data.hourList[val],
+      money: money
     })
   },
   //余额支付
@@ -84,25 +97,9 @@ Page({
       })
       return
     }
-    if (userInfo.money > this.data.money) {
-      // wx.request({
-      //   url: wx.envConfig.host + 'user/updateMoney',
-      //   data: { money: +('-'+this.data.money*100) },
-      //   method: 'POST',
-      //   header: {
-      //     ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
-      //   },
-      //   success: (res) => {
-      //     console.log('余额支付请求--------', res)
-      //     if (res.data.code == '100') {
-      //       wx.redirectTo({
-      //         url: '/pages/progress/progress?num=' + this.data.num + '&fee=-' + this.data.money*100
-      //       })
-      //     }
-      //   }
-      // })
+    if ((userInfo.money/100) > this.data.money) {
       wx.redirectTo({
-        url: '/pages/progress/progress?num=' + this.data.num + '&fee=-' + this.data.money * 100
+        url: '/pages/progress/progress?num=' + this.data.num + '&fee=-' + this.data.money * 100+'&hours='+this.data.time
       })
     } else {
       //余额不足，跳转余额充值页面
@@ -123,10 +120,27 @@ Page({
   },
   //微信支付
   rechargeHandler() {
+    var userInfo = app.globalData.loginUserInfo || wx.getStorageSync('loginUserInfo')
     if (!this.data.money){
       wx.showToast({
         title:'请选择租借时间',
         icon:'none'
+      })
+      return
+    } else if (userInfo.money < 0){
+      //余额不足，跳转余额充值页面
+      wx.showModal({
+        title: '提示',
+        content: '您有订单尚未结算完成，请前往充值',
+        success: (res) => {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/my/recharge/recharge'
+            })
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
       })
       return
     }

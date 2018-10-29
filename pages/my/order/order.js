@@ -52,27 +52,16 @@ Page({
     this.setData({
       isloading:true
     })
-    var userId = app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo').id
-    wx.request({
-      url: wx.envConfig.host +'lockOrder/pageByLockOrder',
-      method: "POST",
-      header: {
-        ticket: userId
-      },
-      data: { type: this.data.select, pageNum: this.data.thisp, pageSize: 8, user_id:userId },
-      success: (res) => {
-        this.setData({
-          orderlist: res.data.data.list
-        })
-      },
-      fail: (err) => {},
-      complete: (data) => {
-        wx.hideLoading()
-        this.setData({
-          isloading: false
-        })
-        wx.stopPullDownRefresh()
-      }
+    app.getOrderList(this.data.select, this.data.thisp,()=>{
+      wx.hideLoading()
+      this.setData({
+        isloading: false
+      })
+      wx.stopPullDownRefresh()
+    }).then((list)=>{
+      this.setData({
+        orderlist: list
+      })
     })
   }
 })

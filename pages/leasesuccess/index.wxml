@@ -15,7 +15,7 @@
     </view>
     <view class='content' wx:else="{{isPlaysuccess=='0'}}">
       <icon type="clear" size="70" color="#E52B22" />
-      <view class='tips'>租借失败,金额已退回账户余额</view>
+      <view class='tips'>租借失败,金额已退回梦宝康护账户余额</view>
       <navigator url='/pages/borrow/borrow' open-type="switchTab">
         <button class='button1' hover-class="none">重新扫码</button>
       </navigator>

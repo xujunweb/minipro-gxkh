@@ -11,7 +11,8 @@ Page({
     indicatorDots: true,
     autoplay: true,
     interval: 5000,
-    duration: 1000
+    duration: 1000,
+    showLayer:false,
   },
   onLoad: function () {
     this.setData({
@@ -20,6 +21,7 @@ Page({
       })
     })
     this.getImages()
+    this.showWelcome()
   },
   //获取轮播图
   getImages:function(){
@@ -63,16 +65,62 @@ Page({
       return
     }
     wx.scanCode({
-      onlyFromCamera:false,   //可以从相册选择照片
+      onlyFromCamera:true,   //可以从相册选择照片
       success:(e)=>{
         console.log(e)
-        var id = this.GetUrlParam('id', e.result)
-        wx.navigateTo({
-          url: '/pages/payment/payment?num=' + id
+        wx.showLoading({
+          title: '正在处理...',
+          mask:true
         })
-        // wx.navigateTo({
-        //   url: '/pages/progress/progress?num=' + e.result
-        // })
+        var id = this.GetUrlParam('id', e.result)
+        var userInfo = app.globalData.loginUserInfo || wx.getStorageSync('loginUserInfo')
+        if (userInfo.money < 0) {
+          wx.hideLoading()
+          //余额不足，跳转余额充值页面
+          wx.showModal({
+            title: '提示',
+            content: '您有订单尚未结算完成，请前往充值',
+            success: (res) => {
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: '/pages/my/recharge/recharge'
+                })
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
+            }
+          })
+          return
+        }
+        app.getOrderList('0', 1).then((list) => {
+          if(!list || !list.length){
+            this.getLockInfo(id).then((data)=>{
+              if(data.state == 0){
+                wx.hideLoading()
+                wx.navigateTo({
+                  url: '/pages/payment/payment?num=' + id
+                })
+              }else{
+                wx.hideLoading()
+                var stateMap = {
+                  1:'该设备存在故障，正在维修中',
+                  2:'该设备目前禁用中',
+                  3:'设备已被占用'
+                }
+                wx.showToast({
+                  title: stateMap[data.state] || '设备异常',
+                  icon: 'none'
+                })
+              }
+            })
+          }else{
+            wx.hideLoading()
+            wx.showToast({
+              title: '您有进行中的订单\n请结束后再使用',
+              icon:'none'
+            })
+          }
+        })
       },
       fail:()=>{
         
@@ -81,5 +129,47 @@ Page({
 
       }
     })
-  }
+  },
+  //获取锁相关信息
+  getLockInfo(no) {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: wx.envConfig.host + 'lockOrder/getLockInfo',
+        method: 'post',
+        header: {
+          ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
+        },
+        data: { qr_code_no: no },
+        success: (res) => {
+          if (res.statusCode >= 400 || res.data.code != '100') {
+            reject(res)
+            return
+          }
+          if (res.data.data) {
+            resolve(res.data.data)
+          } else {
+            reject(res)
+          }
+        },
+        fail: (err) => {
+          reject(err)
+        }
+      })
+    })
+  },
+  //显示欢迎弹窗
+  showWelcome(){
+    if (!app.globalData.welcome){
+      app.globalData.welcome = true
+      this.setData({
+        showLayer: true
+      })
+    }
+  },
+  /**
+   * 关闭弹窗
+   */
+  closeLayer: function () {
+    this.setData({ showLayer: false });
+  },
 })

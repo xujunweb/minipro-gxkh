@@ -24,7 +24,8 @@ Page({
       10:'执行指令失败',
       11:'开锁失败'
     },
-    num:0
+    num:0,
+    hours:'',
   },
 
   /**
@@ -35,6 +36,7 @@ Page({
     if (options) {
       this.data.id = options.num
       this.data.fee = options.fee
+      this.data.hours = options.hours
       console.log('设备编号-----------',this.data.id)
     }
     if (wx.openBluetoothAdapter) {
@@ -113,7 +115,7 @@ Page({
         header: {
           ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
         },
-        data: { qr_code_no: no },
+        data: { qr_code_no: no, hours:this.data.hours },
         success: (res) => {
           if (res.statusCode >= 400 || res.data.code != '100') {
             reject(res)

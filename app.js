@@ -175,6 +175,27 @@ App({
       }
     })
   },
+  //订单请求
+  getOrderList(select,p,fn){
+    var userId = this.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo').id
+    return new Promise((resolve, reject)=>{
+      wx.request({
+        url: wx.envConfig.host + 'lockOrder/pageByLockOrder',
+        method: "POST",
+        header: {
+          ticket: userId
+        },
+        data: { type: select, pageNum: p, pageSize: 8, user_id: userId },
+        success: (res) => {
+          resolve(res.data.data.list)
+        },
+        fail: (err) => { reject(err) },
+        complete: (data) => {
+          fn&&fn()
+        }
+      })
+    })
+  },
   /** 
    * ajaxSubmit公用方法
    */
@@ -229,6 +250,7 @@ App({
     },
     openid: '',
     hourly:'5',   //每小时计费数额
+    welcome:false,  //是否显示过欢迎词
     env: {
       mode: 'dev',
       dev: {
