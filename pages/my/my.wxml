@@ -56,7 +56,7 @@
       </view>
       <view class='arrwo'></view>
     </view>
-    <view class='item'>
+    <view class='item' bindtap='goNovice'>
       <view class='left'>
         <image src='../../images/icon2.png'></image>
         <text>新手指南</text>

@@ -17,7 +17,8 @@
     "pages/leasesuccess/index",
     "pages/blue/blue",
     "pages/aboutme/index",
-    "pages/jointwork/index"
+    "pages/jointwork/index",
+    "pages/novice/index"
   ],
   "window": {
     "backgroundTextStyle": "dark",

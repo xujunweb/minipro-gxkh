@@ -1,0 +1,7 @@
+/* pages/novice/index.wxss */
+.image{
+  width: 100%;
+}
+.image image{
+  width: 100%;
+}

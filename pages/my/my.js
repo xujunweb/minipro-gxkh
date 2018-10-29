@@ -74,4 +74,10 @@ Page({
       url: '/pages/jointwork/index',
     })
   },
+  //新手指南
+  goNovice(){
+    wx.navigateTo({
+      url: '/pages/novice/index',
+    })
+  },
 })

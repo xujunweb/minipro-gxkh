@@ -1,0 +1,4 @@
+<!--pages/novice/index.wxml-->
+<view class='image'>
+  <image src='../../images/noviceGuide.jpg' mode='widthFix'></image>
+</view>
