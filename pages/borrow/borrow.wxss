@@ -8,6 +8,11 @@
   width: 678rpx;
   margin: 0 auto;
   border-radius: 30rpx;
+  padding-bottom: 20rpx;
+}
+.h2-title{
+  color: #E23364;font-size: 40rpx;padding-left:61rpx;
+  font-weight: 500;line-height: 60rpx;margin-bottom: 50rpx;
 }
 .log-list image{
   width: 100%;

@@ -188,7 +188,7 @@ Page({
         console.log(payRes)
         if (payRes.errMsg === 'requestPayment:ok') {
           wx.redirectTo({
-            url: '/pages/progress/progress?num=' + this.data.num + '&fee=-' + this.data.money*100
+            url: '/pages/progress/progress?num=' + this.data.num + '&fee=-' + this.data.money * 100 + '&hours=' + this.data.time
           })
         }
       },

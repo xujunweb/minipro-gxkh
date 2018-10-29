@@ -1,5 +1,6 @@
 <!--logs.wxml-->
 <view class="container log-list">
+  <!-- <view class='h2-title'>欢迎使用梦宝康护倍护床！</view> -->
   <view class='content'>
     <view class='swiper'>
       <swiper indicator-dots="{{indicatorDots}}" indicator-color="#fff"

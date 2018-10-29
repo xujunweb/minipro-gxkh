@@ -115,7 +115,7 @@ Page({
         header: {
           ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
         },
-        data: { qr_code_no: no, hours:this.data.hours },
+        data: { qr_code_no: no },
         success: (res) => {
           if (res.statusCode >= 400 || res.data.code != '100') {
             reject(res)
@@ -185,7 +185,7 @@ Page({
     console.log(app.globalData.loginUserInfo, wx.getStorageSync('loginUserInfo'))
     wx.request({
       url: wx.envConfig.host + 'lockOrder/unLock',
-      data: { lock_no: lock, fee: +this.data.fee },
+      data: { lock_no: lock, fee: +this.data.fee, hours: this.data.hours },
       method: 'POST',
       header: {
         ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
