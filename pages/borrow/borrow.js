@@ -161,8 +161,8 @@ Page({
   },
   //显示欢迎弹窗
   showWelcome(){
-    if (!app.globalData.welcome){
-      app.globalData.welcome = true
+    if (!wx.getStorageSync('welcome')){
+      wx.setStorageSync('welcome', true)
       this.setData({
         showLayer: true
       })
