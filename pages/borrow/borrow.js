@@ -79,7 +79,7 @@ Page({
           //余额不足，跳转余额充值页面
           wx.showModal({
             title: '提示',
-            content: '您有订单尚未结算完成，请前往充值',
+            content: `您好！您有订单${Math.abs(userInfo.money)}元暂未结清，请前往充值结清并留意余额帐户，支付本次使用金额。`,
             success: (res) => {
               if (res.confirm) {
                 wx.navigateTo({
