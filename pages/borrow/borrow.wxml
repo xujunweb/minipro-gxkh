@@ -1,6 +1,10 @@
 <!--logs.wxml-->
+<wxs module="util" src="../../utils/util.wxs" />
 <view class="container log-list">
   <!-- <view class='h2-title'>欢迎使用梦宝康护倍护床！</view> -->
+  <view class='top'>
+    <text class='status'>租借中</text><text class='time'>开始时间：{{'2018-11-26 14:43'}}</text><button bindtap='goFault'>强制结算</button>
+  </view>
   <view class='content'>
     <view class='swiper'>
       <swiper indicator-dots="{{indicatorDots}}" indicator-color="#fff"

@@ -13,6 +13,9 @@
   <view class='item'>
     <text>备注：</text><input placeholder='请输入备注' bindinput='inputDesc' value='{{describe}}'></input>
   </view>
+  <view class='item'>
+    <text>订单编号：</text><input placeholder='(可选)如输入编号，该订单将强制结算' bindinput='inputOder' value='{{orderNo}}'></input>
+  </view>
   <view class='upload-image'>
     <view class='upload' bindtap='getImage'>
       <image src='../../images/camera.png'></image>

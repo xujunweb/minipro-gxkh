@@ -60,6 +60,9 @@ App({
         if (this.getLoginUserInfo){
           this.getLoginUserInfo(res.data.data)
         }
+        if (this.getOrderListTwo){
+          this.getOrderListTwo(res.data.data)
+        }
         callback && callback(res)
       },
       fail:function(){
@@ -177,23 +180,30 @@ App({
   },
   //订单请求
   getOrderList(select,p,fn){
-    var userId = this.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo').id
     return new Promise((resolve, reject)=>{
-      wx.request({
-        url: wx.envConfig.host + 'lockOrder/pageByLockOrder',
-        method: "POST",
-        header: {
-          ticket: userId
-        },
-        data: { type: select, pageNum: p, pageSize: 8, user_id: userId },
-        success: (res) => {
-          resolve(res.data.data.list)
-        },
-        fail: (err) => { reject(err) },
-        complete: (data) => {
-          fn&&fn()
-        }
-      })
+      var post = ()=>{
+        var userId = this.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo').id
+        wx.request({
+          url: wx.envConfig.host + 'lockOrder/pageByLockOrder',
+          method: "POST",
+          header: {
+            ticket: userId
+          },
+          data: { type: select, pageNum: p, pageSize: 8, user_id: userId },
+          success: (res) => {
+            resolve(res.data.data.list)
+          },
+          fail: (err) => { reject(err) },
+          complete: (data) => {
+            fn && fn()
+          }
+        })
+      }
+      if (this.globalData.loginUserInfo) {
+        post()
+      } else {
+        this.getOrderListTwo = post
+      }
     })
   },
   /** 

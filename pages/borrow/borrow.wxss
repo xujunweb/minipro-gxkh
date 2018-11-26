@@ -10,6 +10,26 @@
   border-radius: 30rpx;
   padding-bottom: 20rpx;
 }
+.top{
+  position: fixed;display: flex;background: #fff;border-bottom: 1rpx solid #eee;top: 0;left: 0;width: 100%;
+  font-size: 28rpx;align-items: center;padding: 10rpx 0rpx;justify-content: space-around;
+}
+.top button{
+  color: #fff;
+  background:#E23364;
+  border-radius:10rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  box-shadow: 0 0 10rpx #c1bbbb;
+  font-size: 24rpx;
+  margin: 0;
+}
+.top .status{
+  margin-right: 10rpx;color: #E23364;
+}
+.top .time{
+  font-size: 24rpx;color: #999;
+}
 .h2-title{
   color: #E23364;font-size: 40rpx;padding-left:61rpx;
   font-weight: 500;line-height: 60rpx;margin-bottom: 50rpx;

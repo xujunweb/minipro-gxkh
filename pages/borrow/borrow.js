@@ -13,15 +13,33 @@ Page({
     interval: 5000,
     duration: 1000,
     showLayer:false,
+    showOrdering:false,
+    ordering:{},  //进行中的订单信息
   },
   onLoad: function () {
-    this.setData({
-      logs: (wx.getStorageSync('logs') || []).map(log => {
-        return util.formatTime(new Date(log))
-      })
-    })
+    // this.setData({
+    //   logs: (wx.getStorageSync('logs') || []).map(log => {
+    //     return util.formatTime(new Date(log))
+    //   })
+    // })
     this.getImages()
     this.showWelcome()
+  },
+  onShow(){
+    app.getOrderList('0', 1).then((list) => {
+      if (list && list.length) {
+        this.setData({
+          ordering: {...list[0]},
+          showOrdering:true,
+        })
+      }
+    })
+  },
+  //强制结算
+  goFault(){
+    wx.navigateTo({
+      url: 'pages/fault/fault?order=' + this.data.ordering.order_no,
+    })
   },
   //获取轮播图
   getImages:function(){

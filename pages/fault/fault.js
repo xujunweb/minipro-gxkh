@@ -19,13 +19,18 @@ Page({
     fault:null,
     describe:'',
     proNo:'',
+    orderNo:'',
     postImgList:[]  //传给后台的文件
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if (options.order){
+      this.setData({
+        orderNo: options.order
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -43,6 +48,12 @@ Page({
   inputDesc:function(e){
     this.setData({
       describe: e.detail.value
+    })
+  },
+  //输入订单编号
+  inputOder(e){
+    this.setData({
+      orderNo: e.detail.value
     })
   },
   //输入编号
