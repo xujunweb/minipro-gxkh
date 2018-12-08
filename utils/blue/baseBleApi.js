@@ -181,7 +181,7 @@ function getBluetoothDevices(params) {
       for (let i = 0; i < res.devices.length; i++) {
         //忽略传入的deviceName大小写
         // isContains bleUtils
-        if (res.devices[i].localName == 'k06_YPP'){
+        if (res.devices[i].localName == 'k06_YPP' || res.devices[i].localName == 'k06_for_LLS'){
           var macId = ''
           try{
             var bf = res.devices[i].advertisData.slice(2, 8);

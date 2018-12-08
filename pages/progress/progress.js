@@ -68,41 +68,44 @@ Page({
   },
   //通过api开启蓝牙
   bluetext: function () {
-    console.log('蓝牙开启')
-    var pwd = "050106303030303030FFFFFFFFAEAEAE"    //开锁指令
-    var token = '060101012D1A683D48271A18316E471A'  //获取token的指令
     this.getLockInfo(this.data.id).then((data)=>{
-      blue.writeCommend({
-        services: ['FEE7'], sendCommend: token,
-        indicateCharacteristicUUID: '000036F6-0000-1000-8000-00805F9B34FB',
-        notifyCharacteristicUUID: '000036F6-0000-1000-8000-00805F9B34FB',
-        writeCharacteristicUUID: '000036F5-0000-1000-8000-00805F9B34FB',
-        writeServiceUUID: '0000FEE7-0000-1000-8000-00805F9B34FB',
-        notifyServiceUUID: '0000FEE7-0000-1000-8000-00805F9B34FB',
-        password: data.lock_pwd,
-        MAC: data.lock_mac,
-        qrCode: this.data.id,
-        onSendSuccessCallBack: (result) => {
-          console.log('完全成功-----', result)
-          blue.closeBLEConnection(result.deviceId, () => {
-            wx.showLoading({
-              title: '解锁成功,生成订单中...',
-              mask: true
+      this.unlock(data.lock_no,'v2').then(()=>{
+
+      }).catch((res)=>{
+        var token = '060101012D1A683D48271A18316E471A'  //获取token的指令
+        blue.writeCommend({
+          services: ['FEE7'], sendCommend: token,
+          indicateCharacteristicUUID: '000036F6-0000-1000-8000-00805F9B34FB',
+          notifyCharacteristicUUID: '000036F6-0000-1000-8000-00805F9B34FB',
+          writeCharacteristicUUID: '000036F5-0000-1000-8000-00805F9B34FB',
+          writeServiceUUID: '0000FEE7-0000-1000-8000-00805F9B34FB',
+          notifyServiceUUID: '0000FEE7-0000-1000-8000-00805F9B34FB',
+          password: data.lock_pwd,
+          MAC: data.lock_mac,
+          qrCode: this.data.id,
+          onSendSuccessCallBack: (result) => {
+            console.log('完全成功-----', result)
+            blue.closeBLEConnection(result.deviceId, () => {
+              wx.showLoading({
+                title: '解锁成功,生成订单中...',
+                mask: true
+              })
+              this.data.currentDevice = result
+              this.unlock(("0" + '' + result.msgId).substr(0, 12))
             })
-            this.data.currentDevice = result
-            this.unlock(("0" + '' + result.msgId).substr(0, 12))
-          })
-        },
-        onFailCallBack: (res, dev) => {
-          if (dev.deviceId) {
-            blue.closeBLEConnection(dev.deviceId, () => {
+          },
+          onFailCallBack: (res, dev) => {
+            if (dev.deviceId) {
+              blue.closeBLEConnection(dev.deviceId, () => {
+                this.again(res)
+              })
+            } else {
               this.again(res)
-            })
-          } else {
-            this.again(res)
+            }
           }
-        }
+        })
       })
+    
     })
     
   },
@@ -181,35 +184,44 @@ Page({
     }, 200);
   },
   //解锁请求
-  unlock: function (lock) {
-    console.log(app.globalData.loginUserInfo, wx.getStorageSync('loginUserInfo'))
-    wx.request({
-      url: wx.envConfig.host + 'lockOrder/unLock',
-      data: { lock_no: lock, fee: +this.data.fee, hours: this.data.hours },
-      method: 'POST',
-      header: {
-        ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
-      },
-      success: (res) => {
-        console.log('解锁请求--------', res)
-        wx.hideLoading()
-        if (res.data.code == 100) {
-          this.setData({
-            progress:100
-          })
-          wx.redirectTo({
-            url:'/pages/leasesuccess/index?result=1'
-          })
-        }else{
-          wx.showToast({
-            title: app.globalData.typeMap[res.data.code] || '未知错误',
-            icon: 'none'
-          })
-          wx.redirectTo({
-            url: '/pages/leasesuccess/index?result=0'
-          })
+  unlock: function (lock,v) {
+    var url = 'lockOrder/unLock'
+    if(v){
+      //GPRS解锁
+      url = 'lockOrder/unLockV2'
+    }
+    return new Promise((resolve, reject)=>{
+      wx.request({
+        url: wx.envConfig.host + url,
+        data: { lock_no: lock, fee: +this.data.fee, hours: this.data.hours },
+        method: 'POST',
+        header: {
+          ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
+        },
+        success: (res) => {
+          console.log('解锁请求--------', res)
+          wx.hideLoading()
+          if (res.data.code == 100) {
+            this.setData({
+              progress: 100
+            })
+            wx.redirectTo({
+              url: '/pages/leasesuccess/index?result=1'
+            })
+            resolve()
+          } else {
+            reject(res.data)
+            if(v)return
+            wx.showToast({
+              title: app.globalData.typeMap[res.data.code] || '未知错误',
+              icon: 'none'
+            })
+            wx.redirectTo({
+              url: '/pages/leasesuccess/index?result=0'
+            })
+          }
         }
-      }
+      })
     })
   }
 })
