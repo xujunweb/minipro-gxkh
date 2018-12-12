@@ -261,6 +261,7 @@ App({
     openid: '',
     hourly:'5',   //每小时计费数额
     welcome:false,  //是否显示过欢迎词
+    gprsUrl:'http://gps.dola520.com:8888',
     env: {
       mode: 'dev',
       dev: {

@@ -30,10 +30,10 @@
         <view class='upperPart'>
           <view><image src='../../images/logo.png'></image></view>
           <view class='login_title'>欢迎使用梦宝康护倍护床！</view>
-          <view class='lit_title'>本小程序需要打开您的手机蓝牙才可正常使用，请确保蓝牙已开启</view>
+          <view class='lit_title'>本小程序在GPRS网络信号较弱时需要将手机蓝牙打开</view>
         </view>
         <view class='lowerPart'>
-          <view class='button' catchtap='closeLayer'>我已开启蓝牙</view>
+          <view class='button' catchtap='closeLayer'>我知道了</view>
         </view>
       </view>
       <!-- <view class='logout_btn' catchtap='closeLayer'>
