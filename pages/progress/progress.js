@@ -69,7 +69,7 @@ Page({
   //通过api开启蓝牙
   bluetext: function () {
     this.getLockInfo(this.data.id).then((data)=>{
-      if(data.type === '1'){
+      if (+data.type === 1){
         this.unlock(data.lock_no, 'v2')
       }else{
         var token = '060101012D1A683D48271A18316E471A'  //获取token的指令
@@ -105,6 +105,12 @@ Page({
           }
         })
       }
+      // this.unlock(data.lock_no,'v2').then(()=>{
+
+      // }).catch((res)=>{
+
+      // })
+    
     })
     
   },
@@ -210,7 +216,7 @@ Page({
             resolve()
           } else {
             reject(res.data)
-            if(v)return
+            // if(v)return
             wx.showToast({
               title: app.globalData.typeMap[res.data.code] || '未知错误',
               icon: 'none'
