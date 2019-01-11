@@ -132,6 +132,7 @@ Page({
   deleteImg:function(e){
     var index = e.currentTarget.dataset.index
     this.data.imgList.splice(index,1)
+    this.data.postImgList.splice(index,1)
     this.setData({
       imgList: this.data.imgList
     })

@@ -26,6 +26,7 @@ Page({
     },
     num:0,
     hours:'',
+    outno:'',//微信支付订单号
   },
 
   /**
@@ -37,6 +38,7 @@ Page({
       this.data.id = options.num
       this.data.fee = options.fee
       this.data.hours = options.hours
+      this.data.outno = options.outno||''
       console.log('设备编号-----------',this.data.id)
     }
     if (wx.openBluetoothAdapter) {
@@ -221,9 +223,33 @@ Page({
               title: app.globalData.typeMap[res.data.code] || '未知错误',
               icon: 'none'
             })
-            wx.redirectTo({
-              url: '/pages/leasesuccess/index?result=0'
+            this.refund().then(()=>{
+              wx.redirectTo({
+                url: '/pages/leasesuccess/index?result=0'
+              })
             })
+          }
+        }
+      })
+    })
+  },
+  //微信退款
+  refund:function(){
+    var url = 'pay/wx/refund'
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: wx.envConfig.host + url,
+        data: { out_trade_no: this.data.outno, total_fee: Math.abs(+this.data.fee), user_id: app.globalData.loginUserInfo.id },
+        method: 'POST',
+        header: {
+          ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
+        },
+        success: (res) => {
+          console.log('退款请求--------', res)
+          if (res.data.code == 100) {
+            resolve()
+          } else {
+            reject(res.data)
           }
         }
       })
