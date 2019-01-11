@@ -17,11 +17,11 @@
     <session id="-735646818">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
-          <entry key="project.open.time.0" value="3" />
+          <entry key="project.closed" value="4" />
+          <entry key="project.open.time.0" value="4" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -76,6 +76,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -83,16 +84,20 @@
               <item name="minipro-gxkh" type="b2602c69:ProjectViewProjectNode" />
               <item name="minipro-gxkh" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="minipro-gxkh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="minipro-gxkh" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="E:/yam/shop-multi-template-xcx" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -128,6 +133,7 @@
       <workItem from="1543026024237" duration="1197000" />
       <workItem from="1543389826676" duration="1833000" />
       <workItem from="1543901969461" duration="1666000" />
+      <workItem from="1545051019205" duration="3784000" />
     </task>
     <task id="LOCAL-00001" summary="xxx">
       <created>1540789723582</created>
@@ -144,6 +150,7 @@
       <updated>1540789738473</updated>
     </task>
     <task id="LOCAL-00003" summary="xxx">
+<<<<<<< HEAD
       <created>1544961942610</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
@@ -155,6 +162,33 @@
   </component>
   <component name="TimeTrackingManager">
     <option name="totallyTimeSpent" value="11455000" />
+=======
+      <created>1545051721600</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1545051721600</updated>
+    </task>
+    <task id="LOCAL-00004" summary="xxx">
+      <created>1545114115480</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1545114115480</updated>
+    </task>
+    <task id="LOCAL-00005" summary="xxx">
+      <created>1545114622609</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1545114622609</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="13758000" />
+>>>>>>> 387501b3d7a129b0a4838b3450ada4e16ec03d7d
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -180,8 +214,13 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3296582" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Version Control" order="8" visible="true" weight="0.20336135" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.44983461" />
+=======
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.42227122" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3693495" />
+>>>>>>> 387501b3d7a129b0a4838b3450ada4e16ec03d7d
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />

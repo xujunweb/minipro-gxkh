@@ -40,7 +40,8 @@ Page({
   getTimes: function () {
     app.getAppAllInfo().then((res) => {
       console.log('所有的应用数据-----', res)
-      app.globalData.hourly = (res.data[1].value) / 100
+      //不使用全局的价格了
+      // app.globalData.hourly = (res.data[1].value) / 100
       this.setData({
         hourList: res.data[3].value.split(','),
         hourly: app.globalData.hourly

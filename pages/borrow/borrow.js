@@ -115,6 +115,9 @@ Page({
             this.getLockInfo(id).then((data)=>{
               if(data.state == 0){
                 wx.hideLoading()
+                if (data.unit_price){
+                  app.globalData.hourly = (+data.unit_price) / 100
+                }
                 wx.navigateTo({
                   url: '/pages/payment/payment?num=' + id
                 })
