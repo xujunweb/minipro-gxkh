@@ -200,7 +200,7 @@ Page({
     return new Promise((resolve, reject)=>{
       wx.request({
         url: wx.envConfig.host + url,
-        data: { lock_no: lock, fee: +this.data.fee, hours: this.data.hours },
+        data: { lock_no: lock, fee: +this.data.fee, hours: this.data.hours, out_trade_no: this.data.outno },
         method: 'POST',
         header: {
           ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
