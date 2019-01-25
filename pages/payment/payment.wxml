@@ -30,7 +30,7 @@
     <view class='inputTime'>
       <text>租借时间(h)：</text>
       <picker bindchange="bindPickerChange" value="{{index}}" range="{{hourList}}">
-        <view class="picker" wx:if="{{!time}}">请选择时间</view>
+        <view class="picker" wx:if="{{!time}}">滑动选择时间</view>
         <view class='value' wx:if="{{time}}">{{time}}</view>
       </picker>
       <!-- <input bindinput='inputTime' type='number' maxlength='3' placeholder='请输入时间' value='{{time}}'></input> -->
