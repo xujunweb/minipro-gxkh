@@ -46,9 +46,38 @@ const getUUID = ()=>{
   return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
 }
 
+//获取url的参数
+function GetUrlParam(paraName, lurl) {
+  var url = lurl;
+  var arrObj = url.split("?");
+  if (arrObj.length > 1) {
+    var arrPara = arrObj[1].split("&");
+    var arr;
+    for (var i = 0; i < arrPara.length; i++) {
+      arr = arrPara[i].split("=");
+      if (arr != null && arr[0] == paraName) {
+        return arr[1];
+      }
+    }
+    return "";
+  } else {
+    return "";
+  }
+}
+function urlTo(lurl){
+  var url = lurl
+  url = url.replace(/%3A/g,':')
+  url = url.replace(/%2F/g, '/')
+  url = url.replace(/%3F/g, '?')
+  url = url.replace(/%3D/g, '=')
+  url = url.replace(/%26/g, '&')
+  return url
+}
 
 module.exports = {
   formatTime: formatTime,
   timeToStr: timeToStr,
-  getUUID: getUUID
+  getUUID: getUUID,
+  GetUrlParam,
+  urlTo
 }

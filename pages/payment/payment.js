@@ -13,7 +13,8 @@ Page({
     hourly:'',
     num:'',
     hourList:[2,3,4,5,6],
-    value:0
+    value:0,
+    playing:false,    //支付中
   },
   /**
    * 生命周期函数--监听页面加载
@@ -98,11 +99,15 @@ Page({
       })
       return
     }
+    if (this.data.playing) return
+    this.data.playing = true
     if ((userInfo.money/100) > this.data.money) {
+      this.data.playing = false
       wx.redirectTo({
         url: '/pages/progress/progress?num=' + this.data.num + '&fee=-' + this.data.money * 100+'&hours='+this.data.time
       })
     } else {
+      this.data.playing = false
       //余额不足，跳转余额充值页面
       wx.showModal({
         title:'提示',
@@ -145,6 +150,8 @@ Page({
       })
       return
     }
+    if (this.data.playing) return
+    this.data.playing = true
     return new Promise((resolve, reject) => {
       app.ajaxSubmit({
         url: wx.envConfig.host + 'pay/wx/generatePayParams',
@@ -162,10 +169,10 @@ Page({
         },
         isHideLoading: true
       }).then((res) => {
+        this.data.playing = false
         if (res.data.code == '100001') {
           return;
-        }
-        else if (res.data.code !== 100) {
+        }else if (res.data.code !== 100) {
           wx.showToast({
             title: res.data.msg || '服务器异常',
             icon: 'none'
@@ -174,10 +181,14 @@ Page({
         }
         this.signWxPay(res.data.data)
         resolve(res)
+      }).catch(()=>{
+        this.data.playing = false
       })
     })
   },
   signWxPay(data) {
+    if (this.data.playing) return
+    this.data.playing = true
     wx.requestPayment({ //调用支付弹框
       timeStamp: data.timeStamp,
       nonceStr: data.nonceStr,
@@ -186,6 +197,7 @@ Page({
       paySign: data.paySign,
       success: (payRes) => { // 支付成功后
         // this.triggerEvent("paySuccess")
+        this.data.playing = false
         console.log(payRes)
         if (payRes.errMsg === 'requestPayment:ok') {
           wx.redirectTo({
@@ -194,6 +206,7 @@ Page({
         }
       },
       fail: (res) => { // 支付失败回调
+        this.data.playing = false
         wx.showToast({
           title: '用户取消支付',
           icon: 'none'

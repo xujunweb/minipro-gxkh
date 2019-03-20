@@ -1,7 +1,11 @@
 //app.js
+import { GetUrlParam, urlTo } from './utils/util.js'
 App({
   onLaunch: function (e) {
-    console.log('app-onLaunch',e)
+    console.log('app-onLaunch', e)
+    if (e.query.q){
+      console.log('app-onLaunch-----q', GetUrlParam('id', urlTo(e.query.q)))
+    }
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())

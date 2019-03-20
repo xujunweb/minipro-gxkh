@@ -27,6 +27,7 @@ Page({
     num:0,
     hours:'',
     outno:'',//微信支付订单号
+    opening:false,    //开锁中
   },
 
   /**
@@ -197,6 +198,8 @@ Page({
       //GPRS解锁
       url = 'lockOrder/unLockV2'
     }
+    if (this.data.opening)return
+    this.data.opening = true
     return new Promise((resolve, reject)=>{
       wx.request({
         url: wx.envConfig.host + url,
@@ -206,6 +209,7 @@ Page({
           ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
         },
         success: (res) => {
+          this.data.opening = false
           console.log('解锁请求--------', res)
           wx.hideLoading()
           if (res.data.code == 100) {
@@ -229,6 +233,9 @@ Page({
               })
             })
           }
+        },
+        fail:()=>{
+          this.data.opening = false
         }
       })
     })

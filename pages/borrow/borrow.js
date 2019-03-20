@@ -134,6 +134,13 @@ Page({
                   duration:3000
                 })
               }
+            }).catch(()=>{
+              wx.showToast({
+                title:'设备异常',
+                icon: 'none',
+                duration: 2000
+              })
+              wx.hideLoading()
             })
           }else{
             wx.hideLoading()
