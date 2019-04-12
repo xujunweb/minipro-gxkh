@@ -30,7 +30,7 @@
     <view class='inputTime'>
       <text>租借时间(h)：</text>
       <picker bindchange="bindPickerChange" value="{{index}}" range="{{hourList}}">
-        <view class="picker" wx:if="{{!time}}">滑动选择时间</view>
+        <view class="picker" wx:if="{{!time}}">点击此处再滑动选择时间</view>
         <view class='value' wx:if="{{time}}">{{time}}</view>
       </picker>
       <!-- <input bindinput='inputTime' type='number' maxlength='3' placeholder='请输入时间' value='{{time}}'></input> -->
@@ -44,7 +44,8 @@
   <view class='rule'>
     <view class='rule-title'>计费规则</view>
     <view class='rule-de'>分时计费</view>
-    <view class='rule-content'>自借出后，每小时{{hourly}}元，不足1小时按1小时算</view>
+    <!-- <view class='rule-content'>自借出后，每小时{{hourly}}元，不足1小时按1小时算</view> -->
+    <view class='rule-content'>计费规则，按时计费，自使用后，按小时收费，不足1小时按1小时算</view>
   </view>
 </view>
 

@@ -64,26 +64,27 @@ Page({
   },
   //输入时间
   inputTime: function (e) {
-    //每24个小时封顶30元
+    //每24个小时封顶(单价x10)元
     var value = e.detail.value
+    var maxPri = app.globalData.hourly * 10
     var day = Math.floor(value / 24)
     var rem = value % 24
-    var product = (rem * app.globalData.hourly) > 30 ? 30 : rem * app.globalData.hourly
-    var money = day * 30 + product
+    var product = (rem * app.globalData.hourly) > maxPri ? maxPri : rem * app.globalData.hourly
+    var money = day * maxPri + product
     this.setData({
       time: e.detail.value,
       money: money
     })
   },
   bindPickerChange: function (e) {
-    console.log('ddddddd',e)
     //每24个小时封顶30元
     var val = e.detail.value
     var value = this.data.hourList[val]
+    var maxPri = app.globalData.hourly * 10
     var day = Math.floor(value / 24)
     var rem = value % 24
-    var product = (rem * app.globalData.hourly) > 30 ? 30 : rem * app.globalData.hourly
-    var money = day * 30 + product
+    var product = (rem * app.globalData.hourly) > maxPri ? maxPri : rem * app.globalData.hourly
+    var money = day * maxPri + product
     this.setData({
       time: this.data.hourList[val],
       money: money
