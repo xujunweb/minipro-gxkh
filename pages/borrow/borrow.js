@@ -167,7 +167,7 @@ Page({
         url: wx.envConfig.host + 'lockOrder/getLockInfo',
         method: 'post',
         header: {
-          ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo')
+          ticket: app.globalData.loginUserInfo.id || wx.getStorageSync('loginUserInfo').id
         },
         data: { qr_code_no: no },
         success: (res) => {

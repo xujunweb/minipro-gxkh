@@ -18,7 +18,9 @@
     "pages/blue/blue",
     "pages/aboutme/index",
     "pages/jointwork/index",
-    "pages/novice/index"
+    "pages/novice/index",
+    "pages/my/agent/device/device",
+    "pages/my/agent/order/order"
   ],
   "window": {
     "backgroundTextStyle": "dark",
