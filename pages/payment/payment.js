@@ -102,7 +102,7 @@ Page({
     }
     if (this.data.playing) return
     this.data.playing = true
-    if ((userInfo.money/100) > this.data.money) {
+    if ((userInfo.money/100) >= this.data.money) {
       this.data.playing = false
       wx.redirectTo({
         url: '/pages/progress/progress?num=' + this.data.num + '&fee=-' + this.data.money * 100+'&hours='+this.data.time
