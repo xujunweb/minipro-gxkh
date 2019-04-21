@@ -1,6 +1,6 @@
 var formatMoney = function (money) {
   if (!money) return '0';
-  money = money / 100;
+  money = Math.abs(money) / 100;
   money = (+money).toString();
   return money;
 }
@@ -101,9 +101,10 @@ var dateFormat = (function () {
   };
 })()
 
-//剔除最后两位
-var lastString = function(str){
-  return str.substring(0,str.length-3)
+//剔除几位，默认3位
+var lastString = function(str,num){
+  var nnum = num || 3
+  return str.substring(0, str.length - nnum)
 }
 
 

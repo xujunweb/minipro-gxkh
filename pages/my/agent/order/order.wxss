@@ -1,1 +1,48 @@
 /* pages/my/agent/order/order.wxss */
+page{
+  background: #f4f4f4;
+}
+.top{
+  padding: 0 20rpx;padding-top: 20rpx;
+}
+.top .time{
+  display: flex;font-size: 26rpx;
+}
+.top .time .int{
+  margin: 0 10rpx;
+}
+.top .time image{
+  margin-left: 15rpx;
+  width: 14rpx;
+  height: 25rpx;
+  transform: rotate(90deg);
+}
+.top .time text{
+  color: #888;
+}
+.top .num{
+  font-size: 28rpx;color: #888;line-height: 45rpx;
+}
+
+.item{
+  background: #fff;margin: 0 20rpx;margin-top: 20rpx;
+  font-size: 26rpx;border-radius: 10rpx;padding: 20rpx;
+  line-height: 46rpx;
+}
+.item .lebal{
+  color: #888;
+}
+.item .time{
+  /* text-align: right; */
+}
+.item .money{
+  border-top: 1rpx solid #e6e6e6;
+  margin-top: 10rpx;padding-top: 12rpx;
+  text-align: right;
+}
+.item .money .num{
+  color: red;font-size: 32rpx;
+}
+.item .money text{
+  margin: 0 10rpx;
+}

@@ -14,6 +14,34 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+//指定格式获取时间字符串
+function GetTime(str, format) {
+  var date = str ? new Date(str) : new Date();
+  var Y = date.getFullYear() + '-';
+  var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+  var D = date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate();
+  var hh = (parseInt(date.getHours()) > 9 ? date.getHours() : '0' + date.getHours()) + ':';
+  var mm = (parseInt(date.getMinutes()) > 9 ? date.getMinutes() : "0" + date.getMinutes()) + ':';
+  var mmEnd = (parseInt(date.getMinutes()) > 9 ? date.getMinutes() : "0" + date.getMinutes());
+  var ss = parseInt(date.getSeconds()) > 9 ? date.getSeconds() : '0' + date.getSeconds();
+  console.log(Y, M, D, hh)
+  if (format) {
+    if (format == 'Y-M-D hh:mm:ss') {
+      return Y + M + D + " " + hh + mm + ss;
+    }
+    else if (format == 'Y-M-D hh:mm') {
+      return Y + M + D + " " + hh + mmEnd;
+    }
+    else {
+      return Y + M + D
+    }
+  }
+  else {
+    return Y + M + D
+  }
+}
+
+
 const timeToStr = (time, option)=> {
   const d = new Date(time)
   //获取当天0点的时间戳
@@ -79,5 +107,6 @@ module.exports = {
   timeToStr: timeToStr,
   getUUID: getUUID,
   GetUrlParam,
-  urlTo
+  urlTo,
+  GetTime
 }

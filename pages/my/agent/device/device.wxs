@@ -1,0 +1,33 @@
+//取绝对值
+var abs = function (str) {
+  return Math.abs(str)
+}
+
+//状态对应的文案
+var stateToStr = function (state) {
+  var str = ''
+  switch (state) {
+    case 0:
+      str = '正常'
+      break
+    case 1:
+      str = '维修中'
+      break
+    case 2:
+      str = '禁用'
+      break
+    case 3:
+      str = '使用中'
+      break
+    default:
+      str = '未知'
+      break
+  }
+  return str
+}
+
+
+module.exports = {
+  abs: abs,
+  stateToStr: stateToStr
+}

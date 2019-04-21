@@ -1,4 +1,5 @@
 {
   "navigationBarTitleText": "设备查看",
+  "enablePullDownRefresh": true,
   "usingComponents": {}
 }

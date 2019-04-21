@@ -82,4 +82,10 @@ Page({
       url: '/pages/novice/index',
     })
   },
+  //单纯链接跳转
+  goUrl(e) {
+    wx.navigateTo({
+      url: e.target.dataset.url,
+    })
+  },
 })

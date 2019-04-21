@@ -1,5 +1,6 @@
 <!--pages/jointwork/index.wxml-->
 <view class='jointwork'>
+
   <view class='content'>
     <text decode="{{true}}">{{content}}</text>
   </view>

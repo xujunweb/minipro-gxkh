@@ -1,2 +1,32 @@
 <!--pages/my/agent/order/order.wxml-->
-<text>pages/my/agent/order/order.wxml</text>
+<wxs module="util" src="../../../../utils/util.wxs" />
+<view class='top'>
+  <view class='time'>
+    <text>订单创建时间：</text>
+    <picker
+      mode="date"
+      value="{{startDate}}"
+      start="2018-09-01"
+      end="{{endDate}}"
+      data-type="start"
+      bindchange="bindTimeChange">
+      <view class="picker">{{startDate}}<image src="http://yamxcx.oss-cn-shenzhen.aliyuncs.com/one-shop-one-mini-app/next.png" class="order_icon"></image></view>
+    </picker>
+    <text class='int'>至</text>
+    <picker
+      mode="date"
+      value="{{endDate}}"
+      start="{{startDate}}"
+      end="{{thisDate}}"
+      data-type="end"
+      bindchange="bindTimeChange">
+      <view class="picker">{{endDate}}<image src="http://yamxcx.oss-cn-shenzhen.aliyuncs.com/one-shop-one-mini-app/next.png" class="order_icon"></image></view>
+    </picker>
+  </view>
+  <view class='num'>总计：{{total}}</view>
+</view>
+<view class='item' wx:for="{{articlelist}}" wx:key="{{index}}" >
+  <view class='h3-title'><text class='lebal'>设备编号：</text>{{item.lock_no}}</view>
+  <view class='time'><text class='lebal'>订单时间：</text>{{util.lastString(item.start_time)}}~{{util.lastString(item.end_time)}}</view>
+  <view class='money'><text class='lebal'>金额明细：</text>扣除<text class='num'>￥{{util.formatMoney(item.fee)}}</text>欠费<text>￥{{util.formatMoney(item.diff_fee)}}</text></view>
+</view>

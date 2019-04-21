@@ -4,10 +4,8 @@ var DateFr = {
     return m < 10 ? '0' + m : m
   },
   getDate: function (shijianchuo) {
-    console.log('dfdfdsfsdfsdfs', shijianchuo)
     //shijianchuo是整数，否则要parseInt转换
     var time = getDate(shijianchuo);
-    console.log('dfdfdsfsdfsdfs', time)
     var y = time.getFullYear();
     var m = time.getMonth() + 1;
     var d = time.getDate();

@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 11,
+			"current": 20,
 			"list": [
 				{
 					"id": -1,
@@ -148,6 +148,17 @@
 					"name": "商户合作",
 					"pathName": "pages/jointwork/index",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "商户订单",
+					"pathName": "pages/my/agent/order/order",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "商户设备",
+					"pathName": "pages/my/agent/device/device"
 				}
 			]
 		}
