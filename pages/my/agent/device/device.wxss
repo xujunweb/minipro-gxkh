@@ -1,11 +1,11 @@
 /* pages/my/agent/device/device.wxss */
 page{
-  background: #f4f4f4;
+  background: #fff;
 }
 .top{
   position: fixed;top: 0;left: 0;
   width: 100%;height: 70rpx;border-bottom: 1rpx solid #e6e6e6;
-  line-height: 70rpx;font-size: 28rpx;color: #888;background: #fff;
+  line-height: 70rpx;font-size: 28rpx;color: #888;background: #e4f9ff;
   display: flex;z-index: 1;
 }
 .top view{
@@ -16,7 +16,7 @@ page{
   color: #888;
 }
 .item{
-  background: #fff;margin-bottom: 20rpx;padding-bottom: 15rpx;
+  background: #e4f9ff;margin-bottom: 20rpx;padding-bottom: 15rpx;
 }
 .item .one{
   padding-top: 10rpx;display: flex;

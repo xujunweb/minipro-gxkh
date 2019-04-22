@@ -20,7 +20,8 @@
     "pages/jointwork/index",
     "pages/novice/index",
     "pages/my/agent/device/device",
-    "pages/my/agent/order/order"
+    "pages/my/agent/order/order",
+    "pages/my/agent/agent"
   ],
   "window": {
     "backgroundTextStyle": "dark",

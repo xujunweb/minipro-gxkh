@@ -1,0 +1,17 @@
+<!--pages/my/agent/agent.wxml-->
+<view class='caidan'>
+  <view class='item' bindtap='goUrl' data-url='/pages/my/agent/order/order'>
+    <view class='left'>
+      <image src='../../../images/icon8.png'></image>
+      <text>订单管理</text>
+    </view>
+    <view class='arrwo'></view>
+  </view>
+  <view class='item' bindtap='goUrl' data-url='/pages/my/agent/device/device'>
+    <view class='left'>
+      <image src='../../../images/icon8.png'></image>
+      <text>设备管理</text>
+    </view>
+    <view class='arrwo'></view>
+  </view>
+</view>

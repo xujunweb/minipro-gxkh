@@ -16,6 +16,12 @@ Page({
     startDate:'2018-09-01', //开始时间
     endDate: GetTime(),   //结束时间
     thisDate: GetTime(),  //当前时间
+    typeMap: {
+      0: '普通用户',
+      1: '管理员',
+      2: '代理商',
+      3: '工作人员'
+    },
   },
 
   /**

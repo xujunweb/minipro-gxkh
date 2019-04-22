@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 20,
+			"current": 21,
 			"list": [
 				{
 					"id": -1,
@@ -158,7 +158,14 @@
 				{
 					"id": -1,
 					"name": "商户设备",
-					"pathName": "pages/my/agent/device/device"
+					"pathName": "pages/my/agent/device/device",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "数据查询",
+					"pathName": "pages/my/agent/agent",
+					"scene": null
 				}
 			]
 		}

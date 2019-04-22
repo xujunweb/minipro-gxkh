@@ -2,7 +2,7 @@
 <wxs module="util" src="../../../../utils/util.wxs" />
 <view class='top'>
   <view class='time'>
-    <text>订单创建时间：</text>
+    <text>订单创建日期：</text>
     <picker
       mode="date"
       value="{{startDate}}"
@@ -27,6 +27,12 @@
 </view>
 <view class='item' wx:for="{{articlelist}}" wx:key="{{index}}" >
   <view class='h3-title'><text class='lebal'>设备编号：</text>{{item.lock_no}}</view>
+  <view class='hospital'><text class='lebal'>所属医院：</text>{{item.address}}</view>
   <view class='time'><text class='lebal'>订单时间：</text>{{util.lastString(item.start_time)}}~{{util.lastString(item.end_time)}}</view>
-  <view class='money'><text class='lebal'>金额明细：</text>扣除<text class='num'>￥{{util.formatMoney(item.fee)}}</text>欠费<text>￥{{util.formatMoney(item.diff_fee)}}</text></view>
+  <view class='money'>
+    <view class='user-type'><text class='lebal'>用户身份：</text>{{typeMap[item.user.type]}}</view>
+    <view>
+      <text class='lebal'>金额明细：</text>扣除<text class='num'>￥{{util.formatMoney(item.fee)}}</text>欠费<text>￥{{util.formatMoney(item.diff_fee)}}</text>
+    </view>
+  </view>
 </view>

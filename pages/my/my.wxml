@@ -36,7 +36,7 @@
   </view>
   <view class='fenge'></view>
   <view class='caidan'>
-  <view class='item' bindtap='goMyOrder'>
+    <view class='item' bindtap='goMyOrder'>
       <view class='left'>
         <image src='../../images/icon6.png'></image>
         <text>我的订单</text>
@@ -78,17 +78,11 @@
       </view>
       <view class='arrwo'></view>
     </view>
-    <view class='item' bindtap='goUrl' data-url='/pages/my/agent/order/order' wx:if="{{userInfo.type == 2}}">
+    <!-- <view class='item' bindtap='goUrl' data-url='/pages/my/agent/agent'> -->
+    <view class='item' bindtap='goUrl' data-url='/pages/my/agent/agent' wx:if="{{userInfo.type == 2}}">
       <view class='left'>
         <image src='../../images/icon8.png'></image>
-        <text>订单管理</text>
-      </view>
-      <view class='arrwo'></view>
-    </view>
-    <view class='item' bindtap='goUrl' data-url='/pages/my/agent/device/device' wx:if="{{userInfo.type == 2}}">
-      <view class='left'>
-        <image src='../../images/icon8.png'></image>
-        <text>设备管理</text>
+        <text>数据查询</text>
       </view>
       <view class='arrwo'></view>
     </view>
