@@ -47,5 +47,6 @@
     "borderStyle": "black",
     "backgroundColor": "#fff",
     "selectedColor": "#E24473"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }
