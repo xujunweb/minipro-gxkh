@@ -1,5 +1,5 @@
 // pages/my/agent/order/order.js
-import { getOrderList } from '../../../../api/order.js'
+import { getOrderList, sumByLockOrder } from '../../../../api/order.js'
 import { GetTime } from '../../../../utils/util.js'
 var app = getApp()
 Page({
@@ -17,11 +17,14 @@ Page({
     endDate: GetTime(),   //结束时间
     thisDate: GetTime(),  //当前时间
     typeMap: {
-      0: '普通用户',
-      1: '管理员',
-      2: '代理商',
-      3: '工作人员'
+      0: 'PT',
+      1: 'GL',
+      2: 'DL',
+      3: 'GZ'
     },
+    total_fee:0,  //总费用
+    diff_fee:0, //总欠费
+    hospital:'',  //所属医院
   },
 
   /**
@@ -44,12 +47,22 @@ Page({
   onShow: function () {
 
   },
+  inputChange: function(e){
+    this.setData({
+      hospital:e.detail.value
+    })
+  },
   bindTimeChange:function (res) {
     console.log('选择时间-------',res)
     this.data[res.target.dataset.type + 'Date'] = res.detail.value
     this.setData({
       [res.target.dataset.type+'Date']:res.detail.value
     })
+    this.data.thisp = 1
+    this.getOrderList(true)
+  },
+  //医院搜索
+  getOrderListToHo: function(){
     this.data.thisp = 1
     this.getOrderList(true)
   },
@@ -65,13 +78,23 @@ Page({
       })
       return
     }
-    //获取本地的关注用户
-    getOrderList({
+    var data = {
       pageNum: this.data.thisp,
       pageSize: 8,
-      start_time:this.data.startDate+' 00:00:00',
-      end_time:this.data.endDate+ ' 23:59:59',
-    }).then((res) => {
+      start_time: this.data.startDate + ' 00:00:00',
+      end_time: this.data.endDate + ' 23:59:59',
+      hospital: this.data.hospital,
+    }
+    //获取订单统计数据
+    sumByLockOrder(data).then((res) => {
+      console.log('订单统计数据---', res)
+      this.setData({
+        diff_fee: res.data.diff_fee,
+        total_fee: res.data.total_fee,
+      })
+    })
+    //分页加载文章列表
+    getOrderList(data).then((res) => {
       console.log(res)
       this.data.lastPage = res.data.lastPage
       if (resf) {

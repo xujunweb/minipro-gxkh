@@ -22,18 +22,23 @@
       bindchange="bindTimeChange">
       <view class="picker">{{endDate}}<image src="http://yamxcx.oss-cn-shenzhen.aliyuncs.com/one-shop-one-mini-app/next.png" class="order_icon"></image></view>
     </picker>
-    <view class='num'>总计：{{total}}</view>
+    <view class='num'>总计：{{total+'单'}} 实付：{{util.formatMoney(total_fee-diff_fee)}} 欠费：{{util.formatMoney(diff_fee)}}</view>
+    <view class='cond'>
+      <text>所属医院：</text>
+      <input type='text' value='{{hospital}}'  bindinput='inputChange' confirm-type='搜索' bindconfirm='getOrderListToHo'></input>
+    </view>
   </view>
 </view>
 <view class='intl'></view>
 <view class='item' wx:for="{{articlelist}}" wx:key="{{index}}" >
-  <view class='h3-title'><text class='lebal'>二维码编号：</text>{{item.lock_no}}</view>
-  <view class='hospital'><text class='lebal'>所属医院：</text>{{item.address}}</view>
+  <view class='h3-title'><text class='lebal'>二维码编号：</text>{{item.qr_code_no}}</view>
+  <view class='hospital'><text class='lebal'>设备编号：</text>{{item.lock_no}}</view>
+  <view class='hospital'><text class='lebal'>所属医院：</text>{{item.hospital}}</view>
   <view class='time'><text class='lebal'>订单时间：</text>{{util.lastString(item.start_time)}}~{{util.lastString(item.end_time)}}</view>
   <view class='money'>
     <view class='user-type'>{{typeMap[item.user.type]}}</view>
     <view>
-      <text class='lebal'>订单金额：</text><text class='num'>￥{{util.formatMoney(item.fee)}}</text>欠费<text>￥{{util.formatMoney(item.diff_fee)}}</text>
+      <text class='lebal'>订单金额：</text><text class='num'>￥{{util.formatMoney(item.fee)}}</text>实付<text>￥{{util.formatMoney(item.fee-item.diff_fee)}}</text>欠费<text>￥{{util.formatMoney(item.diff_fee)}}</text>
     </view>
   </view>
 </view>

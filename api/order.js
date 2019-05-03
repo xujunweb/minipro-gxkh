@@ -29,3 +29,12 @@ export const getDeviceList = (data) => {
     loading: true,
   })
 }
+//统计订单数据
+export const sumByLockOrder = (data) => {
+  var app = getApp()
+  return ajax({
+    url: wx.envConfig.host + 'lockOrder/sumByLockOrder',
+    data: { ...data },
+    method: 'post',
+  })
+}
