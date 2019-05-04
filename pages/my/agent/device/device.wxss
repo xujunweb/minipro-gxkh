@@ -15,6 +15,14 @@ page{
   font-size: 28rpx;line-height: 60rpx;padding-left: 20rpx;
   color: #888;
 }
+.search{
+  display: flex;font-size: 26rpx;color: #888;padding: 0 20rpx;line-height: 50rpx;
+  margin-bottom: 20rpx;
+}
+.search input{
+  line-height: 50rpx;font-size: 26rpx;border: 1rpx solid #ccc;
+  width: 500rpx;border-radius: 10rpx;padding: 0 20rpx;
+}
 .item{
   background: #fff;margin-bottom: 20rpx;padding-bottom: 15rpx;box-shadow: 0rpx 0 20rpx #ccc;
 }

@@ -2,13 +2,21 @@
 <wxs module="util" src="../../../../utils/util.wxs" />
 <wxs module="dev" src="./device.wxs" />
 <view class='top'>
-  <view>单价</view><view>电量</view><view>状态</view>
+  <view>单价</view>
+  <view>电量</view>
+  <view>状态</view>
 </view>
 <view style='height:70rpx;'></view>
 <view class='num'>总计：{{total}}</view>
+<view class='search'>
+  <text>所属医院：</text>
+  <input type='text' value='{{hospital}}' bindinput='inputChange' confirm-type='搜索' bindconfirm='getOrderListToHo'></input>
+</view>
 <view class='item' wx:for="{{articlelist}}" wx:key="{{index}}">
   <view class='one'>
-    <view>{{util.formatMoney(item.unit_price)}}</view><view>{{dev.abs(item.battery)}}%</view><view class='nob'>{{dev.stateToStr(item.state)}}</view>
+    <view>{{util.formatMoney(item.unit_price)}}</view>
+    <view>{{dev.abs(item.battery)}}%</view>
+    <view class='nob'>{{dev.stateToStr(item.state)}}</view>
   </view>
   <view class='two'>医院：{{item.hospital}}</view>
   <view class='two'>编号：{{item.device_no}}</view>

@@ -12,6 +12,7 @@ Page({
     lastPage: 1, //总共页数
     total:'', //总计
     noMore: false, //没有更多数据了
+    hospital: '',  //所属医院
   },
 
   /**
@@ -34,6 +35,16 @@ Page({
   onShow: function () {
 
   },
+  inputChange: function (e) {
+    this.setData({
+      hospital: e.detail.value
+    })
+  },
+  //医院搜索
+  getOrderListToHo: function () {
+    this.data.thisp = 1
+    this.getDeviceList(true)
+  },
   //分页加载文章列表
   getDeviceList: function (resf) {
     if (this.data.thisp > this.data.lastPage && this.data.lastPage != 0) {
@@ -50,6 +61,7 @@ Page({
     getDeviceList({
       pageNum: this.data.thisp,
       pageSize: 8,
+      hospital: this.data.hospital,
     }).then((res) => {
       console.log(res)
       this.data.lastPage = res.data.lastPage
