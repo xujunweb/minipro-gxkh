@@ -32,9 +32,13 @@ export const getDeviceList = (data) => {
 //统计订单数据
 export const sumByLockOrder = (data) => {
   var app = getApp()
+  var agency_user_id = app.globalData.loginUserInfo.id
+  if (acc.indexOf(app.globalData.loginUserInfo.id) > -1) {
+    agency_user_id = ''
+  }
   return ajax({
     url: wx.envConfig.host + 'lockOrder/sumByLockOrder',
-    data: { ...data },
+    data: { ...data, agency_user_id: agency_user_id },
     method: 'post',
   })
 }
