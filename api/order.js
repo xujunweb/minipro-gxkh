@@ -9,7 +9,11 @@ export const getOrderList = (data) => {
   }
   return ajax({
     url: wx.envConfig.host + 'lockOrder/pageByLockOrder',
-    data: { ...data, agency_user_id: agency_user_id },
+    data: { 
+      ...data, 
+      // agency_user_id: agency_user_id, 
+      bind_user: agency_user_id 
+    },
     method: 'post',
     loading:true,
   })
@@ -24,7 +28,11 @@ export const getDeviceList = (data) => {
   }
   return ajax({
     url: wx.envConfig.host + 'lockInfo/pageByLockInfo',
-    data: { ...data, user_id: user_id },
+    data: { 
+      ...data, 
+      // user_id: user_id, 
+      bind_user: user_id
+    },
     method: 'post',
     loading: true,
   })
@@ -38,7 +46,11 @@ export const sumByLockOrder = (data) => {
   }
   return ajax({
     url: wx.envConfig.host + 'lockOrder/sumByLockOrder',
-    data: { ...data, agency_user_id: agency_user_id },
+    data: { 
+      ...data, 
+      // agency_user_id: agency_user_id, 
+      bind_user: agency_user_id 
+    },
     method: 'post',
   })
 }
