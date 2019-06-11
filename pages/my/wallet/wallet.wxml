@@ -29,7 +29,7 @@
 </view> -->
 <view class='newwallet'>
   <view class='top'>
-    <view class='money'>{{util.formatMoney(balance)}}</view>
+    <view class='money'>{{util.formatMoney2(balance)}}</view>
     <view class='text'>账户余额(元)</view>
   </view>
   <view class='button'>

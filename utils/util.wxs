@@ -1,6 +1,6 @@
 var formatMoney = function (money) {
   if (!money) return '0';
-  money = money / 100;
+  money = Math.abs(money) / 100;
   money = (+money).toString();
   return money;
 }
